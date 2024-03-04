@@ -1,0 +1,228 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<nav
+    class="navbar navbar-expand-lg bg-body-tertiary custom-bg">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">TNP IIIT Surat</a>
+        <button class="navbar-toggler" type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse"
+            id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page"
+                        href="#">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Link</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#"
+                        role="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        Dropdown
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item"
+                                href="#">Action</a></li>
+                        <li><a class="dropdown-item" href="#">Another
+                                action</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="#">Something
+                                else here</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled"
+                        aria-disabled="true">Disabled</a>
+                </li>
+            </ul>
+            <div class="d-flex navbar-btn" role="search">
+                {% load socialaccount %}
+                <a href='{% provider_login_url "google" %}'>
+                    <button class="btn"
+                        type="submit">Log in</button>
+                </a>
+            </di>
+        </div>
+    </div>
+</nav>
+<main>
+    <section class="hero-section container-fluid">
+        <div class="background">
+            <div class="circle-1"></div>
+            <div class="circle-2"></div>
+            <div class="circle-3"></div>
+        </div>
+        <div class="logos">
+            {% load static %}
+            <img src="{% static 'assets/backLogos/image1.png' %}"
+                class="comp-logo">
+            <img src="{% static 'assets/backLogos/image2.png' %}"
+                class="comp-logo">
+            <img src="{% static 'assets/backLogos/image3.png' %}"
+                class="comp-logo">
+            <img src="{% static 'assets/backLogos/image4.png' %}"
+                class="comp-logo">
+            <img src="{% static 'assets/backLogos/image5.png' %}"
+                class="comp-logo">
+            <img src="{% static 'assets/backLogos/image6.png' %}"
+                class="comp-logo">
+            <img src="{% static 'assets/backLogos/image7.png' %}"
+                class="comp-logo">
+            <img src="{% static 'assets/backLogos/image8.png' %}"
+                class="comp-logo">
+            <img src="{% static 'assets/backLogos/image9.png' %}"
+                class="comp-logo">
+        </div>
+        <div class="title">
+            <h1>
+                <span
+                    class="title-grad">Placements.</span>Stats.Companies.
+            </h1>
+            <p>IIIT Surat's very own Training & Placement Website</p>
+        </div>
+    </section>
+    <section class="container-fluid resume-gen">
+        <h1>A <span>Pre-Requisite</span> for <br>all the students.</h1>
+        <div class="row align-items-center">
+            <div class="col-5">
+                <p class="resume-content">Lorem ipsum dolor,
+                    sit amet
+                    consectetur adipisicing
+                    elit. Nihil, culpa! Quo dolor commodi minus
+                    similique omnis. Eligendi nisi, fuga assumenda unde
+                    repellendus rem soluta. Odio atque perferendis illum
+                    sed repudiandae?Lorem ipsum dolor, sit amet
+                    consectetur adipisicing elit. Labore, natus.</p>
+            </div>
+            <div class="col-7">
+                <img class="resume-img" src="{%static 'assets/resume.png'%}"
+                    alt>
+            </div>
+        </div>
+        <a href="{% url 'resume' %}">
+            <button class="btn resume-btn">Build your resume
+                today!</button>
+        </a>
+    </section>
+    <section class="announcements light-section">
+        <h1 class="light-heading"><span>Announcements</span><br>that are
+            important...</h1>
+        <div class="list">
+            {% for announcement in announcements %}
+            <a href="{% url 'announcement_detail' announcement.id %}">
+                <div class="row">
+                    <div class="col-1">
+                        <img class="calender"
+                            src="{% static 'assets/svg/calender.svg'%}" alt>
+                        <div
+                            class="date"><span>{{announcement.date_posted|date:"d"}}</span>{{announcement.date_posted|date:"S"}}<br>{{announcement.date_posted|date:"M"}}</div>
+                    </div>
+                    <div class="col-11">
+                        <h2>{{announcement.title}}</h2>
+                        <p>{{announcement.content}}</p>
+                    </div>
+                </div>
+            </a>
+            {% endfor%}
+        </div>
+    </section>
+    <section class="training-programs light-section">
+        <h1 class="light-heading"><span>Training Programs</span><br>that
+            are
+            going on...</h1>
+
+        <div class="swiper">
+            <!-- Additional required wrapper -->
+            <div class="swiper-wrapper">
+                <!-- Slides -->
+                {%for program in training_programs%}
+                <div class="swiper-slide">
+                    <a href="{% url 'training_program_detail' program.id %}">
+                        <div class="card">
+                            <img src="{%static 'assets/job.png'%}"
+                                class="card-img-top"
+                                alt="...">
+                            <div class="card-body">
+                                <div class="card-title"><img
+                                        src="{% static 'assets/backLogos/image1.png' %}"
+                                        alt>{{program.training_organization}}</div>
+                                <p
+                                    class="card-text">{{program.training_subject}}</p>
+                            </div>
+                            <div class="card-body time-details">
+                                <div><i
+                                        class="bi bi-calendar"></i>
+                                    {{program.end_of_registration}}</div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                {% endfor %}
+
+            </div>
+
+            <div class="nav-btn">
+                <div class="prev-btn"><i
+                        class="bi bi-caret-left-fill"></i></div>
+                <div class="next-btn"><i
+                        class="bi bi-caret-right-fill"></i></div>
+            </div>
+
+        </div>
+    </section>
+    <section class="job-openings light-section">
+        <h1 class="light-heading"><span>Job Openings</span><br>that
+            you are eagerly waiting for...</h1>
+
+        <div class="swiper">
+            <!-- Additional required wrapper -->
+            <div class="swiper-wrapper">
+                <!-- Slides -->
+                {% for job in job_openings%}
+
+                <div class="swiper-slide">
+                    <a href="{% url 'job_opening_detail' job.id %}">
+                        <div class="card">
+                            <img src="{%static 'assets/job.png'%}"
+                                class="card-img-top"
+                                alt="...">
+                            <div class="card-body">
+                                <div class="card-title"><img
+                                        src="{% static 'assets/backLogos/image1.png' %}"
+                                        alt>{{job.NameofCompany}}</div>
+                                <p class="card-text">{{job.JobProfile}}</p>
+                            </div>
+                            <div class="card-body time-details">
+                                <div><i
+                                        class="bi bi-calendar"></i>
+                                    {{job.end_of_registration}}</div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                {% endfor %}
+
+            </div>
+
+            <div class="nav-btn">
+                <div class="prev-btn"><i
+                        class="bi bi-caret-left-fill"></i></div>
+                <div class="next-btn"><i
+                        class="bi bi-caret-right-fill"></i></div>
+            </div>
+
+        </div>
+    </section>
+</main>
+
+{% endblock content %}

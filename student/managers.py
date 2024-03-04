@@ -14,7 +14,7 @@ class StudentManager(BaseUserManager):
         user.set_password(password)
         user.save()
         return user
-
+                                     
 
     def create_superuser(self, **extra_fields):
         """

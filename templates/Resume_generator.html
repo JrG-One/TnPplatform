@@ -41,30 +41,39 @@
             <div class="row mt-3">
                 <div class="col">
                     <div class="mb-3">
-                        <label for="fname" class="form-label">First Name*</label>
-                        <input type="text" class="form-control" name="fname" id="fname" required>
+                        <label for="fname" class="form-label">First Name<b style="color: red;">*</b></label>
+                        <input type="text" class="form-control" name="fname" id="fname"  required value={{ user.Name }}>
                     </div>
                     <div class="mb-3">
-                        <label for="contact-no" class="form-label">Contact no*</label>
-                        <input type="number" maxlength="10" name="contact-no" class="form-control" id="contact-no" required>
+                        <label for="contact-no" class="form-label">Contact Number<b style="color: red;">*</b></label>
+                        <input type="number" maxlength="10" name="contact-no" class="form-control" id="contact-no"
+                             required value={{ user.mobile }}>
                     </div>
                     <div class="mb-3">
-                        <label for="linkedin" class="form-label">Linkedin profile*</label>
-                        <input type="text" class="form-control" name="linkedin" id="linkedin" required>
+                        <label for="whats-no" class="form-label">Whatsapp Number<b style="color: red;">*</b></label>
+                        <input type="number" maxlength="10" name="whats-no" class="form-control" id="whats-no" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="linkedin" class="form-label">Linkedin profile link<b style="color: red;">*</b></label>
+                        <input type="text" class="form-control" name="linkedin" id="linkedin" required value={{ user.linked }}>
                     </div>
                 </div>
                 <div class="col">
                     <div class="mb-3">
-                        <label for="lname" class="form-label">Last Name*</label>
-                        <input type="text" class="form-control" id="lname" name="lname" required>
+                        <label for="lname" class="form-label">Last Name<b style="color: red;">*</b></label>
+                        <input type="text" class="form-control" id="lname" name="lname" required value={{ user.Name }}>
                     </div>
                     <div class="mb-3">
-                        <label for="e-mail" class="form-label">E-mail*</label>
-                        <input type="email" class="form-control" id="e-mail" name="e-mail" required>
+                        <label for="e-mail" class="form-label">Personal E-mail<b style="color: red;">*</b></label>
+                        <input type="email" class="form-control" id="e-mail" name="e-mail" required value={{ user.email }}>
                     </div>
                     <div class="mb-3">
-                        <label for="github" class="form-label">Github profile link*</label>
-                        <input type="text" class="form-control" id="github" name="github" required>
+                        <label for="addr" class="form-label">Address<b style="color: red;">*</b></label>
+                        <input type="text" class="form-control" id="addr" name="addr" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="github" class="form-label">Github profile link<b style="color: red;">*</b></label>
+                        <input type="text" class="form-control" id="github" name="github"  required value={{ user.github }}>
                     </div>
                 </div>
             </div>
@@ -82,16 +91,90 @@
             <div style="border-top:5px solid green"></div>
             <div class="mt-3">
                 <div class="mb-3">
-                    <label for="insname" class="form-label">Name of Institute*</label>
-                    <input type="text" class="form-control" id="insname" name="insname">
+                    <label for="schname-1" class="form-label"><b>Name of 10th School</b><b style="color: red;">*</b></label>
+                    <input type="text" class="form-control" id="schname-1" name="schname-1" maxlength="60" value= >
                 </div>
                 <div class="mb-3">
-                    <label for="tperiod" class="form-label">Time Period*</label>
-                    <input type="text" class="form-control" id="tperiod" name="tperiod">
+                    <label for="sch-1-tperiod" class="form-label">Time Period<b style="color: red;">*</b></label>
+                    <br>
+                    <div class="d-flex">
+                        <div>
+                            <p class="my-2">From : </p>
+                            <input type="number" min="2010" max="2025" class="form-control w-100" id="sch-1-tperiod-from"
+                                name="sch-1-tperiod-from">
+                        </div>
+                        <div class="mx-2">
+                            <p class="my-2">To : </p>
+                            <input type="number" min="2010" max="2025" class="form-control w-100" id="sch-1-tperiod-to"
+                                name="sch-1-tperiod-to">
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="sch-1-cgpa" class="form-label">Percentage<b style="color: red;">*</b> </label>
+                    <input type="number" class="form-control" id="sch-1-cgpa" name="sch-1-cgpa">
+                </div>
+                <div class="mb-3">
+                    <label for="sch-1-detail" class="form-label">10th School details</label>
+                    <input type="text" class="form-control" id="sch-1-detail" name="sch-1-detail">
+                </div>
+                <hr>
+                <div class="mb-3">
+                    <label for="schname-2" class="form-label"><b>Name of 12th School</b><b style="color: red;">*</b></label>
+                    <input type="text" class="form-control" id="schname-2" name="schname-2" maxlength="60">
+                </div>
+                <div class="mb-3">
+                    <label for="sch-2-tperiod" class="form-label">Time Period<b style="color: red;">*</b></label>
+                    <br>
+                    <div class="d-flex">
+                        <div>
+                            <p class="my-2">From : </p>
+                            <input type="number" min="2010" max="2030" class="form-control w-100" id="sch-2-tperiod-from"
+                                name="sch-2-tperiod-from">
+                        </div>
+                        <div class="mx-2">
+                            <p class="my-2">To : </p>
+                            <input type="number" min="2010" max="2030" class="form-control w-100" id="sch-2-tperiod-to"
+                                name="sch-2-tperiod-to">
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="sch-2-cgpa" class="form-label">Percentage<b style="color: red;">*</b> </label>
+                    <input type="number" class="form-control" id="sch-2-cgpa" name="sch-2-cgpa">
+                </div>
+                <div class="mb-3">
+                    <label for="sch-2-detail" class="form-label">12th School details</label>
+                    <input type="text" class="form-control" id="sch-2-detail" name="sch-2-detail">
+                </div>
+                <hr>
+                <div class="mb-3">
+                    <label for="insname" class="form-label"><b>Name of Institute</b><b style="color: red;">*</b></label>
+                    <input type="text" class="form-control" id="insname" name="insname" maxlength="60">
+                </div>
+                <div class="mb-3">
+                    <label for="tperiod" class="form-label">Time Period<b style="color: red;">*</b></label>
+                    <br>
+                    <div class="d-flex">
+                        <div>
+                            <p class="my-2">From : </p>
+                            <input type="number" min="2021" max="2025" class="form-control w-100" id="tperiod1"
+                                name="tperiod1">
+                        </div>
+                        <div class="mx-2">
+                            <p class="my-2">To : </p>
+                            <input type="number" min="2025" max="2029" class="form-control w-100" id="tperiod2"
+                                name="tperiod2">
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="ins-cgpa" class="form-label">CGPA<b style="color: red;">*</b> </label>
+                    <input type="number" class="form-control" id="ins-cgpa" name="ins-cgpa">
                 </div>
                 <div class="mb-3">
                     <label for="eddetails" class="form-label">Education details</label>
-                    <input type="text" class="form-control" id="eddetails" name="eddetails">
+                    <input type="text" class="form-control" id="eddetails" name="eddetails" value= >
                 </div>
             </div>
             <div class="d-flex justify-content-center">
@@ -104,16 +187,16 @@
             <div style="border-top:5px solid green"></div>
             <div class="mt-3">
                 <div class="mb-3">
-                    <label for="achieve1" class="form-label">Achievements*</label>
-                    <input type="text" class="form-control" id="achieve1" name="achieve1" maxlength="125">
+                    <label for="achieve1" class="form-label">Achievements</label>
+                    <input type="text" class="form-control" id="achieve1" name="achieve1" maxlength="125" value= >
                 </div>
                 <div class="mb-3">
-                    <label for="achieve2" class="form-label">Achievements*</label>
-                    <input type="text" class="form-control" id="achieve2" name="achieve2" maxlength="125">
+                    <label for="achieve2" class="form-label">Achievements</label>
+                    <input type="text" class="form-control" id="achieve2" name="achieve2" maxlength="125" value= >
                 </div>
                 <div class="mb-3">
-                    <label for="achieve3" class="form-label">Achievements*</label>
-                    <input type="text" class="form-control" id="achieve3" name="achieve3" maxlength="125">
+                    <label for="achieve3" class="form-label">Achievements</label>
+                    <input type="text" class="form-control" id="achieve3" name="achieve3" maxlength="125" value= >
                 </div>
             </div>
             <div class="d-flex justify-content-center">
@@ -142,28 +225,47 @@
                         aria-labelledby="experienceHeading1" data-bs-parent="#experienceAccordion">
                         <div class="accordion-body">
                             <div class="mb-3">
-                                <label for="exp-1-cname" class="form-label">Name of Company*</label>
-                                <input type="text" class="form-control" id="exp-1-cname" name="exp-1-cname" maxlength="66">
+                                <label for="exp-1-cname" class="form-label">Name of Company<b
+                                        style="color: red;">*</b></label>
+                                <input type="text" class="form-control" id="exp-1-cname" name="exp-1-cname"
+                                    maxlength="66" value= >
                             </div>
                             <div class="mb-3">
-                                <label for="exp-1-time-period" class="form-label">Time-Period*</label>
-                                <input type="text" class="form-control" id="exp-1-time-period" name="exp-1-time-period" placeholder="year - year" maxlength="20">
+                                <label for="exp-1-time-period" class="form-label">Time-Period<b
+                                        style="color: red;">*</b></label>
+                                <br>
+                                <div class="d-flex">
+                                    <div>
+                                        <p class="my-2">From : </p>
+                                        <input type="number" min="2020" max="2040" class="form-control w-100"
+                                            id="exp-1-time-period-from" name="exp-1-time-period-from">
+                                    </div>
+                                    <div class="mx-2">
+                                        <p class="my-2">To : </p>
+                                        <input type="number" min="2020" max="2040" class="form-control w-100"
+                                            id="exp-1-time-period-to" name="exp-1-time-period-to">
+                                    </div>
+                                </div>
                             </div>
                             <div class="mb-3">
-                                <label for="exp-1-designation" class="form-label">Designation*</label>
-                                <input type="text" class="form-control" id="exp-1-designation" name="exp-1-designation" maxlength="66">
+                                <label for="exp-1-designation" class="form-label">Designation<b
+                                        style="color: red;">*</b></label>
+                                <input type="text" class="form-control" id="exp-1-designation" name="exp-1-designation"
+                                    maxlength="66" >
                             </div>
                             <div class="mb-3">
-                                <label for="exp-1-location" class="form-label">Location*</label>
-                                <input type="text" class="form-control" id="exp-1-location" name="exp-1-location" maxlength="66">
+                                <label for="exp-1-location" class="form-label">Location<b
+                                        style="color: red;">*</b></label>
+                                <input type="text" class="form-control" id="exp-1-location" name="exp-1-location"
+                                    maxlength="66" >
                             </div>
                             <div class="mb-3">
                                 <label for="exp-1-det-1" class="form-label">details-1</label>
-                                <input type="text" class="form-control" id="exp-1-det-1" name="exp-1-det-1">
+                                <input type="text" class="form-control" id="exp-1-det-1" name="exp-1-det-1" value= >
                             </div>
                             <div class="mb-3">
                                 <label for="exp-1-det-2" class="form-label">details-2</label>
-                                <input type="text" class="form-control" id="exp-1-det-2" name="exp-1-det-2">
+                                <input type="text" class="form-control" id="exp-1-det-2" name="exp-1-det-2" value= >
                             </div>
                             <div class="mb-3">
                                 <label for="exp-1-det-3" class="form-label">details-3</label>
@@ -201,29 +303,46 @@
                         <div class="accordion-body">
                             <!-- Your Internship form fields go here -->
                             <div class="mb-3">
-                                <label for="intern-1-cname" class="form-label">Name of Company*</label>
-                                <input type="text" class="form-control" id="intern-1-cname" name="intern-1-cname" maxlength="66">
+                                <label for="intern-1-cname" class="form-label">Name of Company<b
+                                        style="color: red;">*</b></label>
+                                <input type="text" class="form-control" id="intern-1-cname" name="intern-1-cname"
+                                    maxlength="66" value= >
                             </div>
                             <div class="mb-3">
-                                <label for="intern-1-time-period" class="form-label">Time-Period*</label>
-                                <input type="text" class="form-control" id="intern-1-time-period"
-                                    name="intern-1-time-period" placeholder="year - year" maxlength="20">
+                                <label for="intern-1-time-period" class="form-label">Time-Period<b
+                                        style="color: red;">*</b></label>
+                                <br>
+                                <div class="d-flex">
+                                    <div>
+                                        <p class="my-2">From : </p>
+                                        <input type="number" min="2020" max="2030" class="form-control w-100"
+                                            id="intern-1-time-period-from" name="intern-1-time-period-from">
+                                    </div>
+                                    <div class="mx-2">
+                                        <p class="my-2">To : </p>
+                                        <input type="number" min="2020" max="2030" class="form-control w-100"
+                                            id="intern-1-time-period-to" name="intern-1-time-period-to">
+                                    </div>
+                                </div>
                             </div>
                             <div class="mb-3">
-                                <label for="intern-1-role" class="form-label">Role*</label>
-                                <input type="text" class="form-control" id="intern-1-role" name="intern-1-role" maxlength="66">
+                                <label for="intern-1-role" class="form-label">Role<b style="color: red;">*</b></label>
+                                <input type="text" class="form-control" id="intern-1-role" name="intern-1-role"
+                                    maxlength="66" >
                             </div>
                             <div class="mb-3">
-                                <label for="intern-1-location" class="form-label">Location*</label>
-                                <input type="text" class="form-control" id="intern-1-location" name="intern-1-location" maxlength="66">
+                                <label for="intern-1-location" class="form-label">Location<b
+                                        style="color: red;">*</b></label>
+                                <input type="text" class="form-control" id="intern-1-location" name="intern-1-location"
+                                    maxlength="66" >
                             </div>
                             <div class="mb-3">
                                 <label for="intern-1-det-1" class="form-label">Details-1</label>
-                                <input type="text" class="form-control" id="intern-1-det-1" name="intern-1-det-1">
+                                <input type="text" class="form-control" id="intern-1-det-1" name="intern-1-det-1" value= >
                             </div>
                             <div class="mb-3">
                                 <label for="intern-1-det-2" class="form-label">Details-2</label>
-                                <input type="text" class="form-control" id="intern-1-det-2" name="intern-1-det-2">
+                                <input type="text" class="form-control" id="intern-1-det-2" name="intern-1-det-2" value= >
                             </div>
                             <div class="mb-3">
                                 <label for="intern-1-det-3" class="form-label">Details-3</label>
@@ -263,21 +382,23 @@
                         aria-labelledby="hackathonHeading1" data-bs-parent="#accordionHackathons">
                         <div class="accordion-body">
                             <div class="mb-3">
-                                <label for="hack-1-name" class="form-label">Hackathon Name*</label>
-                                <input type="text" class="form-control" id="hack-1-name" name="hack-1-name" maxlength="66">
+                                <label for="hack-1-name" class="form-label">Hackathon Name<b
+                                        style="color: red;">*</b></label>
+                                <input type="text" class="form-control" id="hack-1-name" name="hack-1-name" maxlength="66" value= >
                             </div>
                             <div class="mb-3">
-                                <label for="hack-1-time-period" class="form-label">Year of Hackathon*</label>
-                                <input type="text" class="form-control" id="hack-1-time-period"
-                                    name="hack-1-time-period" placeholder="year" maxlength="20">
+                                <label for="hack-1-time-period" class="form-label">Year of Hackathon<b
+                                        style="color: red;">*</b></label>
+                                <input type="number" class="form-control w-25" id="hack-1-time-period"
+                                    name="hack-1-time-period" placeholder="year" min="2020" value= >
                             </div>
                             <div class="mb-3">
                                 <label for="hack-1-det-1" class="form-label">Details-1</label>
-                                <input type="text" class="form-control" id="hack-1-det-1" name="hack-1-det-1">
+                                <input type="text" class="form-control" id="hack-1-det-1" name="hack-1-det-1" value= >
                             </div>
                             <div class="mb-3">
                                 <label for="hack-1-det-2" class="form-label">Details-2</label>
-                                <input type="text" class="form-control" id="hack-1-det-2" name="hack-1-det-2">
+                                <input type="text" class="form-control" id="hack-1-det-2" name="hack-1-det-2" value= >
                             </div>
                         </div>
                     </div>
@@ -313,11 +434,13 @@
                         aria-labelledby="githubProjectHeading1" data-bs-parent="#accordionGithubProjects">
                         <div class="accordion-body">
                             <div class="mb-3">
-                                <label for="git-proj-1-name" class="form-label">Project Name*</label>
-                                <input type="text" class="form-control" id="git-proj-1-name" name="git-proj-1-name" maxlength="66">
+                                <label for="git-proj-1-name" class="form-label">Project Name<b
+                                        style="color: red;">*</b></label>
+                                <input type="text" class="form-control" id="git-proj-1-name" name="git-proj-1-name"
+                                    maxlength="66">
                             </div>
                             <div class="mb-3">
-                                <label for="git-proj-1-det-1" class="form-label">Details-1</label>
+                                <label for="git-proj-1-det-1" class="form-label">Details-1<b style="color: red;">*</b></label>
                                 <input type="text" class="form-control" id="git-proj-1-det-1" name="git-proj-1-det-1">
                             </div>
                             <div class="mb-3">
@@ -413,31 +536,43 @@
             // Add input fields to the accordion body
             accordionBody.innerHTML = `
             <div class="mb-3">
-                <label for="exp-${experienceCount}-cname" class="form-label">Name of Company*</label>
+                <label for="exp-${experienceCount}-cname" class="form-label">Name of Company<b style="color: red;">*</b></label>
                 <input type="text" class="form-control" id="exp-${experienceCount}-cname" name="exp-${experienceCount}-cname">
             </div>
             <div class="mb-3">
-                <label for="exp-${experienceCount}-time-period" class="form-label">Time-Period*</label>
-                <input type="text" class="form-control" id="exp-${experienceCount}-time-period" name="exp-${experienceCount}-time-period">
+                <label for="exp-${experienceCount}-time-period" class="form-label">Time-Period<b style="color: red;">*</b></label>
+                <br>
+                <div class="d-flex">
+                    <div>
+                        <p class="my-2">From : </p>
+                        <input type="number" min="2020" max="2040" class="form-control w-100"
+                            id="exp-${experienceCount}-time-period-from" name="exp-${experienceCount}-time-period-from">
+                    </div>
+                    <div class="mx-2">
+                        <p class="my-2">To : </p>
+                        <input type="number" min="2020" max="2040" class="form-control w-100"
+                            id="exp-${experienceCount}-time-period-to" name="exp-${experienceCount}-time-period-to">
+                    </div> 
+                </div>
             </div>
             <div class="mb-3">
-                <label for="exp-${experienceCount}-designation" class="form-label">Designation*</label>
+                <label for="exp-${experienceCount}-designation" class="form-label">Designation<b style="color: red;">*</b></label>
                 <input type="text" class="form-control" id="exp-${experienceCount}-designation" name="exp-${experienceCount}-designation">
             </div>
             <div class="mb-3">
-                <label for="exp-${experienceCount}-location" class="form-label">Location*</label>
+                <label for="exp-${experienceCount}-location" class="form-label">Location<b style="color: red;">*</b></label>
                 <input type="text" class="form-control" id="exp-${experienceCount}-location" name="exp-${experienceCount}-location">
             </div>
             <div class="mb-3">
-                <label for="exp-${experienceCount}-det-1" class="form-label">details-1*</label>
+                <label for="exp-${experienceCount}-det-1" class="form-label">details-1</label>
                 <input type="text" class="form-control" id="exp-${experienceCount}-det-1" name="exp-${experienceCount}-det-1">
             </div>
             <div class="mb-3">
-                <label for="exp-${experienceCount}-det-2" class="form-label">details-2*</label>
+                <label for="exp-${experienceCount}-det-2" class="form-label">details-2</label>
                 <input type="text" class="form-control" id="exp-${experienceCount}-det-2" name="exp-${experienceCount}-det-2">
             </div>
             <div class="mb-3">
-                <label for="exp-${experienceCount}-det-3" class="form-label">details-3*</label>
+                <label for="exp-${experienceCount}-det-3" class="form-label">details-3</label>
                 <input type="text" class="form-control" id="exp-${experienceCount}-det-3" name="exp-${experienceCount}-det-3">
             </div>
         `;
@@ -488,31 +623,43 @@
             // Add input fields to the accordion body
             accordionBody.innerHTML = `
             <div class="mb-3">
-                <label for="intern-${internshipCount}-cname" class="form-label">Name of Company*</label>
+                <label for="intern-${internshipCount}-cname" class="form-label">Name of Company<b style="color: red;">*</b></label>
                 <input type="text" class="form-control" id="intern-${internshipCount}-cname" name="intern-${internshipCount}-cname">
             </div>
             <div class="mb-3">
-                <label for="intern-${internshipCount}-time-period" class="form-label">Time-Period*</label>
-                <input type="text" class="form-control" id="intern-${internshipCount}-time-period" name="intern-${internshipCount}-time-period">
+                <label for="intern-${internshipCount}-time-period" class="form-label">Time-Period<b style="color: red;">*</b></label>
+                <br>
+                <div class="d-flex">
+                    <div>
+                        <p class="my-2">From : </p>
+                        <input type="number" min="2020" max="2030" class="form-control w-100"
+                            id="intern-${internshipCount}-time-period-from" name="intern-${internshipCount}-time-period-from">
+                    </div>
+                    <div class="mx-2">
+                        <p class="my-2">To : </p>
+                        <input type="number" min="2020" max="2030" class="form-control w-100"
+                            id="intern-${internshipCount}-time-period-to" name="intern-${internshipCount}-time-period-to">
+                    </div> 
+                </div>
             </div>
             <div class="mb-3">
-                <label for="intern-${internshipCount}-role" class="form-label">Role*</label>
+                <label for="intern-${internshipCount}-role" class="form-label">Role<b style="color: red;">*</b></label>
                 <input type="text" class="form-control" id="intern-${internshipCount}-role" name="intern-${internshipCount}-role">
             </div>
             <div class="mb-3">
-                <label for="intern-${internshipCount}-location" class="form-label">Location*</label>
+                <label for="intern-${internshipCount}-location" class="form-label">Location<b style="color: red;">*</b></label>
                 <input type="text" class="form-control" id="intern-${internshipCount}-location" name="intern-${internshipCount}-location">
             </div>
             <div class="mb-3">
-                <label for="intern-${internshipCount}-det-1" class="form-label">details-1*</label>
+                <label for="intern-${internshipCount}-det-1" class="form-label">details-1</label>
                 <input type="text" class="form-control" id="intern-${internshipCount}-det-1" name="intern-${internshipCount}-det-1">
             </div>
             <div class="mb-3">
-                <label for="intern-${internshipCount}-det-2" class="form-label">details-2*</label>
+                <label for="intern-${internshipCount}-det-2" class="form-label">details-2</label>
                 <input type="text" class="form-control" id="intern-${internshipCount}-det-2" name="intern-${internshipCount}-det-2">
             </div>
             <div class="mb-3">
-                <label for="intern-${internshipCount}-det-3" class="form-label">details-3*</label>
+                <label for="intern-${internshipCount}-det-3" class="form-label">details-3</label>
                 <input type="text" class="form-control" id="intern-${internshipCount}-det-3" name="intern-${internshipCount}-det-3">
             </div>
         `;
@@ -563,12 +710,12 @@
             // Add input fields to the accordion body
             accordionBody.innerHTML = `
             <div class="mb-3">
-                <label for="hack-${hackathonCount}-name" class="form-label">Hackathon Name*</label>
+                <label for="hack-${hackathonCount}-name" class="form-label">Hackathon Name<b style="color: red;">*</b></label>
                 <input type="text" class="form-control" id="hack-${hackathonCount}-name" name="hack-${hackathonCount}-name">
             </div>
             <div class="mb-3">
-                <label for="hack-${hackathonCount}-time-period" class="form-label">Year of Hackathon*</label>
-                <input type="text" class="form-control" id="hack-${hackathonCount}-time-period" name="hack-${hackathonCount}-time-period">
+                <label for="hack-${hackathonCount}-time-period" class="form-label">Year of Hackathon<b style="color: red;">*</b></label>
+                <input type="number" class="form-control w-25" id="hack-${hackathonCount}-time-period" name="hack-${hackathonCount}-time-period" min="2011">
             </div>
             <div class="mb-3">
                 <label for="hack-${hackathonCount}-det-1" class="form-label">Details-1</label>
@@ -626,11 +773,11 @@
             // Add input fields to the accordion body
             accordionBody.innerHTML = `
             <div class="mb-3">
-                <label for="git-proj-${githubProjectCount}-name" class="form-label">Project Name*</label>
+                <label for="git-proj-${githubProjectCount}-name" class="form-label">Project Name<b style="color: red;">*</b></label>
                 <input type="text" class="form-control" id="git-proj-${githubProjectCount}-name" name="git-proj-${githubProjectCount}-name">
             </div>
             <div class="mb-3">
-                <label for="git-proj-${githubProjectCount}-det-1" class="form-label">Details-1</label>
+                <label for="git-proj-${githubProjectCount}-det-1" class="form-label">Details-1<b style="color: red;">*</b></label>
                 <input type="text" class="form-control" id="git-proj-${githubProjectCount}-det-1" name="git-proj-${githubProjectCount}-det-1">
             </div>
             <div class="mb-3">
@@ -652,20 +799,41 @@
         }
 
         function HandleSubmit() {
+            console.log('Submit button clicked');
             var name = document.getElementById('fname').value + ' ' + document.getElementById('lname').value;
             var mobile = document.getElementById('contact-no').value;
+            
             var email = document.getElementById('e-mail').value;
             var linked = document.getElementById('linkedin').value;
             var github = document.getElementById('github').value;
             var csrfToken = document.getElementsByName('csrfmiddlewaretoken')[0].value;
+            var whatsno = document.getElementById('whats-no').value;
+            var address = document.getElementById('addr').value;
             var careerSummary = {
                 "data": document.getElementById('career-summary').value,
+            };
+
+            // 10th details
+            var tenth = {
+                "tenth-name": document.getElementById('schname-1').value,
+                "tenth-period": document.getElementById('sch-1-tperiod-from').value + ' - ' + document.getElementById('sch-1-tperiod-to').value,
+                "tenth-per": document.getElementById('sch-1-cgpa').value,
+                "tenth-details": document.getElementById('sch-1-detail').value
+            };
+
+            // twelth details
+            var twelth = {
+                "twelth-name": document.getElementById('schname-2').value,
+                "twelth-period": document.getElementById('sch-2-tperiod-from').value + ' - ' + document.getElementById('sch-2-tperiod-to').value,
+                "twelth-per": document.getElementById('sch-2-cgpa').value,
+                "twelth-details": document.getElementById('sch-2-detail').value
             };
 
             // Education details
             var education = {
                 "Education-clg": document.getElementById('insname').value,
-                "ed-date": document.getElementById('tperiod').value,
+                "ed-date": document.getElementById('tperiod1').value + ' - ' + document.getElementById('tperiod2').value,
+                "ins-cgpa": document.getElementById('ins-cgpa').value,
                 "edu-details": document.getElementById('eddetails').value
             };
 
@@ -686,12 +854,11 @@
                     var expDetail = document.getElementById('exp-' + i + '-det-' + j).value;
                     expDetails3.push({ "exp_details": expDetail });
                 }
-
                 var expDetails = {
                     "exp-company": document.getElementById('exp-' + i + '-cname').value,
-                    "exp-date": document.getElementById('exp-' + i + '-time-period').value,
-                    "exp-details1": document.getElementById('exp-' + i + '-det-1').value,
-                    "exp-details2": document.getElementById('exp-' + i + '-det-2').value,
+                    "exp-date": document.getElementById('exp-' + i + '-time-period-from').value + ' - ' + document.getElementById('exp-' + i + '-time-period-to').value,
+                    "exp-details1": document.getElementById('exp-' + i + '-designation').value,
+                    "exp-details2": document.getElementById('exp-' + i + '-location').value,
                     "exp-details3": expDetails3
                 };
 
@@ -711,9 +878,9 @@
 
                 var internDetails = {
                     "intern-company": document.getElementById('intern-' + i + '-cname').value,
-                    "intern-date": document.getElementById('intern-' + i + '-time-period').value,
-                    "intern-details1": document.getElementById('intern-' + i + '-det-1').value,
-                    "intern-details2": document.getElementById('intern-' + i + '-det-2').value,
+                    "intern-date": document.getElementById('intern-' + i + '-time-period-from').value + ' - ' + document.getElementById('intern-' + i + '-time-period-to').value,
+                    "intern-details1": document.getElementById('intern-' + i + '-role').value,
+                    "intern-details2": document.getElementById('intern-' + i + '-location').value,
                     "intern-details3": internDetails3
                 };
 
@@ -748,11 +915,15 @@
                 "json": [{
                     "Name": name,
                     "mobile": mobile,
+                    "whatsno": whatsno,
+                    "address": address,
                     "email": email,
                     "linked": linked,
                     "github": github,
                     "CareerSum": careerSummary,
                     "education": education,
+                    "tenth": tenth,
+                    "twelth": twelth,
                     "achievement": achievements,
                     "experience": experiences,
                     "Internships": internships,
@@ -761,17 +932,221 @@
                 }]
             };
 
-            //console.log(JSON.stringify(resumeData, null, 2));
+            const nameReg = /^[a-zA-Z]+$/;
+            if(document.getElementById("fname").value === ""){
+                alert("first Name is required");
+                return false;
+            }
+
+            if(document.getElementById("lname").value === ""){
+                alert("last Name is required");
+                return false;
+            }
+            
+            if(nameReg.test(document.getElementById("fname").value) && nameReg.test(document.getElementById("lname").value)){
+                resumeData.json[0].Name = document.getElementById("fname").value.toUpperCase() + " " + document.getElementById("lname").value.toUpperCase();
+            }else{
+                alert("first name or last name should contain only alphabets");
+                return false;
+            }
+
+            if(mobile === ""){
+                alert("Contact number is required");
+                return false;
+            }else if(mobile.length !== 10){
+                alert("Contact number should be of 10 digits");
+                return false;
+            }else{
+                resumeData.json[0].mobile = "+91 " + mobile.slice(0,5) + "-" + mobile.slice(5,10);
+            }
+            if(email === ""){
+                alert("Email is required");
+                return false;
+            }
+
+            if(whatsno === ""){
+                alert("Whatsapp number is required");
+                return false;
+            }else if(whatsno.length !== 10){
+                alert("Whatsapp number should be of 10 digits");
+                return false;
+            }else{
+                var modifiedwhats = "+91 " + whatsno.slice(0,5) + "-" + whatsno.slice(5,10);
+                resumeData.json[0].whatsno = modifiedwhats;
+            }
+
+            if(address === ""){
+                alert("Address is required");
+                return false;
+            }
+            if(linked === ""){
+                alert("Linkedin is required");
+                return false;
+            }else if(linked.slice(0,12) !== "https://www."){
+                alert("Linkedin URL should start with 'https://www.'");
+                return false;
+            }else{
+                resumeData.json[0].linked = linked.slice(12,linked.length);
+            }
+
+            if(github === ""){
+                alert("Github is required");
+                return false;
+            }else if(github.slice(0,8) !== "https://"){
+                alert("Github URL should start with 'https://'");
+                return false;
+            }else{
+                resumeData.json[0].github = github.slice(8,github.length);
+            }
+
+            if(careerSummary.data === ""){
+                delete resumeData.json[0].CareerSum;
+            } 
+            if(document.getElementById('schname-1').value === ""){
+                alert("10th school name is required");
+                return false;
+            }
+            if(document.getElementById('sch-1-tperiod-from').value === "" || document.getElementById('sch-1-tperiod-to').value === ""){
+                alert("10th school time-period is required");
+                return false;
+            }
+            if(document.getElementById('sch-1-cgpa').value === ""){
+                alert("10th school percentage is required");
+                return false;
+            }else{
+                resumeData.json[0].tenth["tenth-per"] = document.getElementById('sch-1-cgpa').value + "%";
+            }
+
+            if(document.getElementById('schname-2').value === ""){
+                alert("12th school name is required");
+                return false;
+            }
+            if(document.getElementById('sch-2-tperiod-from').value === "" || document.getElementById('sch-2-tperiod-to').value === ""){
+                alert("12th school time-period is required");
+                return false;
+            }
+            if(document.getElementById('sch-2-cgpa').value === ""){
+                alert("12th school percentage is required");
+                return false;
+            }else{
+                resumeData.json[0].twelth["twelth-per"] = document.getElementById('sch-2-cgpa').value + "%";
+            }
+            if(document.getElementById('insname').value === ""){
+                alert("College name is required");
+                return false;
+            }
+            if(document.getElementById('tperiod1').value === "" || document.getElementById('tperiod2').value === ""){
+                alert("College time-period is required");
+                return false;
+            }
+            if(document.getElementById('ins-cgpa').value === ""){
+                alert("College CGPA is required");
+                return false;
+            }
+            if(document.getElementById('achieve1').value === "" && document.getElementById('achieve2').value === "" && document.getElementById('achieve3').value === ""){
+                delete resumeData.json[0].achievement;
+            }
+            
+            let k = 0;
+            for(k = 0; k < experienceCount; k++){
+                if(experiences[k]["exp-company"].length !== 0 || (experiences[k]["exp-date"].length - 3) !== 0 || experiences[k]["exp-details1"].length !== 0 || experiences[k]["exp-details2"].length !== 0){
+                    if(experiences[k]["exp-company"].length === 0){
+                        alert("Experience company name is required");
+                        return false;
+                    }
+                    if((experiences[k]["exp-date"].length - 3) === 0){
+                        alert("Experience time-period is required");
+                        return false;
+                    }
+                    if(experiences[k]["exp-details1"].length === 0){
+                        alert("Experience designation is required");
+                        return false;
+                    }
+                    if(experiences[k]["exp-details2"].length === 0){
+                        alert("Experience location is required");
+                        return false;
+                    }
+                    if(document.getElementById('exp-' + (k+1) + '-time-period-from').value === "" || document.getElementById('exp-' + (k+1) + '-time-period-to').value === ""){
+                        alert("Experience time-period is required");
+                        return false;
+                    }
+                }
+            }
+            if(experiences[0]["exp-company"].length === 0 || (experiences[0]["exp-date"].length - 3) === 0 || experiences[0]["exp-details1"].length === 0 || experiences[0]["exp-details2"].length === 0){
+                delete resumeData.json[0].experience;
+            }
+
+            for(k = 0; k < internshipCount; k++){
+                if(internships[k]["intern-company"] !== "" || internships[k]["intern-date"] !== " - " || internships[k]["intern-details1"] !== "" || internships[k]["intern-details2"] !== ""){
+                    if(internships[k]["intern-company"] === ""){
+                        alert("Internship company name is required");
+                        return false;
+                    }
+                    if(internships[k]["intern-date"] === " - "){
+                        alert("Internship time-period is required");
+                        return false;
+                    }
+                    if(internships[k]["intern-details1"] === ""){
+                        alert("Internship role is required");
+                        return false;
+                    }
+                    if(internships[k]["intern-details2"] === ""){
+                        alert("Internship location is required");
+                        return false;
+                    }
+                    if(document.getElementById('intern-' + (k+1) + '-time-period-from').value === "" || document.getElementById('intern-' + (k+1) + '-time-period-to').value === ""){
+                        alert("Internship time-period is required");
+                        return false;
+                    }
+                }
+            }
+            if(internships[0]["intern-company"] === "" || internships[0]["intern-date"] === " - " || internships[0]["intern-details1"] === "" || internships[0]["intern-details2"] === ""){
+                delete resumeData.json[0].Internships;
+            }
+
+            for(k = 0; k < hackathonCount; k++){
+                if(hackathons[k]["hack-title"] !== "" || hackathons[k]["hack-date"] !== ""){
+                    if(hackathons[k]["hack-title"] === ""){
+                        alert("Hackathon title is required");
+                        return false;
+                    }
+                    if(hackathons[k]["hack-date"] === ""){
+                        alert("Hackathon time-period is required");
+                        return false;
+                    }
+                }
+            }
+            if(hackathons[0]["hack-title"] === "" || hackathons[0]["hack-date"] === ""){
+                delete resumeData.json[0].Hackathon;
+            }
+
+            for(k = 0; k < githubProjectCount; k++){
+                if(githubProjects[k]["gitproj-title"] !== ""){
+                    if(githubProjects[k]["gitproj-title"] === ""){
+                        alert("Github project title is required");
+                        return false;
+                    }
+                    if(githubProjects[k]["gitproj-details"][0]["gitproj_details1"] === ""){
+                        alert("Github project details is required");
+                        return false;
+                    }
+                }
+            }
+            if(githubProjects[0]["gitproj-title"] === ""){
+                delete resumeData.json[0].Gitproj;
+            }
+ 
+            console.log(resumeData);
 
             // Use AJAX to post the JSON data to your Django view
             var xhr = new XMLHttpRequest();
-            xhr.open("POST", "{% url 'index' %}", true);
+            xhr.open("POST", "{% url 'resume' %}", true);
             xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
             xhr.setRequestHeader("X-CSRFToken", csrfToken);  // Include CSRF token
             xhr.onreadystatechange = function () {
                 if (xhr.readyState == 4 && xhr.status == 200) {
                     console.log(xhr.responseText);
-                    // Handle success if needed
+                    // Handle success if needed 
                 } else if (xhr.readyState == 4) {
                     console.error(xhr.statusText);
                     // Handle error if needed
@@ -784,4 +1159,5 @@
         }
     </script>
 </body>
+
 </html>

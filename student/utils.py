@@ -22,7 +22,7 @@ import os
 
 
 fpdf.set_global("FPDF_CACHE_MODE", 1)
-def generate_pdf(data, output_file):
+def generate_pdf(data):
     pdf = FPDF('P', 'mm', 'Letter') # Page size
     pdf.add_page()
     pdf.set_auto_page_break(True, margin=7)
@@ -30,13 +30,13 @@ def generate_pdf(data, output_file):
     # font_path = abspath('cmr12.ttf')
     # print(font_path)  
 
-    font_path1 = os.path.join(settings.BASE_DIR, 'api', 'fonts', 'cmr12.ttf')
-    font_path2 = os.path.join(settings.BASE_DIR, 'api', 'fonts', 'cmbx12.ttf')
-    font_path3 = os.path.join(settings.BASE_DIR, 'api', 'fonts', 'cmsl12.ttf')
-    image_path1 = os.path.join(settings.BASE_DIR, 'api', 'images', 'phone-flip-solid.png')
-    image_path2 = os.path.join(settings.BASE_DIR, 'api', 'images', 'envelope-solid.png')
-    image_path3 = os.path.join(settings.BASE_DIR, 'api', 'images', 'github.png')
-    image_path4 = os.path.join(settings.BASE_DIR, 'api', 'images', 'linkedin.png')
+    font_path1 = os.path.join(settings.BASE_DIR, 'student', 'fonts', 'cmr12.ttf')
+    font_path2 = os.path.join(settings.BASE_DIR, 'student', 'fonts', 'cmbx12.ttf')
+    font_path3 = os.path.join(settings.BASE_DIR, 'student', 'fonts', 'cmsl12.ttf')
+    image_path1 = os.path.join(settings.BASE_DIR, 'student', 'images', 'phone-flip-solid.png')
+    image_path2 = os.path.join(settings.BASE_DIR, 'student', 'images', 'envelope-solid.png')
+    image_path3 = os.path.join(settings.BASE_DIR, 'student', 'images', 'github.png')
+    image_path4 = os.path.join(settings.BASE_DIR, 'student', 'images', 'linkedin.png')
     pdf.add_font('cmr', '', font_path1, uni = True)
     pdf.add_font('cmbx','', font_path2, uni = True)
     pdf.add_font('cmsl','', font_path3, uni = True)
@@ -83,10 +83,12 @@ def generate_pdf(data, output_file):
         pdf.set_link(link='')
 
     if data.get('CareerSum'):
+        pdf.set_y(pdf.get_y() + 2)
         pdf.set_font("cmbx", "", 14)
         pdf.cell(0, 7, "Career summary so far", ln=1)
         pdf.set_line_width(0.2)
         pdf.line(10, pdf.get_y(), 204, pdf.get_y())
+        pdf.set_y(pdf.get_y() + 1)
         pdf.set_font("cmr", "", 10)
 
         remain_space = 204 - pdf.get_x()
@@ -102,9 +104,36 @@ def generate_pdf(data, output_file):
         pdf.set_font("cmbx", "", 14)
         pdf.cell(0, 7, 'Education', ln=1)
         pdf.line(10, pdf.get_y(), 204, pdf.get_y())
+        pdf.set_font("cmbx", "", 12)
+        pdf.cell(0, 7, "Secondary Education :", ln=1)
         pdf.set_font("cmbx", "", 11)
-        pdf.cell(0, 7, data['education'].get("Education-clg"))
-        pdf.cell(0, 7, data['education'].get("ed-date"), ln=1, align="R")
+        pdf.cell(0, 6, data['tenth'].get("tenth-name"))
+        pdf.cell(0, 6, data['tenth'].get("tenth-period"), ln=1, align="R")
+        pdf.cell(0, 6, "Grade : " + data['tenth'].get("tenth-per"), ln=1)
+        pdf.set_font("cmsl", "", 10)
+        lines = pdf.multi_cell(remain_space, 4, data['tenth'].get("tenth-details"))
+        
+        for line in lines:
+            pdf.cell(0, 5, line)
+        
+        pdf.set_font("cmbx", "", 12)
+        pdf.cell(0, 7, "Higher Secondary Education :", ln=1)
+        pdf.set_font("cmbx", "", 11)
+        pdf.cell(0, 6, data['twelth'].get("twelth-name"))
+        pdf.cell(0, 6, data['twelth'].get("twelth-period"), ln=1, align="R")
+        pdf.cell(0, 6, "Grade : " + data['twelth'].get("twelth-per"), ln=1)
+        pdf.set_font("cmsl", "", 10)
+        lines = pdf.multi_cell(remain_space, 4, data['twelth'].get("twelth-details"))
+        
+        for line in lines:
+            pdf.cell(0, 5, line)
+            
+        pdf.set_font("cmbx", "", 12)
+        pdf.cell(0, 7, "Institute Education :", ln=1)
+        pdf.set_font("cmbx", "", 11)
+        pdf.cell(0, 6, data['education'].get("Education-clg"))
+        pdf.cell(0, 6, data['education'].get("ed-date"), ln=1, align="R")
+        pdf.cell(0, 6, "CGPA : " + data['education'].get("ins-cgpa"), ln=1)
         pdf.set_font("cmsl", "", 10)
         lines = pdf.multi_cell(remain_space, 4, data['education'].get("edu-details"))
 
@@ -120,7 +149,7 @@ def generate_pdf(data, output_file):
         pdf.set_y(pdf.get_y() + 2)
         pdf.set_font("cmr", "", 10)
         for i in range(len(data["achievement"])):
-            pdf.cell(5)
+            pdf.cell(3)
             lines = pdf.multi_cell(remain_space, 4, data['achievement'][i].get("ach-details"))
             
             for line in lines:
@@ -141,7 +170,7 @@ def generate_pdf(data, output_file):
             pdf.cell(0, 5, data['experience'][i].get("exp-details1"))
             pdf.cell(0, 5, data['experience'][i].get("exp-details2"), ln=1, align="R")
             for j in range(len(data['experience'][i].get("exp-details3"))):
-                pdf.cell(5)
+                pdf.cell(3)
                 pdf.multi_cell(remain_space, 4, data['experience'][i].get("exp-details3")[j].get("exp_details"))
                 
                 for line in lines:
@@ -161,7 +190,7 @@ def generate_pdf(data, output_file):
             pdf.cell(0, 5, data['Internships'][i].get("intern-details1"))
             pdf.cell(0, 5, data['Internships'][i].get("intern-details2"), ln=1, align="R")
             for j in range(len(data['Internships'][i].get("intern-details3"))):
-                pdf.cell(5)
+                pdf.cell(3)
                 pdf.multi_cell(remain_space, 4, data['Internships'][i].get("intern-details3")[j].get("intern_details"))
                 for line in lines:
                     pdf.cell(0, 5, line)
@@ -178,7 +207,7 @@ def generate_pdf(data, output_file):
             pdf.cell(0, 6, data['Hackathon'][i].get("hack-date"), ln=1, align="R")
             pdf.set_font("cmr", "", 10) 
             for j in range(len(data['Hackathon'][i].get("hack-details"))):
-                pdf.cell(5)
+                pdf.cell(3)
                 lines = pdf.multi_cell(remain_space, 4, data['Hackathon'][i].get("hack-details")[j].get("hack_details1"))
                 for line in lines:
                     pdf.cell(0, 5, line)
@@ -198,13 +227,13 @@ def generate_pdf(data, output_file):
 
             pdf.set_font("cmr", "", 10)
             for j in range(len(data['Gitproj'][i].get("gitproj-details"))):
-                pdf.cell(5)
+                pdf.cell(3)
                 lines = pdf.multi_cell(remain_space, 4, data['Gitproj'][i].get("gitproj-details")[j].get("gitproj_details1"))
 
                 for line in lines:
                     pdf.cell(0, 5, line)
     # print(f"Output file: {output_file}")
-    pdf.output(output_file)
+    # pdf.output(output_file, "F")
     # print("PDF generated")
     pdf_data = pdf.output(dest='S').encode('latin1')
     # print("PDF generated")
@@ -226,6 +255,11 @@ def store_pdf_in_drive(user, pdf_content, file_name='document.pdf'):
     file_id = file.get('id')
     # web_view_link = file.get('webViewLink')
 
+    permission_all = {
+        'type': 'anyone',
+        'role': 'reader',
+    }
+    service.permissions().create(fileId=file_id, body = permission_all).execute()
     return file_id
     # return file.get('id')
 

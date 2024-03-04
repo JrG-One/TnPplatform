@@ -2,17 +2,32 @@
     "json": [
         {
     "Name" : "LOREN IPSUM",
-    "mobile" : "+91(123)456-7890",
+    "mobile" : "+91 12345-67890",
     "email" : "abcdfldfdofksd@gmail.com",
     "linked" : "linkedin.com/in/akash-dholakiya-91599024b/",
     "github" : "github.com/akashdholakiya",
+    "whatsno" : "+91(123)456-7890",
+    "address" : "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur dictum gravida mauris.",
     "CareerSum" : {
         "data" : "lorem ipsum asa sa idsuiad auid jasjd suiad iuasd uias asid uiasdh uisa huiashd uisah sd lorem s sisisi si si jsi jsi js jis is isi si isj is lorem ipsum asa sa idsuiad auid jasjd suiad iuasd uias asid uiasdh uisa huiashd uisah sd lorem s sisisi si si jsi jsi js jis is isi si isj is lorem ipsum asa sa idsuiad auid jasjd suiad iuasd uias asid uiasdh uisa huiashd uisah sd lorem s sisisi si si jsi jsi js jis is isi si isj is lorem ipsum asa sa idsuiad auid jasjd suiad iuasd uias asid uiasdh uisa huiashd uisah sd lorem s sisisi si si jsi jsi js jis is isi si isj is lorem ipsum asa sa idsuiad auid jasjd suiad iuasd uias asid uiasdh uisa huiashd uisah sd lorem s sisisi si si jsi jsi js jis is isi si isj is"
     },
     "education" : {
         "Education-clg" : "This College",
-        "ed-date" : "july 2001 - july 2005",
+        "ed-date" : "2001 - 2005",
+        "ins-cgpa" : "9.0",
         "edu-details" : "dsa isa jdsa jsa"
+    },
+    "tenth" : {
+        "tenth-name" : "This School",
+        "tenth-period" : "2001 - 2005",
+        "tenth-per" : "90%",
+        "tenth-details" : "dsa isa jdsa jsa"
+    },
+    "twelth" : {
+        "twelth-name" : "This School",
+        "twelth-period" : "2001 - 2005",
+        "twelth-per" : "90%",
+        "twelth-details" : "dsa isa jdsa jsa"
     },
     "achievement" : [
         {
@@ -28,7 +43,24 @@
     "experience" : [
         {
             "exp-company" : "This Company",
-            "exp-date" : "july 2001 - july 2005",
+            "exp-date" : "2001 - 2005",
+            "exp-details1" : "dsa isa jdsa jsa jdsa jsa",
+            "exp-details2" : "dsa isa jdsa jsa jdsa jsa",
+            "exp-details3" : [
+                {   
+                    "exp_details" : "dsa isa jdsa jsa"
+                },
+                {
+                    "exp_details" : "dsa isa jdsa jsa"
+                },
+                {
+                    "exp_details" : "dsa isa jdsa jsa"
+                }
+            ]
+        },
+        {
+            "exp-company" : "This Company",
+            "exp-date" : "2001 - 2005",
             "exp-details1" : "dsa isa jdsa jsa jdsa jsa",
             "exp-details2" : "dsa isa jdsa jsa jdsa jsa",
             "exp-details3" : [
@@ -45,24 +77,7 @@
         },
         {
             "exp-company" : "This Company",
-            "exp-date" : "july 2001 - july 2005",
-            "exp-details1" : "dsa isa jdsa jsa jdsa jsa",
-            "exp-details2" : "dsa isa jdsa jsa jdsa jsa",
-            "exp-details3" : [
-                {
-                    "exp_details" : "dsa isa jdsa jsa"
-                },
-                {
-                    "exp_details" : "dsa isa jdsa jsa"
-                },
-                {
-                    "exp_details" : "dsa isa jdsa jsa"
-                }
-            ]
-        },
-        {
-            "exp-company" : "This Company",
-            "exp-date" : "july 2001 - july 2005",
+            "exp-date" : "2001 - 2005",
             "exp-details1" : "dsa isa jdsa jsa jdsa jsa",
             "exp-details2" : "dsa isa jdsa jsa jdsa jsa",
             "exp-details3" : [
@@ -81,7 +96,7 @@
     "Internships" : [
         {
             "intern-company" : "This Company",
-            "intern-date" : "july 2001 - july 2005",
+            "intern-date" : "2001 - 2005",
             "intern-details1" : "dsa isa jdsa jsa jdsa jsa",
             "intern-details2" : "dsa isa jdsa jsa jdsa jsa",
             "intern-details3" : [
@@ -98,7 +113,7 @@
         },
         {
             "intern-company" : "This Company",
-            "intern-date" : "july 2001 - july 2005",
+            "intern-date" : "2001 - 2005",
             "intern-details1" : "dsa isa jdsa jsa jdsa jsa",
             "intern-details2" : "dsa isa jdsa jsa jdsa jsa",
             "intern-details3" : [
@@ -115,7 +130,7 @@
         },
         {
             "intern-company" : "This Company",
-            "intern-date" : "july 2001 - july 2005",
+            "intern-date" : "2001 - 2005",
             "intern-details1" : "dsa isa jdsa jsa jdsa jsa",
             "intern-details2" : "dsa isa jdsa jsa jdsa jsa",
             "intern-details3" : [

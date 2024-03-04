@@ -55,16 +55,13 @@ LOGIN_REDIRECT_URL = '/'
 
 INSTALLED_APPS = [
     "allauth.socialaccount",
-    
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    
     'rest_framework.authtoken',
-    
     "rest_framework",
     "django.contrib.sites",
     "allauth",
@@ -74,7 +71,6 @@ INSTALLED_APPS = [
     "TrainingProgram",
     "Announcement",
     "student",
-    "api",
     "allauth.usersessions",
     'import_export',
 
@@ -191,7 +187,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = "en-us"
 
-TIME_ZONE = "UTC"
+TIME_ZONE = "Asia/Kolkata"
 
 USE_I18N = True
 
@@ -203,10 +199,12 @@ USE_TZ = True
 
 STATIC_URL = "static/"
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 STATICFILES_DIRS = [
-    'api/fonts/',
-    'api/images/',
+    'student/fonts/',
+    'student/images/',
+    os.path.join(BASE_DIR, 'static'),
 ]
  
 

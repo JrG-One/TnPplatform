@@ -1,5 +1,5 @@
 django
-    django-admin
+django-admin
 django-allauth
 djangorestframework
 pydotenv

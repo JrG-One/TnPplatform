@@ -21,7 +21,9 @@ function registerJob() {
 {% if user.is_authenticated %}
     {% if user_has_registered %}
         <p>You have already registered for this job.</p>
-    {% else %}
+    {% elif user_is_staff%}
+    <p>You are an admin. Please Login from a student account to register.</p>
+        {% else %}
         <form id="registerForm">
             {% csrf_token %}
             <input type="button" value="Register" onclick="registerJob()">
