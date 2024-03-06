@@ -42,26 +42,26 @@
                 <div class="col">
                     <div class="mb-3">
                         <label for="fname" class="form-label">First Name<b style="color: red;">*</b></label>
-                        <input type="text" class="form-control" name="fname" id="fname"  required value={{ user.Name }}>
+                        <input type="text" class="form-control" name="fname" id="fname" required value={{ user.Name }}>
                     </div>
                     <div class="mb-3">
                         <label for="contact-no" class="form-label">Contact Number<b style="color: red;">*</b></label>
                         <input type="number" maxlength="10" name="contact-no" class="form-control" id="contact-no"
-                             required value={{ user.mobile }}>
+                            required value="{{ user.mobile|slice:"4:9" }}{{ user.mobile|slice:"10:15" }}">
                     </div>
                     <div class="mb-3">
                         <label for="whats-no" class="form-label">Whatsapp Number<b style="color: red;">*</b></label>
-                        <input type="number" maxlength="10" name="whats-no" class="form-control" id="whats-no" required>
+                        <input type="number" maxlength="10" name="whats-no" class="form-control" id="whats-no" required value="{{ user.whatsno|slice:"4:9" }}{{ user.whatsno|slice:"10:15" }}">
                     </div>
                     <div class="mb-3">
                         <label for="linkedin" class="form-label">Linkedin profile link<b style="color: red;">*</b></label>
-                        <input type="text" class="form-control" name="linkedin" id="linkedin" required value={{ user.linked }}>
+                        <input type="text" class="form-control" name="linkedin" id="linkedin" required value='https://www.{{ user.linked }}'>
                     </div>
                 </div>
                 <div class="col">
                     <div class="mb-3">
                         <label for="lname" class="form-label">Last Name<b style="color: red;">*</b></label>
-                        <input type="text" class="form-control" id="lname" name="lname" required value={{ user.Name }}>
+                        <input type="text" class="form-control" id="lname" name="lname" required value = {{ user.Name }}>
                     </div>
                     <div class="mb-3">
                         <label for="e-mail" class="form-label">Personal E-mail<b style="color: red;">*</b></label>
@@ -69,30 +69,31 @@
                     </div>
                     <div class="mb-3">
                         <label for="addr" class="form-label">Address<b style="color: red;">*</b></label>
-                        <input type="text" class="form-control" id="addr" name="addr" required>
+                        <input type="text" class="form-control" id="addr" name="addr" required value={{ user.address }}>
                     </div>
                     <div class="mb-3">
                         <label for="github" class="form-label">Github profile link<b style="color: red;">*</b></label>
-                        <input type="text" class="form-control" id="github" name="github"  required value={{ user.github }}>
+                        <input type="text" class="form-control" id="github" name="github" required value='https://www.{{ user.github }}'>
                     </div>
                 </div>
             </div>
             <div class="mb-3">
                 <label for="career-summary" class="form-label">Career summary</label>
                 <textarea type="textarea" rows="5" class="form-control" id="career-summary"
-                    name="career-summary"></textarea>
+                    name="career-summary" value={{ user.CareerSum.data }}></textarea>
             </div>
             <div class="d-flex justify-content-center">
                 <div class="btn btn-success px-5" onclick="handleNext(1)">Next</div>
             </div>
         </div>
+
         <div id="page-2" class="container my-2" style="display: none;">
             <h1>Education</h1>
             <div style="border-top:5px solid green"></div>
             <div class="mt-3">
                 <div class="mb-3">
                     <label for="schname-1" class="form-label"><b>Name of 10th School</b><b style="color: red;">*</b></label>
-                    <input type="text" class="form-control" id="schname-1" name="schname-1" maxlength="60" value= >
+                    <input type="text" class="form-control" id="schname-1" name="schname-1" maxlength="60" value={{ user.tenth.tenth_name }}>
                 </div>
                 <div class="mb-3">
                     <label for="sch-1-tperiod" class="form-label">Time Period<b style="color: red;">*</b></label>
@@ -101,27 +102,27 @@
                         <div>
                             <p class="my-2">From : </p>
                             <input type="number" min="2010" max="2025" class="form-control w-100" id="sch-1-tperiod-from"
-                                name="sch-1-tperiod-from">
+                                name="sch-1-tperiod-from" value={{ user.tenth.tenth_period|slice:"0:4" }}>
                         </div>
                         <div class="mx-2">
                             <p class="my-2">To : </p>
                             <input type="number" min="2010" max="2025" class="form-control w-100" id="sch-1-tperiod-to"
-                                name="sch-1-tperiod-to">
+                                name="sch-1-tperiod-to" value={{ user.tenth.tenth_period|slice:"7:" }}>
                         </div>
                     </div>
                 </div>
                 <div class="mb-3">
                     <label for="sch-1-cgpa" class="form-label">Percentage<b style="color: red;">*</b> </label>
-                    <input type="number" class="form-control" id="sch-1-cgpa" name="sch-1-cgpa">
+                    <input type="number" class="form-control" id="sch-1-cgpa" name="sch-1-cgpa" value={{ user.tenth.tenth_per|slice:":-1" }}>
                 </div>
                 <div class="mb-3">
                     <label for="sch-1-detail" class="form-label">10th School details</label>
-                    <input type="text" class="form-control" id="sch-1-detail" name="sch-1-detail">
+                    <input type="text" class="form-control" id="sch-1-detail" name="sch-1-detail" value={{ user.tenth.tenth_details }}>
                 </div>
                 <hr>
                 <div class="mb-3">
                     <label for="schname-2" class="form-label"><b>Name of 12th School</b><b style="color: red;">*</b></label>
-                    <input type="text" class="form-control" id="schname-2" name="schname-2" maxlength="60">
+                    <input type="text" class="form-control" id="schname-2" name="schname-2" maxlength="60" value={{ user.twelth.twelth_name }}>
                 </div>
                 <div class="mb-3">
                     <label for="sch-2-tperiod" class="form-label">Time Period<b style="color: red;">*</b></label>
@@ -130,27 +131,27 @@
                         <div>
                             <p class="my-2">From : </p>
                             <input type="number" min="2010" max="2030" class="form-control w-100" id="sch-2-tperiod-from"
-                                name="sch-2-tperiod-from">
+                                name="sch-2-tperiod-from" value={{ user.twelth.twelth_period|slice:"0:4" }}>
                         </div>
                         <div class="mx-2">
                             <p class="my-2">To : </p>
                             <input type="number" min="2010" max="2030" class="form-control w-100" id="sch-2-tperiod-to"
-                                name="sch-2-tperiod-to">
+                                name="sch-2-tperiod-to" value={{ user.twelth.twelth_period|slice:"7:" }}>
                         </div>
                     </div>
                 </div>
                 <div class="mb-3">
                     <label for="sch-2-cgpa" class="form-label">Percentage<b style="color: red;">*</b> </label>
-                    <input type="number" class="form-control" id="sch-2-cgpa" name="sch-2-cgpa">
+                    <input type="number" class="form-control" id="sch-2-cgpa" name="sch-2-cgpa" value={{ user.twelth.twelth_per|slice:":-1" }}>
                 </div>
                 <div class="mb-3">
                     <label for="sch-2-detail" class="form-label">12th School details</label>
-                    <input type="text" class="form-control" id="sch-2-detail" name="sch-2-detail">
+                    <input type="text" class="form-control" id="sch-2-detail" name="sch-2-detail" value={{ user.twelth.twelth_details }}>
                 </div>
                 <hr>
                 <div class="mb-3">
                     <label for="insname" class="form-label"><b>Name of Institute</b><b style="color: red;">*</b></label>
-                    <input type="text" class="form-control" id="insname" name="insname" maxlength="60">
+                    <input type="text" class="form-control" id="insname" name="insname" maxlength="60" value={{ user.education.Education_clg }}>
                 </div>
                 <div class="mb-3">
                     <label for="tperiod" class="form-label">Time Period<b style="color: red;">*</b></label>
@@ -159,24 +160,25 @@
                         <div>
                             <p class="my-2">From : </p>
                             <input type="number" min="2021" max="2025" class="form-control w-100" id="tperiod1"
-                                name="tperiod1">
+                                name="tperiod1"  value={{ user.education.ed_date|slice:"0:4" }}>
                         </div>
                         <div class="mx-2">
                             <p class="my-2">To : </p>
                             <input type="number" min="2025" max="2029" class="form-control w-100" id="tperiod2"
-                                name="tperiod2">
+                                name="tperiod2" value={{ user.education.ed_date|slice:"7:" }}>
                         </div>
                     </div>
                 </div>
                 <div class="mb-3">
                     <label for="ins-cgpa" class="form-label">CGPA<b style="color: red;">*</b> </label>
-                    <input type="number" class="form-control" id="ins-cgpa" name="ins-cgpa">
+                    <input type="number" class="form-control" id="ins-cgpa" name="ins-cgpa" value={{ user.education.ins_cgpa }}>
                 </div>
                 <div class="mb-3">
                     <label for="eddetails" class="form-label">Education details</label>
-                    <input type="text" class="form-control" id="eddetails" name="eddetails" value= >
+                    <input type="text" class="form-control" id="eddetails" name="eddetails" value={{ user.education.edu_details }}>
                 </div>
             </div>
+
             <div class="d-flex justify-content-center">
                 <div class="btn btn-outline-success px-5 mx-4" onclick="handlePrev(2)">Prev</div>
                 <div class="btn btn-success px-5 mx-4" onclick="handleNext(2)">Next</div>
@@ -188,15 +190,15 @@
             <div class="mt-3">
                 <div class="mb-3">
                     <label for="achieve1" class="form-label">Achievements</label>
-                    <input type="text" class="form-control" id="achieve1" name="achieve1" maxlength="125" value= >
+                    <input type="text" class="form-control" id="achieve1" name="achieve1" maxlength="125" value={{ user.achievement.0.ach_details }}> 
                 </div>
                 <div class="mb-3">
                     <label for="achieve2" class="form-label">Achievements</label>
-                    <input type="text" class="form-control" id="achieve2" name="achieve2" maxlength="125" value= >
+                    <input type="text" class="form-control" id="achieve2" name="achieve2" maxlength="125" value={{ user.achievement.1.ach_details }}>
                 </div>
                 <div class="mb-3">
                     <label for="achieve3" class="form-label">Achievements</label>
-                    <input type="text" class="form-control" id="achieve3" name="achieve3" maxlength="125" value= >
+                    <input type="text" class="form-control" id="achieve3" name="achieve3" maxlength="125" value={{ user.achievement.2.ach_details }}>
                 </div>
             </div>
             <div class="d-flex justify-content-center">
@@ -209,72 +211,138 @@
         <div class="container my-2" id="page-4" style="display: none;">
             <h1>Experience</h1>
             <div style="border-top:5px solid green"></div>
-
+            
             <!-- Experience accordion -->
             <div class="accordion" id="experienceAccordion">
-                <!-- Initial experience item -->
-                <div class="accordion-item" id="experienceItem1">
-                    <h2 class="accordion-header" id="experienceHeading1">
+            {% if user.experience %}
+            {% for experience in user.experience %}
+            
+                
+                <div class="accordion-item" id="experienceItem{{ forloop.counter }}">
+                    <h2 class="accordion-header" id="experienceHeading{{ forloop.counter }}">
                         <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#experienceCollapse1" aria-expanded="true"
-                            aria-controls="experienceCollapse1">
-                            Experience 1
+                            data-bs-target="#experienceCollapse{{ forloop.counter }}" aria-expanded="true"
+                            aria-controls="experienceCollapse{{ forloop.counter }}">
+                            Experience {{ forloop.counter }}
                         </button>
                     </h2>
-                    <div id="experienceCollapse1" class="accordion-collapse collapse show"
-                        aria-labelledby="experienceHeading1" data-bs-parent="#experienceAccordion">
+                    <div id="experienceCollapse{{ forloop.counter }}" class="accordion-collapse collapse show"
+                        aria-labelledby="experienceHeading{{ forloop.counter }}" data-bs-parent="#experienceAccordion">
                         <div class="accordion-body">
-                            <div class="mb-3">
-                                <label for="exp-1-cname" class="form-label">Name of Company<b
-                                        style="color: red;">*</b></label>
-                                <input type="text" class="form-control" id="exp-1-cname" name="exp-1-cname"
-                                    maxlength="66" value= >
-                            </div>
-                            <div class="mb-3">
-                                <label for="exp-1-time-period" class="form-label">Time-Period<b
-                                        style="color: red;">*</b></label>
-                                <br>
-                                <div class="d-flex">
-                                    <div>
-                                        <p class="my-2">From : </p>
-                                        <input type="number" min="2020" max="2040" class="form-control w-100"
-                                            id="exp-1-time-period-from" name="exp-1-time-period-from">
-                                    </div>
-                                    <div class="mx-2">
-                                        <p class="my-2">To : </p>
-                                        <input type="number" min="2020" max="2040" class="form-control w-100"
-                                            id="exp-1-time-period-to" name="exp-1-time-period-to">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="mb-3">
-                                <label for="exp-1-designation" class="form-label">Designation<b
-                                        style="color: red;">*</b></label>
-                                <input type="text" class="form-control" id="exp-1-designation" name="exp-1-designation"
-                                    maxlength="66" >
-                            </div>
-                            <div class="mb-3">
-                                <label for="exp-1-location" class="form-label">Location<b
-                                        style="color: red;">*</b></label>
-                                <input type="text" class="form-control" id="exp-1-location" name="exp-1-location"
-                                    maxlength="66" >
-                            </div>
-                            <div class="mb-3">
-                                <label for="exp-1-det-1" class="form-label">details-1</label>
-                                <input type="text" class="form-control" id="exp-1-det-1" name="exp-1-det-1" value= >
-                            </div>
-                            <div class="mb-3">
-                                <label for="exp-1-det-2" class="form-label">details-2</label>
-                                <input type="text" class="form-control" id="exp-1-det-2" name="exp-1-det-2" value= >
-                            </div>
-                            <div class="mb-3">
-                                <label for="exp-1-det-3" class="form-label">details-3</label>
-                                <input type="text" class="form-control" id="exp-1-det-3" name="exp-1-det-3">
-                            </div>
-                        </div>
+            <div class="mb-3">
+                <label for="exp-{{ forloop.counter }}-cname" class="form-label">Name of Company<b style="color: red;">*</b></label>
+                <input type="text" class="form-control" id="exp-{{ forloop.counter }}-cname" name="exp-{{ forloop.counter }}-cname" value ="{{ experience.exp_company }}">
+            </div>
+            <div class="mb-3">
+                <label for="exp-{{ forloop.counter }}-time-period" class="form-label">Time-Period<b style="color: red;">*</b></label>
+                <br>
+                <div class="d-flex">
+                    <div>
+                        <p class="my-2">From : </p>
+                        <input type="number" min="2020" max="2040" class="form-control w-100"
+                            id="exp-{{ forloop.counter }}-time-period-from" name="exp-{{ forloop.counter }}-time-period-from" value ="{{ experience.exp_date|slice:"0:4" }}">
                     </div>
+                    <div class="mx-2">
+                        <p class="my-2">To : </p>
+                        <input type="number" min="2020" max="2040" class="form-control w-100"
+                            id="exp-{{ forloop.counter }}-time-period-to" name="exp-{{ forloop.counter }}-time-period-to" value ="{{ experience.exp_date|slice:"7:" }}">
+                    </div> 
                 </div>
             </div>
+            <div class="mb-3">
+                <label for="exp-{{ forloop.counter }}-designation" class="form-label">Designation<b style="color: red;">*</b></label>
+                <input type="text" class="form-control" id="exp-{{ forloop.counter }}-designation" name="exp-{{ forloop.counter }}-designation" value ="{{ experience.exp_details1 }}">
+            </div>
+            <div class="mb-3">
+                <label for="exp-{{ forloop.counter }}-location" class="form-label">Location<b style="color: red;">*</b></label>
+                <input type="text" class="form-control" id="exp-{{ forloop.counter }}-location" name="exp-{{ forloop.counter }}-location" value ="{{ experience.exp_details2 }}">
+            </div>
+            <div class="mb-3">
+                <label for="exp-{{ forloop.counter }}-det-1" class="form-label">details-1</label>
+                <input type="text" class="form-control" id="exp-{{ forloop.counter }}-det-1" name="exp-{{ forloop.counter }}-det-1" value ="{{ experience.exp_details3.0.exp_details }}">
+            </div>
+            <div class="mb-3">
+                <label for="exp-{{ forloop.counter }}-det-2" class="form-label">details-2</label>
+                <input type="text" class="form-control" id="exp-{{ forloop.counter }}-det-2" name="exp-{{ forloop.counter }}-det-2" value ="{{ experience.exp_details3.0.exp_details }}">
+            </div>
+            <div class="mb-3">
+                <label for="exp-{{ forloop.counter }}-det-3" class="form-label">details-3</label>
+                <input type="text" class="form-control" id="exp-{{ forloop.counter }}-det-3" name="exp-{{ forloop.counter }}-det-3" value ="{{ experience.exp_details3.0.exp_details }}">
+            </div>
+        </div>
+    </div>
+    </div>
+
+        {% endfor %}
+        {% else %}
+   
+                
+            <div class="accordion-item" id="experienceItem1">
+                <h2 class="accordion-header" id="experienceHeading1">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#experienceCollapse1" aria-expanded="true"
+                        aria-controls="experienceCollapse1">
+                        Experience 1
+                    </button>
+                </h2>
+                <div id="experienceCollapse1" class="accordion-collapse collapse show"
+                    aria-labelledby="experienceHeading1" data-bs-parent="#experienceAccordion">
+                    <div class="accordion-body">
+        <div class="mb-3">
+            <label for="exp-1-cname" class="form-label">Name of Company<b
+                    style="color: red;">*</b></label>
+            <input type="text" class="form-control" id="exp-1-cname" name="exp-1-cname"
+                maxlength="66">
+        </div>
+        <div class="mb-3">
+            <label for="exp-1-time-period" class="form-label">Time-Period<b
+                    style="color: red;">*</b></label>
+            <br>
+            <div class="d-flex">
+                <div>
+                    <p class="my-2">From : </p>
+                    <input type="number" min="2020" max="2040" class="form-control w-100"
+                        id="exp-1-time-period-from" name="exp-1-time-period-from">
+                </div>
+                <div class="mx-2">
+                    <p class="my-2">To : </p>
+                    <input type="number" min="2020" max="2040" class="form-control w-100"
+                        id="exp-1-time-period-to" name="exp-1-time-period-to">
+                </div>
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="exp-1-designation" class="form-label">Designation<b
+                    style="color: red;">*</b></label>
+            <input type="text" class="form-control" id="exp-1-designation" name="exp-1-designation"
+                maxlength="66">
+        </div>
+        <div class="mb-3">
+            <label for="exp-1-location" class="form-label">Location<b
+                    style="color: red;">*</b></label>
+            <input type="text" class="form-control" id="exp-1-location" name="exp-1-location"
+                maxlength="66">
+        </div>
+        <div class="mb-3">
+            <label for="exp-1-det-1" class="form-label">details-1</label>
+            <input type="text" class="form-control" id="exp-1-det-1" name="exp-1-det-1">
+        </div>
+        <div class="mb-3">
+            <label for="exp-1-det-2" class="form-label">details-2</label>
+            <input type="text" class="form-control" id="exp-1-det-2" name="exp-1-det-2">
+        </div>
+        <div class="mb-3">
+            <label for="exp-1-det-3" class="form-label">details-3</label>
+            <input type="text" class="form-control" id="exp-1-det-3" name="exp-1-det-3">
+        </div>
+    </div>
+</div>
+</div>
+
+        {% endif %}
+</div>
+
+
 
             <div type="button" class="btn btn-outline-primary my-3" onclick="addExperience()">Add More
                 Experiences</div>
@@ -284,12 +352,78 @@
             </div>
         </div>
 
+
         <div class="container my-2" id="page-5" style="display: none;">
             <h1>Internships</h1>
             <div style="border-top:5px solid green"></div>
 
             <div class="accordion" id="accordionInternships">
-                <!-- Initial Internship item -->
+
+            {% if user.Internships %}
+            {% for intern in user.Internships %}
+  
+
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="internshipHeading1">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#internshipCollapse{{ forloop.counter }}" aria-expanded="true"
+                            aria-controls="internshipCollapse{{ forloop.counter }}">
+                            Internship {{ forloop.counter }}
+                        </button>
+                    </h2>
+                    <div id="internshipCollapse{{ forloop.counter }}" class="accordion-collapse collapse show"
+                        aria-labelledby="internshipHeading{{ forloop.counter }}" data-bs-parent="#accordionInternships">
+                        <div class="accordion-body">
+
+            <div class="mb-3">
+                <label for="intern-{{ forloop.counter }}-cname" class="form-label">Name of Company<b style="color: red;">*</b></label>
+                <input type="text" class="form-control" id="intern-{{ forloop.counter }}-cname" name="intern-{{ forloop.counter }}-cname" value = "{{ intern.intern_company}}">
+            </div>
+            <div class="mb-3">
+                <label for="intern-{{ forloop.counter }}-time-period" class="form-label">Time-Period<b style="color: red;">*</b></label>
+                <br>
+                <div class="d-flex">
+                    <div>
+                        <p class="my-2">From : </p>
+                        <input type="number" min="2020" max="2030" class="form-control w-100"
+                            id="intern-{{ forloop.counter }}-time-period-from" name="intern-{{ forloop.counter }}-time-period-from" value = "{{ intern.intern_date|slice:"0:4" }}">
+                    </div>
+                    <div class="mx-2">
+                        <p class="my-2">To : </p>
+                        <input type="number" min="2020" max="2030" class="form-control w-100"
+                            id="intern-{{ forloop.counter }}-time-period-to" name="intern-{{ forloop.counter }}-time-period-to" value = "{{ intern.intern_date|slice:"7:" }}">
+                    </div> 
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="intern-{{ forloop.counter }}-role" class="form-label">Role<b style="color: red;">*</b></label>
+                <input type="text" class="form-control" id="intern-{{ forloop.counter }}-role" name="intern-{{ forloop.counter }}-role" value = "{{ intern.intern_details1 }}">
+            </div>
+            <div class="mb-3">
+                <label for="intern-{{ forloop.counter }}-location" class="form-label">Location<b style="color: red;">*</b></label>
+                <input type="text" class="form-control" id="intern-{{ forloop.counter }}-location" name="intern-{{ forloop.counter }}-location" value = "{{ intern.intern_details2 }}">
+            </div>
+            <div class="mb-3">
+                <label for="intern-{{ forloop.counter }}-det-1" class="form-label">details-1</label>
+                <input type="text" class="form-control" id="intern-{{ forloop.counter }}-det-1" name="intern-{{ forloop.counter }}-det-1" value = "{{ intern.intern_details1.0.intern_details }}">
+            </div>
+            <div class="mb-3">
+                <label for="intern-{{ forloop.counter }}-det-2" class="form-label">details-2</label>
+                <input type="text" class="form-control" id="intern-{{ forloop.counter }}-det-2" name="intern-{{ forloop.counter }}-det-2" value = "{{ intern.intern_details1.1.intern_details }}">
+            </div>
+            <div class="mb-3">
+                <label for="intern-{{ forloop.counter }}-det-3" class="form-label">details-3</label>
+                <input type="text" class="form-control" id="intern-{{ forloop.counter }}-det-3" name="intern-{{ forloop.counter }}-det-3" value = "{{ intern.intern_details1.2.intern_details }}">
+            </div>
+        </div>
+    </div>
+</div>
+
+            
+            {% endfor %}
+            {% else %}
+            
+
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="internshipHeading1">
                         <button class="accordion-button" type="button" data-bs-toggle="collapse"
@@ -301,58 +435,58 @@
                     <div id="internshipCollapse1" class="accordion-collapse collapse show"
                         aria-labelledby="internshipHeading1" data-bs-parent="#accordionInternships">
                         <div class="accordion-body">
-                            <!-- Your Internship form fields go here -->
-                            <div class="mb-3">
-                                <label for="intern-1-cname" class="form-label">Name of Company<b
-                                        style="color: red;">*</b></label>
-                                <input type="text" class="form-control" id="intern-1-cname" name="intern-1-cname"
-                                    maxlength="66" value= >
-                            </div>
-                            <div class="mb-3">
-                                <label for="intern-1-time-period" class="form-label">Time-Period<b
-                                        style="color: red;">*</b></label>
-                                <br>
-                                <div class="d-flex">
-                                    <div>
-                                        <p class="my-2">From : </p>
-                                        <input type="number" min="2020" max="2030" class="form-control w-100"
-                                            id="intern-1-time-period-from" name="intern-1-time-period-from">
-                                    </div>
-                                    <div class="mx-2">
-                                        <p class="my-2">To : </p>
-                                        <input type="number" min="2020" max="2030" class="form-control w-100"
-                                            id="intern-1-time-period-to" name="intern-1-time-period-to">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="mb-3">
-                                <label for="intern-1-role" class="form-label">Role<b style="color: red;">*</b></label>
-                                <input type="text" class="form-control" id="intern-1-role" name="intern-1-role"
-                                    maxlength="66" >
-                            </div>
-                            <div class="mb-3">
-                                <label for="intern-1-location" class="form-label">Location<b
-                                        style="color: red;">*</b></label>
-                                <input type="text" class="form-control" id="intern-1-location" name="intern-1-location"
-                                    maxlength="66" >
-                            </div>
-                            <div class="mb-3">
-                                <label for="intern-1-det-1" class="form-label">Details-1</label>
-                                <input type="text" class="form-control" id="intern-1-det-1" name="intern-1-det-1" value= >
-                            </div>
-                            <div class="mb-3">
-                                <label for="intern-1-det-2" class="form-label">Details-2</label>
-                                <input type="text" class="form-control" id="intern-1-det-2" name="intern-1-det-2" value= >
-                            </div>
-                            <div class="mb-3">
-                                <label for="intern-1-det-3" class="form-label">Details-3</label>
-                                <input type="text" class="form-control" id="intern-1-det-3" name="intern-1-det-3">
-                            </div>
-                        </div>
+            <div class="mb-3">
+                <label for="intern-1-cname" class="form-label">Name of Company<b
+                        style="color: red;">*</b></label>
+                <input type="text" class="form-control" id="intern-1-cname" name="intern-1-cname"
+                    maxlength="66">
+            </div>
+            <div class="mb-3">
+                <label for="intern-1-time-period" class="form-label">Time-Period<b
+                        style="color: red;">*</b></label>
+                <br>
+                <div class="d-flex">
+                    <div>
+                        <p class="my-2">From : </p>
+                        <input type="number" min="2020" max="2030" class="form-control w-100"
+                            id="intern-1-time-period-from" name="intern-1-time-period-from">
+                    </div>
+                    <div class="mx-2">
+                        <p class="my-2">To : </p>
+                        <input type="number" min="2020" max="2030" class="form-control w-100"
+                            id="intern-1-time-period-to" name="intern-1-time-period-to">
                     </div>
                 </div>
             </div>
+            <div class="mb-3">
+                <label for="intern-1-role" class="form-label">Role<b style="color: red;">*</b></label>
+                <input type="text" class="form-control" id="intern-1-role" name="intern-1-role"
+                    maxlength="66">
+            </div>
+            <div class="mb-3">
+                <label for="intern-1-location" class="form-label">Location<b
+                        style="color: red;">*</b></label>
+                <input type="text" class="form-control" id="intern-1-location" name="intern-1-location"
+                    maxlength="66">
+            </div>
+            <div class="mb-3">
+                <label for="intern-1-det-1" class="form-label">Details-1</label>
+                <input type="text" class="form-control" id="intern-1-det-1" name="intern-1-det-1">
+            </div>
+            <div class="mb-3">
+                <label for="intern-1-det-2" class="form-label">Details-2</label>
+                <input type="text" class="form-control" id="intern-1-det-2" name="intern-1-det-2">
+            </div>
+            <div class="mb-3">
+                <label for="intern-1-det-3" class="form-label">Details-3</label>
+                <input type="text" class="form-control" id="intern-1-det-3" name="intern-1-det-3">
+            </div>
+        </div>
+    </div>
+</div>
 
+            {% endif %}
+</div>
             <!-- Button to add more Internships -->
             <div type="button" class="btn btn-outline-primary mb-3" onclick="addInternship()">Add More Internships</div>
 
@@ -369,40 +503,78 @@
 
             <!-- Hackathon Accordion -->
             <div class="accordion" id="accordionHackathons">
-                <!-- Initial Hackathon item -->
-                <div class="accordion-item" id="hackathonItem1">
-                    <h2 class="accordion-header" id="hackathonHeading1">
-                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#hackathonCollapse1" aria-expanded="true"
-                            aria-controls="hackathonCollapse1">
-                            Hackathon 1
-                        </button>
-                    </h2>
-                    <div id="hackathonCollapse1" class="accordion-collapse collapse show"
-                        aria-labelledby="hackathonHeading1" data-bs-parent="#accordionHackathons">
-                        <div class="accordion-body">
+               
+                            {% if user.Hackathon %}
+                            {% for hack in user.Hackathon %}
+                            <div class="accordion-item" id="hackathonItem{{ forloop.counter }}">
+                                <h2 class="accordion-header" id="hackathonHeading{{ forloop.counter }}">
+                                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#hackathonCollapse{{ forloop.counter }}" aria-expanded="true"
+                                        aria-controls="hackathonCollapse{{ forloop.counter }}">
+                                        Hackathon {{ forloop.counter }}
+                                    </button>
+                                </h2>
+                                <div id="hackathonCollapse{{ forloop.counter }}" class="accordion-collapse collapse show"
+                                    aria-labelledby="hackathonHeading{{ forloop.counter }}" data-bs-parent="#accordionHackathons">
+                                    <div class="accordion-body">
+
+                            <div class="mb-3">
+                                <label for="hack-{{ forloop.counter }}-name" class="form-label">Hackathon Name<b style="color: red;">*</b></label>
+                                <input type="text" class="form-control" id="hack-{{ forloop.counter }}-name" name="hack-{{ forloop.counter }}-name" value="{{ hack.hack_title }}">
+                            </div>
+                            <div class="mb-3">
+                                <label for="hack-{{ forloop.counter }}-time-period" class="form-label">Year of Hackathon<b style="color: red;">*</b></label>
+                                <input type="number" class="form-control w-25" id="hack-{{ forloop.counter }}-time-period" name="hack-{{ forloop.counter }}-time-period" min="2011" value="{{ hack.hack_date }}">
+                            </div>
+                            <div class="mb-3">
+                                <label for="hack-{{ forloop.counter }}-det-1" class="form-label">Details-1</label>
+                                <input type="text" class="form-control" id="hack-{{ forloop.counter }}-det-1" name="hack-{{ forloop.counter }}-det-1" value="{{ hack.hack_details.0.hack_details1 }}">
+                            </div>
+                            <div class="mb-3">
+                                <label for="hack-{{ forloop.counter }}-det-2" class="form-label">Details-2</label>
+                                <input type="text" class="form-control" id="hack-{{ forloop.counter }}-det-2" name="hack-{{ forloop.counter }}-det-2" value="{{ hack.hack_details.1.hack_details1 }}">
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+                            {% endfor %}
+                            {% else %}
+                            <div class="accordion-item" id="hackathonItem1">
+                                <h2 class="accordion-header" id="hackathonHeading1">
+                                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#hackathonCollapse1" aria-expanded="true"
+                                        aria-controls="hackathonCollapse1">
+                                        Hackathon 1
+                                    </button>
+                                </h2>
+                                <div id="hackathonCollapse1" class="accordion-collapse collapse show"
+                                    aria-labelledby="hackathonHeading1" data-bs-parent="#accordionHackathons">
+                                    <div class="accordion-body">
                             <div class="mb-3">
                                 <label for="hack-1-name" class="form-label">Hackathon Name<b
                                         style="color: red;">*</b></label>
-                                <input type="text" class="form-control" id="hack-1-name" name="hack-1-name" maxlength="66" value= >
+                                <input type="text" class="form-control" id="hack-1-name" name="hack-1-name" maxlength="66">
                             </div>
                             <div class="mb-3">
                                 <label for="hack-1-time-period" class="form-label">Year of Hackathon<b
                                         style="color: red;">*</b></label>
                                 <input type="number" class="form-control w-25" id="hack-1-time-period"
-                                    name="hack-1-time-period" placeholder="year" min="2020" value= >
+                                    name="hack-1-time-period" placeholder="year" min="2020">
                             </div>
                             <div class="mb-3">
                                 <label for="hack-1-det-1" class="form-label">Details-1</label>
-                                <input type="text" class="form-control" id="hack-1-det-1" name="hack-1-det-1" value= >
+                                <input type="text" class="form-control" id="hack-1-det-1" name="hack-1-det-1">
                             </div>
                             <div class="mb-3">
                                 <label for="hack-1-det-2" class="form-label">Details-2</label>
-                                <input type="text" class="form-control" id="hack-1-det-2" name="hack-1-det-2" value= >
+                                <input type="text" class="form-control" id="hack-1-det-2" name="hack-1-det-2">
                             </div>
                         </div>
                     </div>
                 </div>
+                            {% endif %}
+                        
             </div>
 
             <!-- Button to add more Hackathons -->
@@ -422,17 +594,50 @@
             <!-- Github Projects Accordion -->
             <div class="accordion" id="accordionGithubProjects">
                 <!-- Initial Github Project item -->
-                <div class="accordion-item" id="githubProjectItem1">
-                    <h2 class="accordion-header" id="githubProjectHeading1">
-                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#githubProjectCollapse1" aria-expanded="true"
-                            aria-controls="githubProjectCollapse1">
-                            Project 1
-                        </button>
-                    </h2>
-                    <div id="githubProjectCollapse1" class="accordion-collapse collapse show"
-                        aria-labelledby="githubProjectHeading1" data-bs-parent="#accordionGithubProjects">
-                        <div class="accordion-body">
+                
+                            {% if user.Gitproj %}
+                            {% for proj in user.Gitproj %}
+                            <div class="accordion-item" id="githubProjectItem{{ forloop.counter }}">
+                                <h2 class="accordion-header" id="githubProjectHeading{{ forloop.counter }}">
+                                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#githubProjectCollapse{{ forloop.counter }}" aria-expanded="true"
+                                        aria-controls="githubProjectCollapse{{ forloop.counter }}">
+                                        Project {{ forloop.counter }}
+                                    </button>
+                                </h2>
+                                <div id="githubProjectCollapse{{ forloop.counter }}" class="accordion-collapse collapse show"
+                                    aria-labelledby="githubProjectHeading{{ forloop.counter }}" data-bs-parent="#accordionGithubProjects">
+                                    <div class="accordion-body">
+                          
+                            <div class="mb-3">
+                                <label for="git-proj-{{ forloop.counter }}-name" class="form-label">Project Name<b style="color: red;">*</b></label>
+                                <input type="text" class="form-control" id="git-proj-{{ forloop.counter }}-name" name="git-proj-{{ forloop.counter }}-name" value = "{{ proj.gitproj_title }}">
+                            </div>
+                            <div class="mb-3">
+                                <label for="git-proj-{{ forloop.counter }}-det-1" class="form-label">Details-1<b style="color: red;">*</b></label>
+                                <input type="text" class="form-control" id="git-proj-{{ forloop.counter }}-det-1" name="git-proj-{{ forloop.counter }}-det-1" value = "{{ proj.gitproj_details.0.gitproj_details1 }}">
+                            </div>
+                            <div class="mb-3">
+                                <label for="git-proj-{{ forloop.counter }}-det-2" class="form-label">Details-2</label>
+                                <input type="text" class="form-control" id="git-proj-{{ forloop.counter }}-det-2" name="git-proj-{{ forloop.counter }}-det-2" value = "{{ proj.gitproj_details.1.gitproj_details1 }}">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                            {% endfor %}
+                            {% else %}
+                            <div class="accordion-item" id="githubProjectItem1">
+                                <h2 class="accordion-header" id="githubProjectHeading1">
+                                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#githubProjectCollapse1" aria-expanded="true"
+                                        aria-controls="githubProjectCollapse1">
+                                        Project 1
+                                    </button>
+                                </h2>
+                                <div id="githubProjectCollapse1" class="accordion-collapse collapse show"
+                                    aria-labelledby="githubProjectHeading1" data-bs-parent="#accordionGithubProjects">
+                                    <div class="accordion-body">
                             <div class="mb-3">
                                 <label for="git-proj-1-name" class="form-label">Project Name<b
                                         style="color: red;">*</b></label>
@@ -450,6 +655,8 @@
                         </div>
                     </div>
                 </div>
+                            {% endif %}
+                        
             </div>
 
             <!-- Button to add more Github Projects -->
@@ -495,12 +702,12 @@
             }
         }
 
-        var experienceCount = 1;
-        var internshipCount = 1;
-        var hackathonCount = 1;
-        var githubProjectCount = 1;
+        var experienceCount = Math.max({{ user.experience|length }},1);
+        var internshipCount = Math.max({{ user.Internship|length }},1);
+        var hackathonCount = Math.max({{user.Hackathon|length}},1);
+        var githubProjectCount = Math.max({{user.Gitproj|length}},1);
 
-
+    
         function addExperience() {
             experienceCount++; // Increment the counter
 
@@ -815,33 +1022,33 @@
 
             // 10th details
             var tenth = {
-                "tenth-name": document.getElementById('schname-1').value,
-                "tenth-period": document.getElementById('sch-1-tperiod-from').value + ' - ' + document.getElementById('sch-1-tperiod-to').value,
-                "tenth-per": document.getElementById('sch-1-cgpa').value,
-                "tenth-details": document.getElementById('sch-1-detail').value
+                "tenth_name": document.getElementById('schname-1').value,
+                "tenth_period": document.getElementById('sch-1-tperiod-from').value + ' - ' + document.getElementById('sch-1-tperiod-to').value,
+                "tenth_per": document.getElementById('sch-1-cgpa').value,
+                "tenth_details": document.getElementById('sch-1-detail').value
             };
 
             // twelth details
             var twelth = {
-                "twelth-name": document.getElementById('schname-2').value,
-                "twelth-period": document.getElementById('sch-2-tperiod-from').value + ' - ' + document.getElementById('sch-2-tperiod-to').value,
-                "twelth-per": document.getElementById('sch-2-cgpa').value,
-                "twelth-details": document.getElementById('sch-2-detail').value
+                "twelth_name": document.getElementById('schname-2').value,
+                "twelth_period": document.getElementById('sch-2-tperiod-from').value + ' - ' + document.getElementById('sch-2-tperiod-to').value,
+                "twelth_per": document.getElementById('sch-2-cgpa').value,
+                "twelth_details": document.getElementById('sch-2-detail').value
             };
 
             // Education details
             var education = {
-                "Education-clg": document.getElementById('insname').value,
-                "ed-date": document.getElementById('tperiod1').value + ' - ' + document.getElementById('tperiod2').value,
-                "ins-cgpa": document.getElementById('ins-cgpa').value,
-                "edu-details": document.getElementById('eddetails').value
+                "Education_clg": document.getElementById('insname').value,
+                "ed_date": document.getElementById('tperiod1').value + ' - ' + document.getElementById('tperiod2').value,
+                "ins_cgpa": document.getElementById('ins-cgpa').value,
+                "edu_details": document.getElementById('eddetails').value
             };
 
             // Achievements
             var achievements = [
-                { "ach-details": document.getElementById('achieve1').value },
-                { "ach-details": document.getElementById('achieve2').value },
-                { "ach-details": document.getElementById('achieve3').value }
+                { "ach_details": document.getElementById('achieve1').value },
+                { "ach_details": document.getElementById('achieve2').value },
+                { "ach_details": document.getElementById('achieve3').value }
             ];
 
             // Experience
@@ -855,11 +1062,11 @@
                     expDetails3.push({ "exp_details": expDetail });
                 }
                 var expDetails = {
-                    "exp-company": document.getElementById('exp-' + i + '-cname').value,
-                    "exp-date": document.getElementById('exp-' + i + '-time-period-from').value + ' - ' + document.getElementById('exp-' + i + '-time-period-to').value,
-                    "exp-details1": document.getElementById('exp-' + i + '-designation').value,
-                    "exp-details2": document.getElementById('exp-' + i + '-location').value,
-                    "exp-details3": expDetails3
+                    "exp_company": document.getElementById('exp-' + i + '-cname').value,
+                    "exp_date": document.getElementById('exp-' + i + '-time-period-from').value + ' - ' + document.getElementById('exp-' + i + '-time-period-to').value,
+                    "exp_details1": document.getElementById('exp-' + i + '-designation').value,
+                    "exp_details2": document.getElementById('exp-' + i + '-location').value,
+                    "exp_details3": expDetails3
                 };
 
                 experiences.push(expDetails);
@@ -877,11 +1084,11 @@
                 }
 
                 var internDetails = {
-                    "intern-company": document.getElementById('intern-' + i + '-cname').value,
-                    "intern-date": document.getElementById('intern-' + i + '-time-period-from').value + ' - ' + document.getElementById('intern-' + i + '-time-period-to').value,
-                    "intern-details1": document.getElementById('intern-' + i + '-role').value,
-                    "intern-details2": document.getElementById('intern-' + i + '-location').value,
-                    "intern-details3": internDetails3
+                    "intern_company": document.getElementById('intern-' + i + '-cname').value,
+                    "intern_date": document.getElementById('intern-' + i + '-time-period-from').value + ' - ' + document.getElementById('intern-' + i + '-time-period-to').value,
+                    "intern_details1": document.getElementById('intern-' + i + '-role').value,
+                    "intern_details2": document.getElementById('intern-' + i + '-location').value,
+                    "intern_details3": internDetails3
                 };
 
                 internships.push(internDetails);
@@ -891,9 +1098,9 @@
             var hackathons = [];
             for (var i = 1; i <= hackathonCount; i++) {
                 var hackDetails = {
-                    "hack-title": document.getElementById('hack-' + i + '-name').value,
-                    "hack-date": document.getElementById('hack-' + i + '-time-period').value,
-                    "hack-details": [{ "hack_details1": document.getElementById('hack-' + i + '-det-1').value },
+                    "hack_title": document.getElementById('hack-' + i + '-name').value,
+                    "hack_date": document.getElementById('hack-' + i + '-time-period').value,
+                    "hack_details": [{ "hack_details1": document.getElementById('hack-' + i + '-det-1').value },
                     { "hack_details1": document.getElementById('hack-' + i + '-det-2').value }]
                 };
                 hackathons.push(hackDetails);
@@ -904,8 +1111,8 @@
             var gitProjCount = githubProjectCount;
             for (var i = 1; i <= gitProjCount; i++) {
                 var gitProjDetails = {
-                    "gitproj-title": document.getElementById('git-proj-' + i + '-name').value,
-                    "gitproj-details": [{ "gitproj_details1": document.getElementById('git-proj-' + i + '-det-1').value },
+                    "gitproj_title": document.getElementById('git-proj-' + i + '-name').value,
+                    "gitproj_details": [{ "gitproj_details1": document.getElementById('git-proj-' + i + '-det-1').value },
                     { "gitproj_details1": document.getElementById('git-proj-' + i + '-det-2').value }]
                 };
                 githubProjects.push(gitProjDetails);
@@ -1014,7 +1221,7 @@
                 alert("10th school percentage is required");
                 return false;
             }else{
-                resumeData.json[0].tenth["tenth-per"] = document.getElementById('sch-1-cgpa').value + "%";
+                resumeData.json[0].tenth["tenth_per"] = document.getElementById('sch-1-cgpa').value + "%";
             }
 
             if(document.getElementById('schname-2').value === ""){
@@ -1029,7 +1236,7 @@
                 alert("12th school percentage is required");
                 return false;
             }else{
-                resumeData.json[0].twelth["twelth-per"] = document.getElementById('sch-2-cgpa').value + "%";
+                resumeData.json[0].twelth["twelth_per"] = document.getElementById('sch-2-cgpa').value + "%";
             }
             if(document.getElementById('insname').value === ""){
                 alert("College name is required");
@@ -1049,20 +1256,20 @@
             
             let k = 0;
             for(k = 0; k < experienceCount; k++){
-                if(experiences[k]["exp-company"].length !== 0 || (experiences[k]["exp-date"].length - 3) !== 0 || experiences[k]["exp-details1"].length !== 0 || experiences[k]["exp-details2"].length !== 0){
-                    if(experiences[k]["exp-company"].length === 0){
+                if(experiences[k]["exp_company"].length !== 0 || (experiences[k]["exp_date"].length - 3) !== 0 || experiences[k]["exp_details1"].length !== 0 || experiences[k]["exp_details2"].length !== 0){
+                    if(experiences[k]["exp_company"].length === 0){
                         alert("Experience company name is required");
                         return false;
                     }
-                    if((experiences[k]["exp-date"].length - 3) === 0){
+                    if((experiences[k]["exp_date"].length - 3) === 0){
                         alert("Experience time-period is required");
                         return false;
                     }
-                    if(experiences[k]["exp-details1"].length === 0){
+                    if(experiences[k]["exp_details1"].length === 0){
                         alert("Experience designation is required");
                         return false;
                     }
-                    if(experiences[k]["exp-details2"].length === 0){
+                    if(experiences[k]["exp_details2"].length === 0){
                         alert("Experience location is required");
                         return false;
                     }
@@ -1072,25 +1279,25 @@
                     }
                 }
             }
-            if(experiences[0]["exp-company"].length === 0 || (experiences[0]["exp-date"].length - 3) === 0 || experiences[0]["exp-details1"].length === 0 || experiences[0]["exp-details2"].length === 0){
+            if(experiences[0]["exp_company"].length === 0 || (experiences[0]["exp_date"].length - 3) === 0 || experiences[0]["exp_details1"].length === 0 || experiences[0]["exp_details2"].length === 0){
                 delete resumeData.json[0].experience;
             }
 
             for(k = 0; k < internshipCount; k++){
-                if(internships[k]["intern-company"] !== "" || internships[k]["intern-date"] !== " - " || internships[k]["intern-details1"] !== "" || internships[k]["intern-details2"] !== ""){
-                    if(internships[k]["intern-company"] === ""){
+                if(internships[k]["intern_company"] !== "" || internships[k]["intern_date"] !== " - " || internships[k]["intern_details1"] !== "" || internships[k]["intern_details2"] !== ""){
+                    if(internships[k]["intern_company"] === ""){
                         alert("Internship company name is required");
                         return false;
                     }
-                    if(internships[k]["intern-date"] === " - "){
+                    if(internships[k]["intern_date"] === " - "){
                         alert("Internship time-period is required");
                         return false;
                     }
-                    if(internships[k]["intern-details1"] === ""){
+                    if(internships[k]["intern_details1"] === ""){
                         alert("Internship role is required");
                         return false;
                     }
-                    if(internships[k]["intern-details2"] === ""){
+                    if(internships[k]["intern_details2"] === ""){
                         alert("Internship location is required");
                         return false;
                     }
@@ -1100,39 +1307,39 @@
                     }
                 }
             }
-            if(internships[0]["intern-company"] === "" || internships[0]["intern-date"] === " - " || internships[0]["intern-details1"] === "" || internships[0]["intern-details2"] === ""){
+            if(internships[0]["intern_company"] === "" || internships[0]["intern_date"] === " - " || internships[0]["intern_details1"] === "" || internships[0]["intern_details2"] === ""){
                 delete resumeData.json[0].Internships;
             }
 
             for(k = 0; k < hackathonCount; k++){
-                if(hackathons[k]["hack-title"] !== "" || hackathons[k]["hack-date"] !== ""){
-                    if(hackathons[k]["hack-title"] === ""){
+                if(hackathons[k]["hack_title"] !== "" || hackathons[k]["hack_date"] !== ""){
+                    if(hackathons[k]["hack_title"] === ""){
                         alert("Hackathon title is required");
                         return false;
                     }
-                    if(hackathons[k]["hack-date"] === ""){
+                    if(hackathons[k]["hack_date"] === ""){
                         alert("Hackathon time-period is required");
                         return false;
                     }
                 }
             }
-            if(hackathons[0]["hack-title"] === "" || hackathons[0]["hack-date"] === ""){
+            if(hackathons[0]["hack_title"] === "" || hackathons[0]["hack_date"] === ""){
                 delete resumeData.json[0].Hackathon;
             }
 
             for(k = 0; k < githubProjectCount; k++){
-                if(githubProjects[k]["gitproj-title"] !== ""){
-                    if(githubProjects[k]["gitproj-title"] === ""){
+                if(githubProjects[k]["gitproj_title"] !== ""){
+                    if(githubProjects[k]["gitproj_title"] === ""){
                         alert("Github project title is required");
                         return false;
                     }
-                    if(githubProjects[k]["gitproj-details"][0]["gitproj_details1"] === ""){
+                    if(githubProjects[k]["gitproj_details"][0]["gitproj_details1"] === ""){
                         alert("Github project details is required");
                         return false;
                     }
                 }
             }
-            if(githubProjects[0]["gitproj-title"] === ""){
+            if(githubProjects[0]["gitproj_title"] === ""){
                 delete resumeData.json[0].Gitproj;
             }
  
@@ -1152,6 +1359,7 @@
                     // Handle error if needed
                 }
             };
+            console.log(JSON.stringify(resumeData));
             xhr.send(JSON.stringify(resumeData));
 
             // Prevent the default form submission

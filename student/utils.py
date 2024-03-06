@@ -107,11 +107,11 @@ def generate_pdf(data):
         pdf.set_font("cmbx", "", 12)
         pdf.cell(0, 7, "Secondary Education :", ln=1)
         pdf.set_font("cmbx", "", 11)
-        pdf.cell(0, 6, data['tenth'].get("tenth-name"))
-        pdf.cell(0, 6, data['tenth'].get("tenth-period"), ln=1, align="R")
-        pdf.cell(0, 6, "Grade : " + data['tenth'].get("tenth-per"), ln=1)
+        pdf.cell(0, 6, data['tenth'].get("tenth_name"))
+        pdf.cell(0, 6, data['tenth'].get("tenth_period"), ln=1, align="R")
+        pdf.cell(0, 6, "Grade : " + data['tenth'].get("tenth_per"), ln=1)
         pdf.set_font("cmsl", "", 10)
-        lines = pdf.multi_cell(remain_space, 4, data['tenth'].get("tenth-details"))
+        lines = pdf.multi_cell(remain_space, 4, data['tenth'].get("tenth_details"))
         
         for line in lines:
             pdf.cell(0, 5, line)
@@ -119,11 +119,11 @@ def generate_pdf(data):
         pdf.set_font("cmbx", "", 12)
         pdf.cell(0, 7, "Higher Secondary Education :", ln=1)
         pdf.set_font("cmbx", "", 11)
-        pdf.cell(0, 6, data['twelth'].get("twelth-name"))
-        pdf.cell(0, 6, data['twelth'].get("twelth-period"), ln=1, align="R")
-        pdf.cell(0, 6, "Grade : " + data['twelth'].get("twelth-per"), ln=1)
+        pdf.cell(0, 6, data['twelth'].get("twelth_name"))
+        pdf.cell(0, 6, data['twelth'].get("twelth_period"), ln=1, align="R")
+        pdf.cell(0, 6, "Grade : " + data['twelth'].get("twelth_per"), ln=1)
         pdf.set_font("cmsl", "", 10)
-        lines = pdf.multi_cell(remain_space, 4, data['twelth'].get("twelth-details"))
+        lines = pdf.multi_cell(remain_space, 4, data['twelth'].get("twelth_details"))
         
         for line in lines:
             pdf.cell(0, 5, line)
@@ -131,11 +131,11 @@ def generate_pdf(data):
         pdf.set_font("cmbx", "", 12)
         pdf.cell(0, 7, "Institute Education :", ln=1)
         pdf.set_font("cmbx", "", 11)
-        pdf.cell(0, 6, data['education'].get("Education-clg"))
-        pdf.cell(0, 6, data['education'].get("ed-date"), ln=1, align="R")
-        pdf.cell(0, 6, "CGPA : " + data['education'].get("ins-cgpa"), ln=1)
+        pdf.cell(0, 6, data['education'].get("Education_clg"))
+        pdf.cell(0, 6, data['education'].get("ed_date"), ln=1, align="R")
+        pdf.cell(0, 6, "CGPA : " + data['education'].get("ins_cgpa"), ln=1)
         pdf.set_font("cmsl", "", 10)
-        lines = pdf.multi_cell(remain_space, 4, data['education'].get("edu-details"))
+        lines = pdf.multi_cell(remain_space, 4, data['education'].get("edu_details"))
 
         for line in lines:
             pdf.cell(0, 5, line)
@@ -150,7 +150,7 @@ def generate_pdf(data):
         pdf.set_font("cmr", "", 10)
         for i in range(len(data["achievement"])):
             pdf.cell(3)
-            lines = pdf.multi_cell(remain_space, 4, data['achievement'][i].get("ach-details"))
+            lines = pdf.multi_cell(remain_space, 4, data['achievement'][i].get("ach_details"))
             
             for line in lines:
                 pdf.cell(0, 5, line)
@@ -164,14 +164,14 @@ def generate_pdf(data):
         pdf.line(10, pdf.get_y(), 204, pdf.get_y())
         for i in range(len(data['experience'])):
             pdf.set_font("cmbx", "", 11)
-            pdf.cell(0, 6, data['experience'][i].get("exp-company"))
-            pdf.cell(0, 6, data['experience'][i].get("exp-date"), ln=1, align="R")
+            pdf.cell(0, 6, data['experience'][i].get("exp_company"))
+            pdf.cell(0, 6, data['experience'][i].get("exp_date"), ln=1, align="R")
             pdf.set_font("cmr", "", 10)
-            pdf.cell(0, 5, data['experience'][i].get("exp-details1"))
-            pdf.cell(0, 5, data['experience'][i].get("exp-details2"), ln=1, align="R")
-            for j in range(len(data['experience'][i].get("exp-details3"))):
+            pdf.cell(0, 5, data['experience'][i].get("exp_details1"))
+            pdf.cell(0, 5, data['experience'][i].get("exp_details2"), ln=1, align="R")
+            for j in range(len(data['experience'][i].get("exp_details3"))):
                 pdf.cell(3)
-                pdf.multi_cell(remain_space, 4, data['experience'][i].get("exp-details3")[j].get("exp_details"))
+                pdf.multi_cell(remain_space, 4, data['experience'][i].get("exp_details3")[j].get("exp_details"))
                 
                 for line in lines:
                     pdf.cell(0, 5, line)
@@ -184,14 +184,14 @@ def generate_pdf(data):
         pdf.line(10, pdf.get_y(), 204, pdf.get_y())
         for i in range(len(data['Internships'])):
             pdf.set_font("cmbx", "", 11)
-            pdf.cell(0, 6, data['Internships'][i].get("intern-company"))
-            pdf.cell(0, 6, data['Internships'][i].get("intern-date"), ln=1, align="R")
+            pdf.cell(0, 6, data['Internships'][i].get("intern_company"))
+            pdf.cell(0, 6, data['Internships'][i].get("intern_date"), ln=1, align="R")
             pdf.set_font("cmr", "", 10)
-            pdf.cell(0, 5, data['Internships'][i].get("intern-details1"))
-            pdf.cell(0, 5, data['Internships'][i].get("intern-details2"), ln=1, align="R")
-            for j in range(len(data['Internships'][i].get("intern-details3"))):
+            pdf.cell(0, 5, data['Internships'][i].get("intern_details1"))
+            pdf.cell(0, 5, data['Internships'][i].get("intern_details2"), ln=1, align="R")
+            for j in range(len(data['Internships'][i].get("intern_details3"))):
                 pdf.cell(3)
-                pdf.multi_cell(remain_space, 4, data['Internships'][i].get("intern-details3")[j].get("intern_details"))
+                pdf.multi_cell(remain_space, 4, data['Internships'][i].get("intern_details3")[j].get("intern_details"))
                 for line in lines:
                     pdf.cell(0, 5, line)
         pdf.set_y(pdf.get_y() + 2)
@@ -203,12 +203,12 @@ def generate_pdf(data):
         pdf.line(10, pdf.get_y(), 204, pdf.get_y())
         for i in range(len(data['Hackathon'])):
             pdf.set_font("cmbx", "", 11)
-            pdf.cell(0, 6, data['Hackathon'][i].get("hack-title"))
-            pdf.cell(0, 6, data['Hackathon'][i].get("hack-date"), ln=1, align="R")
+            pdf.cell(0, 6, data['Hackathon'][i].get("hack_title"))
+            pdf.cell(0, 6, data['Hackathon'][i].get("hack_date"), ln=1, align="R")
             pdf.set_font("cmr", "", 10) 
-            for j in range(len(data['Hackathon'][i].get("hack-details"))):
+            for j in range(len(data['Hackathon'][i].get("hack_details"))):
                 pdf.cell(3)
-                lines = pdf.multi_cell(remain_space, 4, data['Hackathon'][i].get("hack-details")[j].get("hack_details1"))
+                lines = pdf.multi_cell(remain_space, 4, data['Hackathon'][i].get("hack_details")[j].get("hack_details1"))
                 for line in lines:
                     pdf.cell(0, 5, line)
         pdf.set_y(pdf.get_y() + 2)
@@ -220,15 +220,15 @@ def generate_pdf(data):
         pdf.line(10, pdf.get_y(), 204, pdf.get_y())
         for i in range(len(data['Gitproj'])):
             pdf.set_font("cmbx", "", 11)
-            lines = pdf.multi_cell(remain_space, 6, data['Gitproj'][i].get("gitproj-title"))
+            lines = pdf.multi_cell(remain_space, 6, data['Gitproj'][i].get("gitproj_title"))
 
             for line in lines:
                 pdf.cell(0, 5, line)
 
             pdf.set_font("cmr", "", 10)
-            for j in range(len(data['Gitproj'][i].get("gitproj-details"))):
+            for j in range(len(data['Gitproj'][i].get("gitproj_details"))):
                 pdf.cell(3)
-                lines = pdf.multi_cell(remain_space, 4, data['Gitproj'][i].get("gitproj-details")[j].get("gitproj_details1"))
+                lines = pdf.multi_cell(remain_space, 4, data['Gitproj'][i].get("gitproj_details")[j].get("gitproj_details1"))
 
                 for line in lines:
                     pdf.cell(0, 5, line)
