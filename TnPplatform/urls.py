@@ -39,8 +39,8 @@ urlpatterns = [
     path('', include('Job_Opening.urls')),
     path('', include('TrainingProgram.urls')),
     path('', include('student.urls')),
-    path('admin/', include('student.urls')),
+    # path('admin/', include('student.urls')),
     # path('admin/student/', custom_admin_site.urls),
-    path('student/', include('student.urls')),
+    # path('student/', include('student.urls')),
 
 ]

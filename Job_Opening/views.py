@@ -18,6 +18,7 @@ class JobOpeningViewSet(viewsets.ModelViewSet):
 @login_required(login_url="/accounts/google/login")
 def job_opening_detail(request, pk):
     # print(Student.objects.get(username = request.user).Resume_Link)
+    # print("request object -> ", request.GET, " ", pk)
     if Student.objects.get(username = request.user).Resume_Link =="blank":
         return redirect("/resume/")
     job = get_object_or_404(Job_Opening, pk=pk)
