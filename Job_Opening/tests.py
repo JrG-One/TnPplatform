@@ -17,8 +17,9 @@ job_opening_data = {
             'Selection': 'Virtual',
             'location': 'Surat',
             'stipend': 10000,
+            "start":"2024-03-18",
             'join_date': '2024-03-01',
-            'end_of_registration': '2024-02-10'
+            'end_of_registration': '2025-02-10'
         }
 
 put_job_opening_data = {
