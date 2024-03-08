@@ -665,8 +665,9 @@
             <!-- Buttons to handle next and previous for Github Projects -->
             <div class="d-flex justify-content-center">
                 <div class="btn btn-outline-success px-5 mx-4" onclick="handlePrev(7)">Prev</div>
-                <div class="btn btn-success px-5 mx-4" onclick="HandleSubmit()">Submit</div>
-            </div>
+                <div class="btn btn-success px-5 mx-4" id='sub-btn' onclick="HandleSubmit()">Submit</div>
+                <div class="btn btn-success px-5 mx-4 d-none" onclick="HandleRedirection()">Back to home</div>
+            </div>
         </div>
     </form>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
@@ -1007,6 +1008,7 @@
 
         function HandleSubmit() {
             console.log('Submit button clicked');
+            document.getElementById('sub-btn').style.display = "none";  
             var name = document.getElementById('fname').value + ' ' + document.getElementById('lname').value;
             var mobile = document.getElementById('contact-no').value;
             
@@ -1347,15 +1349,23 @@
 
             // Use AJAX to post the JSON data to your Django view
             var xhr = new XMLHttpRequest();
-            xhr.open("POST", "{% url 'resume' %}", true);
+            xhr.open("POST", "{% url 'json2pdf' %}", true);
             xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
             xhr.setRequestHeader("X-CSRFToken", csrfToken);  // Include CSRF token
             xhr.onreadystatechange = function () {
-                if (xhr.readyState == 4 && xhr.status == 200) {
+                if (xhr.readyState == 4 && xhr.status == 201) {
                     console.log(xhr.responseText);
+                    console.log(xhr.status);
+                    //document.getElementById('sub-btn').style.display = "none";            
+                    document.getElementById('sub-btn').nextElementSibling.classList.remove('d-none');
+                    //window.location.href = "{% url 'index' %}"
                     // Handle success if needed 
+                    
                 } else if (xhr.readyState == 4) {
-                    console.error(xhr.statusText);
+                    console.log(xhr.responseText);
+                    console.log(xhr.status);
+                    {% comment %} console.error(xhr.statusText); {% endcomment %}
+                    console.log(xhr.status);
                     // Handle error if needed
                 }
             };
@@ -1365,6 +1375,9 @@
             // Prevent the default form submission
             return false;
         }
+        function HandleRedirection() {
+            window.location.href = "{% url 'landing_page' %}";
+        }
     </script>
 </body>
 

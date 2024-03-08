@@ -19,7 +19,7 @@ class JobOpeningViewSet(viewsets.ModelViewSet):
 def job_opening_detail(request, pk):
     # print(Student.objects.get(username = request.user).Resume_Link)
     if Student.objects.get(username = request.user).Resume_Link =="blank":
-        return redirect("/resume/")
+        return redirect("/student/resume/")
     job = get_object_or_404(Job_Opening, pk=pk)
     user_has_registered = Job_Student_Application.objects.filter(Student_ID=request.user, Job_ID=job).exists()
     user_is_staff = Student.objects.get(email=request.user.email).is_staff

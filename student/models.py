@@ -52,14 +52,15 @@ class Student(AbstractUser):
     # objects = StudentManager();
 
     def __str__(self):
-        if self.first_name:
-            return f"{self.first_name} {self.last_name}"
-        else:
-            return self.username
+        # if self.first_name:
+        #     return f"{self.first_name} {self.last_name}"
+        # else:
+        return self.username
     
     # method that extracts roll no from email
     def save(self, *args, **kwargs):
         self.Student_ID = self.email.split('@')[0]
+        self.Branch = self.email[4:6].upper()+"E" #CS/EC+E
         super(Student, self).save(*args, **kwargs)
 
 class Student_Training_Registration(models.Model):
@@ -68,7 +69,7 @@ class Student_Training_Registration(models.Model):
     Attended = models.BooleanField()
 
 class Job_Student_Application(models.Model):
-    Student_ID = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    Student_ID = models.ForeignKey(Student, on_delete=models.CASCADE)
     Job_ID = models.ForeignKey('Job_Opening.Job_Opening', on_delete=models.CASCADE)  # Use the string format to avoid circular import
     Blocked = models.BooleanField()
     Status = models.CharField(max_length=1)
@@ -80,4 +81,4 @@ def create_profile(sender, instance, created, **kwargs):
        # Grabbing data from social account to create profile for that user
        profile, created=Student.objects.get_or_create(username=instance.user)
     #    profile.Student_ID = instance.user
-       profile.save()
+    #    profile.save()

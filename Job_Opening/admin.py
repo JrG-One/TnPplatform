@@ -37,8 +37,8 @@ def export_job_data(modeladmin, request, queryset):
                 'Username': [app.Student_ID.username for app in applicants],
                 'Email': [app.Student_ID.email for app in applicants],
                 'Branch': [app.Student_ID.Branch for app in applicants],
-                'Resume_Link' : [app.Student_ID.Branch for app in applicants],
-                'CGPA' : [app.Student_ID.Branch for app in applicants]
+                'Resume_Link' : [app.Student_ID.Resume_Link for app in applicants],
+                'CGPA' : [app.Student_ID.CGPA for app in applicants]
             }
             student_df = pd.DataFrame(student_details)
 

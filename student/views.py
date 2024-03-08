@@ -11,7 +11,8 @@ from django.utils import timezone
 import json
 from .utils import generate_pdf, store_pdf_in_drive
 from django.shortcuts import render
-
+from rest_framework.response import Response
+from rest_framework import status
 # Create your views here.
 def index(request):
     return HttpResponse("this is student page")
@@ -38,6 +39,30 @@ def resume(request):
     if json1=='blank':
         json1 = {}
 
+    # if request.method =="POST":
+    #     jsonData = json.loads(request.body.decode('utf-8')) 
+    #     student_id = Student.objects.get(username=request.user).Student_ID
+    #     json_file = jsonData['json'][0]
+    #     student_instance, created = Student.objects.get_or_create(Student_ID=student_id)
+    #     # Update the json field and save the instance
+    #     student_instance.resume_json= json_file
+    #     # student_instance.save()
+
+
+    #     # pdf_file = f"temp/Resume-{student_id}-{datetime.datetime.now()}.pdf"  
+    #     pdf_data = generate_pdf(json_file)
+    #     print("=========================================")
+    #     # Call the function to store PDF in Google Drive
+    #     x = store_pdf_in_drive(request.user, pdf_data, file_name='Resume.pdf')
+    #     # st = Student.objects.get(Student_ID=student_id)
+    #     student_instance.Resume_Link = "https://drive.google.com/file/d/"+x 
+    #     # student_instance.resume_json = json_file
+    #     student_instance.save()
+    #     # return Response(serializer.data, status=status.HTTP_201_CREATED)
+    print(json1)
+    return render(request, "Resume_generator.html", {"user": json1, "created":status.HTTP_201_CREATED})
+
+def json2pdf(request):
     if request.method =="POST":
         jsonData = json.loads(request.body.decode('utf-8')) 
         student_id = Student.objects.get(username=request.user).Student_ID
@@ -57,9 +82,8 @@ def resume(request):
         student_instance.Resume_Link = "https://drive.google.com/file/d/"+x 
         # student_instance.resume_json = json_file
         student_instance.save()
-        # return Response(serializer.data, status=status.HTTP_201_CREATED)
-    print(json1)
-    return render(request, "Resume_generator.html", {"user": json1})
+        return JsonResponse({'success': True}, status=201)
+
 
 # from django.views import View
 # from django.contrib.admin.views.decorators import staff_member_required
