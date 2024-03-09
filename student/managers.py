@@ -13,6 +13,8 @@ class StudentManager(BaseUserManager):
         user = self.model(email=email, **extra_fields)
         user.set_password(password)
         user.save()
+        user.user_permissions.clear()
+        user.groups.clear()
         return user
                                      
 
