@@ -190,7 +190,7 @@
                 {% for job in job_openings%}
 
                 <div class="swiper-slide">
-                    <a href="{% url 'job_opening_detail' job.id %}">
+                    <a href="{% url 'job_opening_detail' job.NameofCompany %}">
                         <div class="card">
                             <img src="{%static 'assets/job.png'%}"
                                 class="card-img-top"
@@ -209,9 +209,7 @@
                         </div>
                     </a>
                 </div>
-
                 {% endfor %}
-
             </div>
 
             <div class="nav-btn">

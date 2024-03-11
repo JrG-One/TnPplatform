@@ -324,7 +324,7 @@ admin.site.unregister(SocialAccount)
 # admin.site.unregister(SocialApp)
 admin.site.unregister(SocialToken)
 # admin.site.unregister(Site)
-admin.site.unregister(Group)
+# admin.site.unregister(Group)
 # admin.site.unregister(EmailAddress)
 # admin.site.unregister(Token)
 # if admin.site.is_registered(Job_Student_Application):
