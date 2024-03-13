@@ -7,18 +7,11 @@ from Job_Opening.models import Job_Opening
 from allauth.socialaccount.models import SocialAccount
 from django.conf import settings
 
-
 from .managers import StudentManager
 
 # Create your models here.
 class Student(AbstractUser):
     """
-    first name, last name, email and other permission related things are inherited from abstractUser class.
-
-    removed username field and made email field required.
-
-    using custom manager StudentManager
-
     Student_ID is self Generating from the given email 
     """
 

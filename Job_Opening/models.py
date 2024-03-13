@@ -3,29 +3,41 @@ from django.db import models
 
 class Job_Opening(models.Model):
     NameofCompany = models.CharField(max_length=200)
-    profileOfCompany = models.CharField(max_length=200)
+    profileOfCompany = models.TextField()
+
     JobProfile = models.CharField(max_length=100)
+    JobDescription = models.TextField()
+    EmploymentType = models.CharField(max_length=100)
     
-    # Students = models.ManyToManyField(Student, through = "Job_Student_Application")
+
+    Website = models.CharField(max_length = 200, null=True)
+    Linkedin = models.CharField(max_length = 200, null = True)
+
+    Address = models.CharField(max_length=100)
+    Worklocation = models.CharField(max_length=100)
 
     # Use choices for fields with predefined options
     BRANCH_CHOICES = [
         ("CSE", "Computer Science and Engineering"),
         ("ECE", "Electronics and Engineering"),
+        ("both", "both")
     ]
     BranchChoice = models.CharField(max_length=50, choices=BRANCH_CHOICES)
-    
-    ctc = models.TextField()
     Eligibility = models.TextField()
     
-    SELECTION_CHOICES = [
-        ("Virtual", "Virtual"),
-        ("Offline", "Offline"),
-    ]
-    Selection = models.CharField(max_length=10, choices=SELECTION_CHOICES)
+    stipend = models.CharField(max_length = 200)
+    ctc = models.CharField(max_length = 200)
     
-    location = models.CharField(max_length=100)
-    stipend = models.IntegerField()
+    # SELECTION_CHOICES = [
+    #     ("Virtual", "Virtual"),
+    #     ("Offline", "Offline"),
+    # ]
+    # Selection = models.CharField(max_length=10, choices=SELECTION_CHOICES)
+    
+    Bond = models.CharField(max_length = 100 ,null = True)
+
+    SelectionProcess = models.TextField()
+
     start = models.DateField()
     join_date = models.DateField()
     end_of_registration = models.DateField()

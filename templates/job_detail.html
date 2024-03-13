@@ -1,22 +1,37 @@
-<script>
+<!-- <script>
 function registerJob() {
     var form = document.getElementById('registerForm');
     form.innerHTML = '<p>Registering...</p>';
     form.submit();
 }
-</script>
+</script> -->
+
+
+{% for job in jobs%}
 
 <h1>{{ job.NameofCompany }}</h1>
 <p>Profile of Company: {{ job.profileOfCompany }}</p>
 <p>Job Profile: {{ job.JobProfile }}</p>
+<p>Job Description: {{ job.JobDescription }}</p>
+<p>Employement Type: {{ job.EmploymentType }}</p>
+<p>website: {{ job.Website }}</p>
+<p>Linkedin: {{ job.Linkedin }}</p>
+<p>Address: {{ job.Address }}</p>
+<p>Worklocation: {{ job.Worklocation }}</p>
 <p>Branch Choice: {{ job.get_BranchChoice_display }}</p>
-<p>CTC: {{ job.ctc }}</p>
 <p>Eligibility: {{ job.Eligibility }}</p>
-<p>Selection: {{ job.get_Selection_display }}</p>
-<p>Location: {{ job.location }}</p>
 <p>Stipend: {{ job.stipend }}</p>
+<p>CTC: {{ job.ctc }}</p>
+<p>Bond: {{ job.Bond }}</p>
+<p>SelectionProcess: {{ job.SelectionProcess }}</p>
 <p>Joining Date: {{ job.join_date }}</p>
 <p>End Date for Registration: {{ job.end_of_registration }}</p>
+<hr>
+{% endfor %}
+
+
+<!-- <form action="{% url 'register_job' %}" method="post">
+</form> -->
 
 {% if user.is_authenticated %}
     {% if user_has_registered %}
@@ -24,32 +39,20 @@ function registerJob() {
     {% elif user_is_staff%}
     <p>You are an admin. Please Login from a student account to register.</p>
         {% else %}
-        <form id="registerForm">
+        <!-- <form id="registerForm" action="{% url 'register_job' %}" method="post">
             {% csrf_token %}
-            <input type="button" value="Register" onclick="registerJob()">
-        </form>
-    {% endif %}
-{% else %}
+            {{ JobProfileForm }}
+        </form> -->
+        {% endif %}
+        {% else %}
+    <!-- <input type="button" value="Register" onclick="registerJob()"> -->
     <a href="{% url 'login' %}">Login to register</a>
 {% endif %}
 
+<form action="{% url 'register_job' %}" method="post">
+    {% csrf_token %}
+    {{ JobProfileForm }}
+    <input type="submit" value="Submit">
+</form>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script>
-function registerJob() {
-    var form = $('#registerForm');
-    form.html('<p>Registering...</p>');
-    $.ajax({
-        url: "{% url 'register_job' job.id %}",
-        type: 'post',
-        headers: {'X-CSRFToken': '{{ csrf_token }}'},
-        success: function(response) {
-            if (response.status == 'success') {
-                form.html('<p>Registered</p>');
-                setTimeout(function() {
-                    window.location.href = "/";
-                }, 2000);  // Redirect after 2 seconds
-            }
-        }
-    });
-}
-</script>

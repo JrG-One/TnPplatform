@@ -4,4 +4,6 @@ class Announcement(models.Model):
     title = models.CharField(max_length=200)
     content = models.TextField()
     date_posted = models.DateTimeField(auto_now_add=True)
+    attachmentLink = models.CharField(max_length = 300, null = True, blank = True)
+    attachmentFile = models.FileField(null = True, blank = True)
 

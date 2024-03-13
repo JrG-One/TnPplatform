@@ -18,13 +18,16 @@ def index(request):
     return HttpResponse("this is student page")
 
 @login_required(login_url="/accounts/google/login")
-def register_job(request, pk):
-    job = get_object_or_404(Job_Opening, pk=pk)
+def register_job(request, NameOfCompany):
+    # job = get_object_or_404(Job_Opening, pk=pk)
 
-    if job.end_of_registration < timezone.now().date():
-        return HttpResponse('Registration for this job opening has closed.')
+    # if job.end_of_registration < timezone.now().date():
+    #     return HttpResponse('Registration for this job opening has closed.')
     
-    Job_Student_Application.objects.create(Student_ID=request.user, Job_ID=job, Blocked=False, Status='A')
+    # Job_Student_Application.objects.create(Student_ID=request.user, Job_ID=job, Blocked=False, Status='A')
+
+    print("==> ",request.POST)
+
     return JsonResponse({'status': 'success'})
 
 @login_required(login_url="/accounts/google/login")
