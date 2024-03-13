@@ -58,7 +58,7 @@ def resume(request):
         # student_instance.resume_json = json_file
         student_instance.save()
         # return Response(serializer.data, status=status.HTTP_201_CREATED)
-    print(json)
+    print(json1)
     return render(request, "Resume_generator.html", {"user": json1})
 
 # from django.views import View

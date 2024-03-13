@@ -40,6 +40,7 @@ class Student(AbstractUser):
         ("CSE", "CSE"),
         ("ECE", "ECE"),
     ]
+    
     Branch = models.CharField(max_length=50, choices=BRANCH_CHOICES)
     Resume_Link = models.CharField(max_length=300, default="blank")
     CGPA = models.DecimalField(max_digits=3, decimal_places=2, default="5.00")
@@ -52,9 +53,9 @@ class Student(AbstractUser):
     # objects = StudentManager();
 
     def __str__(self):
-        if self.first_name:
-            return f"{self.first_name} {self.last_name}"
-        else:
+        # if self.first_name:
+        #     return f"{self.first_name} {self.last_name}"
+        # else:
             return self.username
     
     # method that extracts roll no from email
