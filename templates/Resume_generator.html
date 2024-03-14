@@ -5,10 +5,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Tnp | Home</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 </head>
-
 <body>
     <header>
         <nav class="navbar navbar-expand-lg bg-body-tertiary">
@@ -35,20 +33,20 @@
     </header>
     <form method="post" action="{% url 'index' %}">
         {% csrf_token %}
-        <div id="page-1" class="container my-2">
+        <div id="page-0" class="container my-2">
             <h1>Personal Details</h1>
             <div style="border-top:5px solid green"></div>
             <div class="row mt-3">
                 <div class="col">
                     <div class="mb-3">
                         <label for="fname" class="form-label">First Name<b style="color: red;">*</b></label>
-                        <input type="text" class="form-control" name="fname" id="fname" required value={{ user.Name }}>
+                        <input type="text" class="form-control" name="fname" id="fname" required value={{ user.firstname }}>
                     </div>
                     <div class="mb-3">
                         <label for="contact-no" class="form-label">Contact Number<b style="color: red;">*</b></label>
                         <input type="number" maxlength="10" name="contact-no" class="form-control" id="contact-no"
                             required value="{{ user.mobile|slice:"4:9" }}{{ user.mobile|slice:"10:15" }}">
-                    </div>
+                    </div>  
                     <div class="mb-3">
                         <label for="whats-no" class="form-label">Whatsapp Number<b style="color: red;">*</b></label>
                         <input type="number" maxlength="10" name="whats-no" class="form-control" id="whats-no" required value="{{ user.whatsno|slice:"4:9" }}{{ user.whatsno|slice:"10:15" }}">
@@ -61,7 +59,7 @@
                 <div class="col">
                     <div class="mb-3">
                         <label for="lname" class="form-label">Last Name<b style="color: red;">*</b></label>
-                        <input type="text" class="form-control" id="lname" name="lname" required value = {{ user.Name }}>
+                        <input type="text" class="form-control" id="lname" name="lname" required value = {{ user.lastname }}>
                     </div>
                     <div class="mb-3">
                         <label for="e-mail" class="form-label">Personal E-mail<b style="color: red;">*</b></label>
@@ -73,21 +71,21 @@
                     </div>
                     <div class="mb-3">
                         <label for="github" class="form-label">Github profile link<b style="color: red;">*</b></label>
-                        <input type="text" class="form-control" id="github" name="github" required value='https://www.{{ user.github }}'>
+                        <input type="text" class="form-control" id="github" name="github" required value='https://{{ user.github }}'>
                     </div>
                 </div>
             </div>
             <div class="mb-3">
                 <label for="career-summary" class="form-label">Career summary</label>
                 <textarea type="textarea" rows="5" class="form-control" id="career-summary"
-                    name="career-summary" value={{ user.CareerSum.data }}></textarea>
+                    name="career-summary" >{{user.CareerSum.data}}</textarea>
             </div>
             <div class="d-flex justify-content-center">
-                <div class="btn btn-success px-5" onclick="handleNext(1)">Next</div>
+                <div class="btn btn-success px-5" onclick="handleNext(0)">Next</div>
             </div>
         </div>
 
-        <div id="page-2" class="container my-2" style="display: none;">
+        <div id="page-1" class="container my-2" style="display: none;">
             <h1>Education</h1>
             <div style="border-top:5px solid green"></div>
             <div class="mt-3">
@@ -106,8 +104,7 @@
                         </div>
                         <div class="mx-2">
                             <p class="my-2">To : </p>
-                            <input type="number" min="2010" max="2025" class="form-control w-100" id="sch-1-tperiod-to"
-                                name="sch-1-tperiod-to" value={{ user.tenth.tenth_period|slice:"7:" }}>
+                            <input type="number" min="2010" max="2025" class="form-control w-100" id="sch-1-tperiod-to" name="sch-1-tperiod-to" value={{ user.tenth.tenth_period|slice:"7:" }}>
                         </div>
                     </div>
                 </div>
@@ -116,9 +113,43 @@
                     <input type="number" class="form-control" id="sch-1-cgpa" name="sch-1-cgpa" value={{ user.tenth.tenth_per|slice:":-1" }}>
                 </div>
                 <div class="mb-3">
-                    <label for="sch-1-detail" class="form-label">10th School details</label>
-                    <input type="text" class="form-control" id="sch-1-detail" name="sch-1-detail" value={{ user.tenth.tenth_details }}>
+                    <label for="sch-1-board" class="form-label">10th Board<b style="color: red;">*</b></label>
+                    <select class="form-select" id="sch-1-board" name="sch-1-board" aria-label="select example" onchange="selectBoard(this)">
+                        <option value="0" selected>Select Board</option>
+                        <option value="Central Board of Secondary Education (CBSE)">Central Board of Secondary Education (CBSE)</option>
+                        <option value="Indian Certificate of Secondary Education (ICSE)">Indian Certificate of Secondary Education (ICSE)</option>
+                        <option value="Bihar School Examination Board (BSEB)">Bihar School Examination Board (BSEB)</option>
+                        <option value="Uttar Pradesh Board of Secondary Education (UPBSE)">Uttar Pradesh Board of Secondary Education (UPBSE)</option>
+                        <option value="Madhya Pradesh Board of Secondary Education (MPBSE)">Madhya Pradesh Board of Secondary Education (MPBSE)</option>
+                        <option value="Rajasthan Board of Secondary Education (RBSE)">Rajasthan Board of Secondary Education (RBSE)</option>
+                        <option value="Haryana State Board of Technical Education (HSBTE)">Haryana State Board of Technical Education (HSBTE)</option>
+                        <option value="Maharashtra State Board of Secondary and Higher Secondary Education (MSBSHSE)">Maharashtra State Board of Secondary and Higher Secondary Education (MSBSHSE)</option>
+                        <option value="Gujarat Secondary and Higher Secondary Education Board (GSEB)">Gujarat Secondary and Higher Secondary Education Board (GSEB)</option>
+                        <option value="West Bengal Board of Secondary Education (WBBSE)">West Bengal Board of Secondary Education (WBBSE)</option>
+                        <option value="Jammu and Kashmir State Board of School Education (JKBOSE)">Jammu and Kashmir State Board of School Education (JKBOSE)</option>
+                        <option value="Tamil Nadu Board of Secondary Education (TNBSE)">Tamil Nadu Board of Secondary Education (TNBSE)</option>
+                        <option value="Punjab School Education Board (PSEB)">Punjab School Education Board (PSEB)</option>
+                        <option value="Karnataka Secondary Education Examination Board (KSEEB)">Karnataka Secondary Education Examination Board (KSEEB)</option>
+                        <option value="Kerala Board of Public Examinations (KBPE)">Kerala Board of Public Examinations (KBPE)</option>
+                        <option value="Telangana Board of Secondary Education (TBSE)">Telangana Board of Secondary Education (TBSE)</option>
+                        <option value="Andhra Pradesh Board of Secondary Education (APBSE)">Andhra Pradesh Board of Secondary Education (APBSE)</option>
+                        <option value="Odisha Board of Secondary Education (OBSE)">Odisha Board of Secondary Education (OBSE)</option>
+                        <option value="Chhattisgarh Board of Secondary Education (CGBSE)">Chhattisgarh Board of Secondary Education (CGBSE)</option>
+                        <option value="Jharkhand Academic Council (JAC)">Jharkhand Academic Council (JAC)</option>
+                        <option value="Nagaland Board of School Education (NBSE)">Nagaland Board of School Education (NBSE)</option>
+                        <option value="Assam Higher Secondary Education Council (AHSEC)">Assam Higher Secondary Education Council (AHSEC)</option>
+                        <option value="Uttarakhand Board of School Education (UBSE)">Uttarakhand Board of School Education (UBSE)</option>
+                        <option value="Haryana Board of School Education (HBSE)">Haryana Board of School Education (HBSE)</option>
+                        <option value="National Institute of Open Schooling (NIOS)">National Institute of Open Schooling (NIOS)</option>
+                        <option value="Aligarh Muslim University (AMU)">Aligarh Muslim University (AMU)</option>
+                        <option value="Council of Higher Secondary Education (CHSE)">Council of Higher Secondary Education (CHSE)</option>
+                        <option value="Other">Other (Specify)</option>
+                    </select>
                 </div>
+                <div id="otherBoardInput" style="display: none;">
+                    <input type="text" class="form-control" id="otherBoardText" name="otherBoardText" placeholder="Enter the name of the board">
+                </div>
+
                 <hr>
                 <div class="mb-3">
                     <label for="schname-2" class="form-label"><b>Name of 12th School</b><b style="color: red;">*</b></label>
@@ -145,13 +176,47 @@
                     <input type="number" class="form-control" id="sch-2-cgpa" name="sch-2-cgpa" value={{ user.twelth.twelth_per|slice:":-1" }}>
                 </div>
                 <div class="mb-3">
-                    <label for="sch-2-detail" class="form-label">12th School details</label>
-                    <input type="text" class="form-control" id="sch-2-detail" name="sch-2-detail" value={{ user.twelth.twelth_details }}>
+                    <label for="sch-2-board" class="form-label">12th Board<b style="color: red;">*</b></label>
+                    <select class="form-select" id="sch-2-board" name="sch-2-board" aria-label="select example" onchange="selectBoard2(this)">
+                        <option value="0" selected>Select Board</option>
+                        <option value="Central Board of Secondary Education (CBSE)">Central Board of Secondary Education (CBSE)</option>
+                        <option value="Indian Certificate of Secondary Education (ICSE)">Indian Certificate of Secondary Education (ICSE)</option>
+                        <option value="Bihar School Examination Board (BSEB)">Bihar School Examination Board (BSEB)</option>
+                        <option value="Uttar Pradesh Board of Secondary Education (UPBSE)">Uttar Pradesh Board of Secondary Education (UPBSE)</option>
+                        <option value="Madhya Pradesh Board of Secondary Education (MPBSE)">Madhya Pradesh Board of Secondary Education (MPBSE)</option>
+                        <option value="Rajasthan Board of Secondary Education (RBSE)">Rajasthan Board of Secondary Education (RBSE)</option>
+                        <option value="Haryana State Board of Technical Education (HSBTE)">Haryana State Board of Technical Education (HSBTE)</option>
+                        <option value="Maharashtra State Board of Secondary and Higher Secondary Education (MSBSHSE)">Maharashtra State Board of Secondary and Higher Secondary Education (MSBSHSE)</option>
+                        <option value="Gujarat Secondary and Higher Secondary Education Board (GSEB)">Gujarat Secondary and Higher Secondary Education Board (GSEB)</option>
+                        <option value="West Bengal Board of Secondary Education (WBBSE)">West Bengal Board of Secondary Education (WBBSE)</option>
+                        <option value="Jammu and Kashmir State Board of School Education (JKBOSE)">Jammu and Kashmir State Board of School Education (JKBOSE)</option>
+                        <option value="Tamil Nadu Board of Secondary Education (TNBSE)">Tamil Nadu Board of Secondary Education (TNBSE)</option>
+                        <option value="Punjab School Education Board (PSEB)">Punjab School Education Board (PSEB)</option>
+                        <option value="Karnataka Secondary Education Examination Board (KSEEB)">Karnataka Secondary Education Examination Board (KSEEB)</option>
+                        <option value="Kerala Board of Public Examinations (KBPE)">Kerala Board of Public Examinations (KBPE)</option>
+                        <option value="Telangana Board of Secondary Education (TBSE)">Telangana Board of Secondary Education (TBSE)</option>
+                        <option value="Andhra Pradesh Board of Secondary Education (APBSE)">Andhra Pradesh Board of Secondary Education (APBSE)</option>
+                        <option value="Odisha Board of Secondary Education (OBSE)">Odisha Board of Secondary Education (OBSE)</option>
+                        <option value="Chhattisgarh Board of Secondary Education (CGBSE)">Chhattisgarh Board of Secondary Education (CGBSE)</option>
+                        <option value="Jharkhand Academic Council (JAC)">Jharkhand Academic Council (JAC)</option>
+                        <option value="Nagaland Board of School Education (NBSE)">Nagaland Board of School Education (NBSE)</option>
+                        <option value="Assam Higher Secondary Education Council (AHSEC)">Assam Higher Secondary Education Council (AHSEC)</option>
+                        <option value="Uttarakhand Board of School Education (UBSE)">Uttarakhand Board of School Education (UBSE)</option>
+                        <option value="Haryana Board of School Education (HBSE)">Haryana Board of School Education (HBSE)</option>
+                        <option value="National Institute of Open Schooling (NIOS)">National Institute of Open Schooling (NIOS)</option>
+                        <option value="Aligarh Muslim University (AMU)">Aligarh Muslim University (AMU)</option>
+                        <option value="Council of Higher Secondary Education (CHSE)">Council of Higher Secondary Education (CHSE)</option>
+                        <option value="Other">Other (Specify)</option>
+                    </select>
                 </div>
+                <div id="otherBoardInput2" style="display: none;">
+                    <input type="text" class="form-control" id="otherBoardText2" name="otherBoardText2" placeholder="Enter the name of the board">
+                </div>
+
                 <hr>
                 <div class="mb-3">
                     <label for="insname" class="form-label"><b>Name of Institute</b><b style="color: red;">*</b></label>
-                    <input type="text" class="form-control" id="insname" name="insname" maxlength="60" value={{ user.education.Education_clg }}>
+                    <input type="text" class="form-control" id="insname" name="insname" maxlength="60" value="Indian Institute of Information Technology Surat">
                 </div>
                 <div class="mb-3">
                     <label for="tperiod" class="form-label">Time Period<b style="color: red;">*</b></label>
@@ -170,35 +235,68 @@
                     </div>
                 </div>
                 <div class="mb-3">
-                    <label for="ins-cgpa" class="form-label">CGPA<b style="color: red;">*</b> </label>
+                    <label for="ins-cgpa" class="form-label">CGPA<b style="color: red;">*</b></label>
                     <input type="number" class="form-control" id="ins-cgpa" name="ins-cgpa" value={{ user.education.ins_cgpa }}>
                 </div>
                 <div class="mb-3">
-                    <label for="eddetails" class="form-label">Education details</label>
-                    <input type="text" class="form-control" id="eddetails" name="eddetails" value={{ user.education.edu_details }}>
+                    <label for="eddetails" class="form-label">Branch<b style="color: red;">*</b></label>
+                    <select class="form-select" aria-label="select example" id="eddetails" name="eddetails">
+                        <option value="0" selected>Select Branch</option>
+                        <option value="Computer Science and Engineering">Computer Science and Engineering</option>
+                        <option value="Electronics and Communication Engineering">Electronics and Communication Engineering</option>
+                    </select>
                 </div>
             </div>
 
+            <div class="d-flex justify-content-center">
+                <div class="btn btn-outline-success px-5 mx-4" onclick="handlePrev(1)">Prev</div>
+                <div class="btn btn-success px-5 mx-4" onclick="handleNext(1)">Next</div>
+            </div>
+        </div>
+        <!-- Skills -->
+        <div class="container my-2" id="page-2" style="display: none;">
+            <h1>Skills</h1>
+            <div style="border-top:5px solid green"></div>
+            <div class="mt-3">
+                <div class="mb-3">
+                    <label for="skill1" class="form-label">Programming Languages<b style="color: red;">*</b></label>
+                    <input type="text" class="form-control" id="skill1" name="skill1" placeholder="e.g. C,C++,Java,Python etc..." value="{{ user.Skills.prog_lang }}" >
+                </div>
+                <div class="mb-3">
+                    <label for="skill2" class="form-label">Technologies or Frameworks</label>
+                    <input type="text" class="form-control" id="skill2" name="skill2" placeholder="e.g. React Js,Node Js,Django,Flask etc..." value="{{ user.Skills.tech_frame_lib }}">
+                </div>
+                <div class="mb-3">
+                    <label for="skill3" class="form-label">Version Control</label>
+                    <input type="text" class="form-control" id="skill3" name="skill3" placeholder="e.g. Git,Github..." value="{{ user.Skills.version_control }}">
+                </div>
+                <div class="mb-3">
+                    <label for="skill4" class="form-label">Familiar with</label>
+                    <input type="text" class="form-control" id="skill4" name="skill4" placeholder="e.g. Postman,MongoDB,MySQL etc...  " value="{{ user.Skills.familier }}">
+                </div>
+            </div>
             <div class="d-flex justify-content-center">
                 <div class="btn btn-outline-success px-5 mx-4" onclick="handlePrev(2)">Prev</div>
                 <div class="btn btn-success px-5 mx-4" onclick="handleNext(2)">Next</div>
             </div>
         </div>
+        <!-- Achievements -->
+
         <div class="container my-2" id="page-3" style="display: none;">
             <h1>Achievements</h1>
             <div style="border-top:5px solid green"></div>
             <div class="mt-3">
                 <div class="mb-3">
                     <label for="achieve1" class="form-label">Achievements</label>
-                    <input type="text" class="form-control" id="achieve1" name="achieve1" maxlength="125" value={{ user.achievement.0.ach_details }}> 
+                    <input type="text" class="form-control" id="achieve1" name="achieve1" value="{{ user.achievement.0.ach_details }}"> 
                 </div>
                 <div class="mb-3">
                     <label for="achieve2" class="form-label">Achievements</label>
-                    <input type="text" class="form-control" id="achieve2" name="achieve2" maxlength="125" value={{ user.achievement.1.ach_details }}>
+                    <input type="text" class="form-control" id="achieve2" name="achieve2" value="{{ user.achievement.1.ach_details }}">
                 </div>
                 <div class="mb-3">
                     <label for="achieve3" class="form-label">Achievements</label>
-                    <input type="text" class="form-control" id="achieve3" name="achieve3" maxlength="125" value={{ user.achievement.2.ach_details }}>
+                    <input type="text" class="form-control" id="achieve3" name="achieve3" value="{{ user.achievement.2.ach_details }}">
                 </div>
             </div>
             <div class="d-flex justify-content-center">
@@ -226,9 +324,8 @@
                             Experience {{ forloop.counter }}
                         </button>
                     </h2>
-                    <div id="experienceCollapse{{ forloop.counter }}" class="accordion-collapse collapse show"
-                        aria-labelledby="experienceHeading{{ forloop.counter }}" data-bs-parent="#experienceAccordion">
-                        <div class="accordion-body">
+                    <div id="experienceCollapse{{ forloop.counter }}" class="accordion-collapse collapse show" aria-labelledby="experienceHeading{{ forloop.counter }}" data-bs-parent="#experienceAccordion">
+                    <div class="accordion-body">
             <div class="mb-3">
                 <label for="exp-{{ forloop.counter }}-cname" class="form-label">Name of Company<b style="color: red;">*</b></label>
                 <input type="text" class="form-control" id="exp-{{ forloop.counter }}-cname" name="exp-{{ forloop.counter }}-cname" value ="{{ experience.exp_company }}">
@@ -269,6 +366,7 @@
                 <label for="exp-{{ forloop.counter }}-det-3" class="form-label">details-3</label>
                 <input type="text" class="form-control" id="exp-{{ forloop.counter }}-det-3" name="exp-{{ forloop.counter }}-det-3" value ="{{ experience.exp_details3.0.exp_details }}">
             </div>
+            <button class="btn btn-danger delete-btn" onclick="deleteExperience({{ forloop.counter }})">Delete</button>
         </div>
     </div>
     </div>
@@ -335,6 +433,7 @@
             <label for="exp-1-det-3" class="form-label">details-3</label>
             <input type="text" class="form-control" id="exp-1-det-3" name="exp-1-det-3">
         </div>
+        <button class="btn btn-danger delete-btn" onclick="deleteExperience(1)">Delete</button>
     </div>
 </div>
 </div>
@@ -363,7 +462,7 @@
             {% for intern in user.Internships %}
   
 
-                <div class="accordion-item">
+                <div class="accordion-item" id='internshipItem{{ forloop.counter }}'>
                     <h2 class="accordion-header" id="internshipHeading1">
                         <button class="accordion-button" type="button" data-bs-toggle="collapse"
                             data-bs-target="#internshipCollapse{{ forloop.counter }}" aria-expanded="true"
@@ -415,16 +514,16 @@
                 <label for="intern-{{ forloop.counter }}-det-3" class="form-label">details-3</label>
                 <input type="text" class="form-control" id="intern-{{ forloop.counter }}-det-3" name="intern-{{ forloop.counter }}-det-3" value = "{{ intern.intern_details1.2.intern_details }}">
             </div>
+            <button class="btn btn-danger delete-btn" onclick="deleteInternship({{ forloop.counter }})">Delete</button>
         </div>
     </div>
 </div>
-
             
             {% endfor %}
             {% else %}
             
 
-                <div class="accordion-item">
+                <div class="accordion-item" id='internshipItem1'>
                     <h2 class="accordion-header" id="internshipHeading1">
                         <button class="accordion-button" type="button" data-bs-toggle="collapse"
                             data-bs-target="#internshipCollapse1" aria-expanded="true"
@@ -481,6 +580,7 @@
                 <label for="intern-1-det-3" class="form-label">Details-3</label>
                 <input type="text" class="form-control" id="intern-1-det-3" name="intern-1-det-3">
             </div>
+            <button class="btn btn-danger delete-btn" onclick="deleteInternship(1)">Delete</button>
         </div>
     </div>
 </div>
@@ -488,7 +588,7 @@
             {% endif %}
 </div>
             <!-- Button to add more Internships -->
-            <div type="button" class="btn btn-outline-primary mb-3" onclick="addInternship()">Add More Internships</div>
+            <div type="button" class="btn btn-outline-primary my-3" onclick="addInternship()">Add More Internships</div>
 
             <!-- Buttons to handle next and previous for Internships -->
             <div class="d-flex justify-content-center">
@@ -498,7 +598,7 @@
         </div>
 
         <div class="container my-2" id="page-6" style="display: none;">
-            <h1>Hackathons Won</h1>
+            <h1>Hackathons</h1>
             <div style="border-top:5px solid green"></div>
 
             <!-- Hackathon Accordion -->
@@ -523,6 +623,30 @@
                                 <input type="text" class="form-control" id="hack-{{ forloop.counter }}-name" name="hack-{{ forloop.counter }}-name" value="{{ hack.hack_title }}">
                             </div>
                             <div class="mb-3">
+                                <label class="form-label">Hackathon Status<b style="color: red;">*</b></label> 
+                                <div class="form-check">
+                                    {% if hack.hack_status == 'winner' %}
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="hack-{{ forloop.counter }}-status" id="hack-{{ forloop.counter }}-status-1" value="winner" checked>
+                                            <label class="form-check-label" for="inlineRadio1">winner</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="hack-{{ forloop.counter }}-status" id="hack-{{ forloop.counter }}-status-2" value="participated">
+                                            <label class="form-check-label" for="inlineRadio2" >participated</label>
+                                        </div>
+                                    {% else %}
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="hack-{{ forloop.counter }}-status" id="hack-{{ forloop.counter }}-status-1" value="winner">
+                                            <label class="form-check-label" for="inlineRadio1">winner</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="hack-{{ forloop.counter }}-status" id="hack-{{ forloop.counter }}-status-2" value="participated" checked>
+                                            <label class="form-check-label" for="inlineRadio2" >participated</label>
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="mb-3">
                                 <label for="hack-{{ forloop.counter }}-time-period" class="form-label">Year of Hackathon<b style="color: red;">*</b></label>
                                 <input type="number" class="form-control w-25" id="hack-{{ forloop.counter }}-time-period" name="hack-{{ forloop.counter }}-time-period" min="2011" value="{{ hack.hack_date }}">
                             </div>
@@ -534,7 +658,7 @@
                                 <label for="hack-{{ forloop.counter }}-det-2" class="form-label">Details-2</label>
                                 <input type="text" class="form-control" id="hack-{{ forloop.counter }}-det-2" name="hack-{{ forloop.counter }}-det-2" value="{{ hack.hack_details.1.hack_details1 }}">
                             </div>
-                            
+                            <button class="btn btn-danger delete-btn" onclick="deleteHackathon({{ forloop.counter }})">Delete</button>
                         </div>
                     </div>
                 </div>
@@ -551,25 +675,39 @@
                                 <div id="hackathonCollapse1" class="accordion-collapse collapse show"
                                     aria-labelledby="hackathonHeading1" data-bs-parent="#accordionHackathons">
                                     <div class="accordion-body">
-                            <div class="mb-3">
-                                <label for="hack-1-name" class="form-label">Hackathon Name<b
-                                        style="color: red;">*</b></label>
-                                <input type="text" class="form-control" id="hack-1-name" name="hack-1-name" maxlength="66">
-                            </div>
-                            <div class="mb-3">
-                                <label for="hack-1-time-period" class="form-label">Year of Hackathon<b
-                                        style="color: red;">*</b></label>
-                                <input type="number" class="form-control w-25" id="hack-1-time-period"
-                                    name="hack-1-time-period" placeholder="year" min="2020">
-                            </div>
-                            <div class="mb-3">
-                                <label for="hack-1-det-1" class="form-label">Details-1</label>
-                                <input type="text" class="form-control" id="hack-1-det-1" name="hack-1-det-1">
-                            </div>
-                            <div class="mb-3">
-                                <label for="hack-1-det-2" class="form-label">Details-2</label>
-                                <input type="text" class="form-control" id="hack-1-det-2" name="hack-1-det-2">
-                            </div>
+                                <div class="mb-3">
+                                    <label for="hack-1-name" class="form-label">Hackathon Name<b
+                                            style="color: red;">*</b></label>
+                                    <input type="text" class="form-control" id="hack-1-name" name="hack-1-name" maxlength="66">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Hackathon Status<b style="color: red;">*</b></label> 
+                                    <div class="form-check">
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="hack-1-status" id="hack-1-status-1" value="winner">
+                                            <label class="form-check-label" for="inlineRadio1">winner</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="hack-1-status" id="hack-1-status-2" value="participated" checked>
+                                            <label class="form-check-label" for="inlineRadio2" >participated</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="hack-1-time-period" class="form-label">Year of Hackathon<b
+                                            style="color: red;">*</b></label>
+                                    <input type="number" class="form-control w-25" id="hack-1-time-period"
+                                        name="hack-1-time-period" placeholder="year" min="2020">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="hack-1-det-1" class="form-label">Details-1</label>
+                                    <input type="text" class="form-control" id="hack-1-det-1" name="hack-1-det-1">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="hack-1-det-2" class="form-label">Details-2</label>
+                                    <input type="text" class="form-control" id="hack-1-det-2" name="hack-1-det-2">
+                                </div>
+                                <button class="btn btn-danger delete-btn" onclick="deleteHackathon(1)">Delete</button>
                         </div>
                     </div>
                 </div>
@@ -578,7 +716,7 @@
             </div>
 
             <!-- Button to add more Hackathons -->
-            <div type="button" class="btn btn-outline-primary mb-3" onclick="addHackathon()">Add More Hackathons</div>
+            <div type="button" class="btn btn-outline-primary my-3" onclick="addHackathon()">Add More Hackathons</div>
 
             <!-- Buttons to handle next and previous for Hackathons -->
             <div class="d-flex justify-content-center">
@@ -621,6 +759,7 @@
                                 <label for="git-proj-{{ forloop.counter }}-det-2" class="form-label">Details-2</label>
                                 <input type="text" class="form-control" id="git-proj-{{ forloop.counter }}-det-2" name="git-proj-{{ forloop.counter }}-det-2" value = "{{ proj.gitproj_details.1.gitproj_details1 }}">
                             </div>
+                            <button class="btn btn-danger delete-btn" onclick="deleteGithubProject({{ forloop.counter }})">Delete</button>
                         </div>
                     </div>
                 </div>
@@ -652,6 +791,7 @@
                                 <label for="git-proj-1-det-2" class="form-label">Details-2</label>
                                 <input type="text" class="form-control" id="git-proj-1-det-2" name="git-proj-1-det-2">
                             </div>
+                            <button class="btn btn-danger delete-btn" onclick="deleteGithubProject(1)">Delete</button>
                         </div>
                     </div>
                 </div>
@@ -660,10 +800,15 @@
             </div>
 
             <!-- Button to add more Github Projects -->
-            <div type="button" class="btn btn-outline-primary mb-3" onclick="addGithubProject()">Add More Projects</div>
+            <div type="button" class="btn btn-outline-primary my-3" onclick="addGithubProject()">Add More Projects</div>
 
             <!-- Buttons to handle next and previous for Github Projects -->
-            <div class="d-flex justify-content-center">
+            <div class="d-flex justify-content-center my-3">
+                <label for="agreeTerms">
+                    <input type="checkbox" class="form-check-input" id="agreeTerms" name="agreeTerms"> I agree to the terms and conditions of TNP and the information provided is true to my knowledge.
+                </label>
+            </div>
+            <div class="d-flex justify-content-center my-2">
                 <div class="btn btn-outline-success px-5 mx-4" onclick="handlePrev(7)">Prev</div>
                 <div class="btn btn-success px-5 mx-4" id='sub-btn' onclick="HandleSubmit()">Submit</div>
                 <div class="btn btn-success px-5 mx-4 d-none" onclick="HandleRedirection()">Back to home</div>
@@ -681,6 +826,91 @@
         crossorigin="anonymous"></script>
 
     <script>
+        {% comment %} function generate_notification(message, type) {
+            console.log(message);
+            var notification = document.createElement('div');
+            notification.className = `alert alert-${type} alert-dismissible fade show fixed-top`;
+            notification.role = 'alert';
+            notification.innerHTML = `
+                ${message}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            `;
+            document.body.insertBefore(notification, document.body.firstChild);
+        
+            setTimeout(function() {
+                notification.remove();
+            }, 2000);
+        } {% endcomment %}
+
+
+        function selectBoard(e) {
+            if (e.value == "Other") {
+                document.getElementById("otherBoardInput").style.display = "block";
+            } else {
+                document.getElementById("otherBoardInput").style.display = "none";
+            }
+        }
+
+        function selectBoard2(e) {
+            if (e.value == "Other") {
+                document.getElementById("otherBoardInput2").style.display = "block";
+            } else {
+                document.getElementById("otherBoardInput2").style.display = "none";
+            }
+        }
+
+        window.onload = () => {
+            const val1 = "{{ user.tenth.tenth_details }}";
+            const val2 = "{{ user.twelth.twelth_details }}";
+            const val3 = "{{ user.education.ins_details}}";
+            const sel1 = document.getElementById('sch-1-board');
+            const sel2 = document.getElementById('sch-2-board');
+            const sel3 = document.getElementById('eddetails');
+
+            var find_val = false;
+            if(val1){
+                for(let i = 0; i < sel1.options.length; i++){
+                    if(sel1.options[i].value === val1){
+                        find_val = true;
+                        break;
+                    }
+                }
+                if (!find_val) {
+                    document.getElementById("otherBoardInput").style.display = "block";
+                    document.getElementById("otherBoardText").value = val1;
+                    document.getElementById('sch-1-board').value = "Other";
+                }else{
+                    document.getElementById("otherBoardInput").style.display = "none";
+                    document.getElementById("sch-1-board").value = "{{ user.tenth.tenth_details }}";
+                }
+            }
+
+            var find_val = false;
+
+            if(val2){
+                for(let i = 0; i < sel2.options.length; i++){
+                    if(sel2.options[i].value === val2){
+                        find_val = true;
+                        break;
+                    }
+                }
+                if (!find_val) {
+                    document.getElementById("otherBoardInput2").style.display = "block";
+                    document.getElementById("otherBoardText2").value = val2;
+                    document.getElementById("sch-2-board").value = "Other";
+                }else{
+                    document.getElementById("otherBoardInput2").style.display = "none";
+                    document.getElementById("sch-2-board").value = "{{ user.twelth.twelth_details }}";
+                }
+            }
+
+            if(val3){
+                document.getElementById("eddetails").value = "{{ user.education.ins_details }}";
+            }else{
+                document.getElementById("eddetails").value = "0";
+            }
+        }
+
         function handleNext(currentPage) {
             var nextStep = currentPage + 1;
             var currentPageElement = document.getElementById('page-' + currentPage);
@@ -703,12 +933,110 @@
             }
         }
 
+        function HandleRedirection() {
+            window.location.href = "{% url 'landing_page' %}";
+        }
+
         var experienceCount = Math.max({{ user.experience|length }},1);
-        var internshipCount = Math.max({{ user.Internship|length }},1);
+        var internshipCount = Math.max({{ user.Internships|length }},1);
         var hackathonCount = Math.max({{user.Hackathon|length}},1);
         var githubProjectCount = Math.max({{user.Gitproj|length}},1);
+ 
+        function deleteExperience(id) {
+            var experienceItem = document.getElementById('experienceItem' + id);
+            for (let i = id + 1; i <= experienceCount; i++) {
+                var nextExperienceItem = document.getElementById('experienceItem' + i);
+                if (nextExperienceItem) {
+                    nextExperienceItem.id = 'experienceItem' + (i - 1);
+                    nextExperienceItem.querySelector('h2').id = 'experienceHeading' + (i - 1);
+                    nextExperienceItem.querySelector('button').innerText = 'Experience ' + (i - 1);
+                    // Update the input elements
+                    nextExperienceItem.querySelectorAll('input').forEach(input => {
+                        var name = input.getAttribute('name');
+                        var newName = name.replace(`-${i}-`, `-${i - 1}-`);
+                        input.setAttribute('name', newName);
+                        input.setAttribute('id', newName);
+                    });
+                    // Update the delete button's onclick attribute
+                    nextExperienceItem.querySelector('div').querySelector('button').setAttribute('onclick', `deleteExperience(${i - 1})`);
+                }
+            }
+            experienceCount--;
+            experienceItem.remove();
+        } 
+        
+        function deleteInternship(id) {
+            var internshipItem = document.getElementById('internshipItem' + id);
+            for (let i = id + 1; i <= internshipCount; i++) {
+                var nextInternshipItem = document.getElementById('internshipItem' + i);
+                if (nextInternshipItem) {
+                    nextInternshipItem.id = 'internshipItem' + (i - 1);
+                    nextInternshipItem.querySelector('h2').id = 'internshipHeading' + (i - 1);
+                    nextInternshipItem.querySelector('button').innerText = 'Internship ' + (i - 1);
+                    // Update the input elements
+                    nextInternshipItem.querySelectorAll('input').forEach(input => {
+                        var name = input.getAttribute('name');
+                        var newName = name.replace(`-${i}-`, `-${i - 1}-`);
+                        input.setAttribute('name', newName);
+                        input.setAttribute('id', newName);
+                    });
+                    // Update the delete button's onclick attribute
+                    nextInternshipItem.querySelector('div').querySelector('button').setAttribute('onclick', `deleteInternship(${i - 1})`);
+                }
+            }
+            internshipCount--;
+            internshipItem.remove();
+        }
 
-    
+        function deleteHackathon(id) {
+            var hackathonItem = document.getElementById('hackathonItem' + id);
+            for (let i = id + 1; i <= hackathonCount; i++) {
+                var nextHackathonItem = document.getElementById('hackathonItem' + i);
+                if (nextHackathonItem) {
+                    nextHackathonItem.id = 'hackathonItem' + (i - 1);
+                    nextHackathonItem.querySelector('h2').id = 'hackathonHeading' + (i - 1);
+                    nextHackathonItem.querySelector('button').innerText = 'Hackathon ' + (i - 1);
+                    // Update the input elements
+                    nextHackathonItem.querySelectorAll('input').forEach(input => {
+                        var name = input.getAttribute('name');
+                        var newName = name.replace(`-${i}-`, `-${i - 1}-`);
+                        input.setAttribute('name', newName);
+                        input.setAttribute('id', newName);
+                    });
+                    // Update the delete button's onclick attribute
+                    nextHackathonItem.querySelector('div').querySelector('button').setAttribute('onclick', `deleteHackathon(${i - 1})`);
+                }
+            }
+            hackathonCount--;
+            hackathonItem.remove();
+        }
+
+        function deleteGithubProject(id) {
+            var githubProjectItem = document.getElementById('githubProjectItem' + id);
+            for (let i = id + 1; i <= githubProjectCount; i++) {
+                var nextGithubProjectItem = document.getElementById('githubProjectItem' + i);
+                if (nextGithubProjectItem) {
+                    nextGithubProjectItem.id = 'githubProjectItem' + (i - 1);
+                    nextGithubProjectItem.querySelector('h2').id = 'githubProjectHeading' + (i - 1);
+                    nextGithubProjectItem.querySelector('button').innerText = 'Project ' + (i - 1);
+                    // Update the input elements
+                    nextGithubProjectItem.querySelectorAll('input').forEach(input => {
+                        var name = input.getAttribute('name');
+                        var newName = name.replace(`-${i}-`, `-${i - 1}-`);
+                        input.setAttribute('name', newName);
+                        input.setAttribute('id', newName);
+                    });
+                    // Update the delete button's onclick attribute
+                    nextGithubProjectItem.querySelector('div').querySelector('button').setAttribute('onclick', `deleteGithubProject(${i - 1})`);
+                }
+            }
+            githubProjectCount--;
+            githubProjectItem.remove();
+        }
+
+
+
+
         function addExperience() {
             experienceCount++; // Increment the counter
 
@@ -783,6 +1111,7 @@
                 <label for="exp-${experienceCount}-det-3" class="form-label">details-3</label>
                 <input type="text" class="form-control" id="exp-${experienceCount}-det-3" name="exp-${experienceCount}-det-3">
             </div>
+            <button class="btn btn-danger delete-btn" onclick="deleteExperience(${experienceCount})">Delete</button>
         `;
 
             // Append elements to create the accordion item
@@ -870,6 +1199,7 @@
                 <label for="intern-${internshipCount}-det-3" class="form-label">details-3</label>
                 <input type="text" class="form-control" id="intern-${internshipCount}-det-3" name="intern-${internshipCount}-det-3">
             </div>
+            <button class="btn btn-danger delete-btn" onclick="deleteInternship(${internshipCount})">Delete</button>
         `;
 
             // Append elements to create the accordion item
@@ -922,6 +1252,19 @@
                 <input type="text" class="form-control" id="hack-${hackathonCount}-name" name="hack-${hackathonCount}-name">
             </div>
             <div class="mb-3">
+                <label class="form-label">Hackathon Status<b style="color: red;">*</b></label> 
+                <div class="form-check">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="hack-${hackathonCount}-status" id="hack-${hackathonCount}-status-1" value="winner">
+                        <label class="form-check-label" for="inlineRadio1">winner</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="hack-${hackathonCount}-status" id="hack-${hackathonCount}-status-2" value="participated" checked>
+                        <label class="form-check-label" for="inlineRadio2" >participated</label>
+                    </div>
+                </div>
+            </div>
+            <div class="mb-3">
                 <label for="hack-${hackathonCount}-time-period" class="form-label">Year of Hackathon<b style="color: red;">*</b></label>
                 <input type="number" class="form-control w-25" id="hack-${hackathonCount}-time-period" name="hack-${hackathonCount}-time-period" min="2011">
             </div>
@@ -933,6 +1276,7 @@
                 <label for="hack-${hackathonCount}-det-2" class="form-label">Details-2</label>
                 <input type="text" class="form-control" id="hack-${hackathonCount}-det-2" name="hack-${hackathonCount}-det-2">
             </div>
+            <button class="btn btn-danger delete-btn" onclick="deleteHackathon(${hackathonCount})">Delete</button>
         `;
 
             // Append elements to create the accordion item
@@ -992,6 +1336,7 @@
                 <label for="git-proj-${githubProjectCount}-det-2" class="form-label">Details-2</label>
                 <input type="text" class="form-control" id="git-proj-${githubProjectCount}-det-2" name="git-proj-${githubProjectCount}-det-2">
             </div>
+            <button class="btn btn-danger delete-btn" onclick="deleteGithubProject(${githubProjectCount})">Delete</button>
         `;
 
             // Append elements to create the accordion item
@@ -1006,10 +1351,16 @@
 
         }
 
-        function HandleSubmit() {
-            console.log('Submit button clicked');
-            document.getElementById('sub-btn').style.display = "none";  
-            var name = document.getElementById('fname').value + ' ' + document.getElementById('lname').value;
+        function HandleSubmit(e) {
+
+            var terms = document.getElementById('agreeTerms');
+            if (!terms.checked) {
+                alert('Please agree to the terms and conditions');
+                return;
+            }
+
+            var firstname = document.getElementById('fname').value.toUpperCase(); 
+            var lastname = document.getElementById('lname').value.toUpperCase();
             var mobile = document.getElementById('contact-no').value;
             
             var email = document.getElementById('e-mail').value;
@@ -1027,7 +1378,7 @@
                 "tenth_name": document.getElementById('schname-1').value,
                 "tenth_period": document.getElementById('sch-1-tperiod-from').value + ' - ' + document.getElementById('sch-1-tperiod-to').value,
                 "tenth_per": document.getElementById('sch-1-cgpa').value,
-                "tenth_details": document.getElementById('sch-1-detail').value
+                "tenth_details": document.getElementById('sch-1-board').value === 'Other' ? document.getElementById('otherBoardText').value : document.getElementById('sch-1-board').value
             };
 
             // twelth details
@@ -1035,7 +1386,7 @@
                 "twelth_name": document.getElementById('schname-2').value,
                 "twelth_period": document.getElementById('sch-2-tperiod-from').value + ' - ' + document.getElementById('sch-2-tperiod-to').value,
                 "twelth_per": document.getElementById('sch-2-cgpa').value,
-                "twelth_details": document.getElementById('sch-2-detail').value
+                "twelth_details": document.getElementById('sch-2-board').value === 'Other' ? document.getElementById('otherBoardText2').value : document.getElementById('sch-2-board').value
             };
 
             // Education details
@@ -1043,8 +1394,15 @@
                 "Education_clg": document.getElementById('insname').value,
                 "ed_date": document.getElementById('tperiod1').value + ' - ' + document.getElementById('tperiod2').value,
                 "ins_cgpa": document.getElementById('ins-cgpa').value,
-                "edu_details": document.getElementById('eddetails').value
+                "ins_details": document.getElementById('eddetails').value
             };
+
+            var Skills = {
+                "prog_lang" : document.getElementById('skill1').value,
+                "tech_frame_lib" : document.getElementById('skill2').value,
+                "version_control"  : document.getElementById('skill3').value,
+                "familier" : document.getElementById('skill4').value,
+            }
 
             // Achievements
             var achievements = [
@@ -1101,6 +1459,7 @@
             for (var i = 1; i <= hackathonCount; i++) {
                 var hackDetails = {
                     "hack_title": document.getElementById('hack-' + i + '-name').value,
+                    "hack_status": document.querySelector('input[name="hack-' + i + '-status"]:checked').value,
                     "hack_date": document.getElementById('hack-' + i + '-time-period').value,
                     "hack_details": [{ "hack_details1": document.getElementById('hack-' + i + '-det-1').value },
                     { "hack_details1": document.getElementById('hack-' + i + '-det-2').value }]
@@ -1122,7 +1481,8 @@
 
             var resumeData = {
                 "json": [{
-                    "Name": name,
+                    "firstname": firstname,
+                    "lastname": lastname,
                     "mobile": mobile,
                     "whatsno": whatsno,
                     "address": address,
@@ -1133,6 +1493,7 @@
                     "education": education,
                     "tenth": tenth,
                     "twelth": twelth,
+                    "Skills": Skills,
                     "achievement": achievements,
                     "experience": experiences,
                     "Internships": internships,
@@ -1142,12 +1503,16 @@
             };
 
             const nameReg = /^[a-zA-Z]+$/;
-            if(document.getElementById("fname").value === ""){
+
+            //match blank input fields regex
+            const matchBlackFiels = /^\s*$/;
+
+            if(matchBlackFiels.test(document.getElementById("fname").value)){
                 alert("first Name is required");
                 return false;
             }
 
-            if(document.getElementById("lname").value === ""){
+            if(matchBlackFiels.test(document.getElementById("lname").value)){
                 alert("last Name is required");
                 return false;
             }
@@ -1157,9 +1522,9 @@
             }else{
                 alert("first name or last name should contain only alphabets");
                 return false;
-            }
+            }       
 
-            if(mobile === ""){
+            if(matchBlackFiels.test(mobile)){
                 alert("Contact number is required");
                 return false;
             }else if(mobile.length !== 10){
@@ -1168,12 +1533,13 @@
             }else{
                 resumeData.json[0].mobile = "+91 " + mobile.slice(0,5) + "-" + mobile.slice(5,10);
             }
-            if(email === ""){
+            
+            if(matchBlackFiels.test(email)){
                 alert("Email is required");
                 return false;
             }
 
-            if(whatsno === ""){
+            if(matchBlackFiels.test(whatsno)){
                 alert("Whatsapp number is required");
                 return false;
             }else if(whatsno.length !== 10){
@@ -1184,11 +1550,12 @@
                 resumeData.json[0].whatsno = modifiedwhats;
             }
 
-            if(address === ""){
+            if(matchBlackFiels.test(address)){
                 alert("Address is required");
                 return false;
             }
-            if(linked === ""){
+
+            if(matchBlackFiels.test(linked)){
                 alert("Linkedin is required");
                 return false;
             }else if(linked.slice(0,12) !== "https://www."){
@@ -1198,7 +1565,7 @@
                 resumeData.json[0].linked = linked.slice(12,linked.length);
             }
 
-            if(github === ""){
+            if(matchBlackFiels.test(github)){
                 alert("Github is required");
                 return false;
             }else if(github.slice(0,8) !== "https://"){
@@ -1208,75 +1575,140 @@
                 resumeData.json[0].github = github.slice(8,github.length);
             }
 
-            if(careerSummary.data === ""){
+            if(matchBlackFiels.test(careerSummary.data)){
                 delete resumeData.json[0].CareerSum;
             } 
-            if(document.getElementById('schname-1').value === ""){
+
+            if(matchBlackFiels.test(document.getElementById('schname-1').value)){
                 alert("10th school name is required");
                 return false;
             }
-            if(document.getElementById('sch-1-tperiod-from').value === "" || document.getElementById('sch-1-tperiod-to').value === ""){
+
+            if(matchBlackFiels.test( document.getElementById('sch-1-tperiod-from').value) || matchBlackFiels.test(document.getElementById('sch-1-tperiod-to').value)){
                 alert("10th school time-period is required");
                 return false;
             }
-            if(document.getElementById('sch-1-cgpa').value === ""){
+
+            if(matchBlackFiels.test(document.getElementById('sch-1-cgpa').value)){
                 alert("10th school percentage is required");
                 return false;
             }else{
                 resumeData.json[0].tenth["tenth_per"] = document.getElementById('sch-1-cgpa').value + "%";
             }
+            
+            if(document.getElementById('sch-1-board').value === "Other"){
+                if(matchBlackFiels.test(document.getElementById('otherBoardText').value)){
+                    alert("10th school board is required");
+                    return false;
+                }else{
+                    resumeData.json[0].tenth["tenth_details"] = document.getElementById('otherBoardText').value;
+                }
+            }else{
+                if(document.getElementById('sch-1-board').value === "0"){
+                    alert("10th school board is required");
+                    return false;
+                }
+                else{
+                    resumeData.json[0].tenth["tenth_details"] = document.getElementById('sch-1-board').value;
+                }
+            }
 
-            if(document.getElementById('schname-2').value === ""){
+            if(matchBlackFiels.test(document.getElementById('schname-2').value)){
                 alert("12th school name is required");
                 return false;
             }
-            if(document.getElementById('sch-2-tperiod-from').value === "" || document.getElementById('sch-2-tperiod-to').value === ""){
+
+            if(matchBlackFiels.test(document.getElementById('sch-2-tperiod-from').value) || matchBlackFiels.test(document.getElementById('sch-2-tperiod-to').value)){
                 alert("12th school time-period is required");
                 return false;
             }
-            if(document.getElementById('sch-2-cgpa').value === ""){
+
+            if(matchBlackFiels.test(document.getElementById('sch-2-cgpa').value)){
                 alert("12th school percentage is required");
                 return false;
             }else{
                 resumeData.json[0].twelth["twelth_per"] = document.getElementById('sch-2-cgpa').value + "%";
             }
-            if(document.getElementById('insname').value === ""){
-                alert("College name is required");
+
+            if(document.getElementById('sch-2-board').value === "Other"){
+                if(matchBlackFiels.test(document.getElementById('otherBoardText2').value)){
+                    alert("12th school board is required");
+                    return false;
+                }else{
+                    resumeData.json[0].twelth["twelth_details"] = document.getElementById('otherBoardText2').value;
+                }
+            }else{
+                if(document.getElementById('sch-2-board').value === "0"){
+                    alert("12th school board is required");
+                    return false;
+                }
+                else{
+                    resumeData.json[0].twelth["twelth_details"] = document.getElementById('sch-2-board').value;
+                }
+            }
+
+            if(matchBlackFiels.test(document.getElementById('insname').value)){
+                alert("Institute name is required");
                 return false;
             }
-            if(document.getElementById('tperiod1').value === "" || document.getElementById('tperiod2').value === ""){
-                alert("College time-period is required");
+            if(matchBlackFiels.test(document.getElementById('tperiod1').value) || matchBlackFiels.test(document.getElementById('tperiod2').value)){
+                alert("Institute time-period is required");
                 return false;
             }
-            if(document.getElementById('ins-cgpa').value === ""){
-                alert("College CGPA is required");
+            if(matchBlackFiels.test(document.getElementById('ins-cgpa').value)){
+                alert("Institute CGPA is required");
                 return false;
             }
-            if(document.getElementById('achieve1').value === "" && document.getElementById('achieve2').value === "" && document.getElementById('achieve3').value === ""){
+
+            if(document.getElementById('eddetails').value === "0"){
+                alert("Education details is required");
+                return false;
+            }
+
+            if(matchBlackFiels.test(document.getElementById('skill1').value)){
+                alert("Programming language is required");
+                return false;
+            }
+
+            if(matchBlackFiels.test(document.getElementById('achieve1').value) && matchBlackFiels.test( document.getElementById('achieve2').value) && matchBlackFiels.test( document.getElementById('achieve3').value)){
                 delete resumeData.json[0].achievement;
+            }else if(matchBlackFiels.test(document.getElementById('achieve1').value) && matchBlackFiels.test( document.getElementById('achieve2').value)){
+                resumeData.json[0].achievement = [{ "ach_details": (document.getElementById('achieve3').value).trim() }];
+            }else if(matchBlackFiels.test(document.getElementById('achieve1').value) && matchBlackFiels.test( document.getElementById('achieve3').value)){
+                resumeData.json[0].achievement = [{ "ach_details": (document.getElementById('achieve2').value).trim() }];  
+            }else if(matchBlackFiels.test(document.getElementById('achieve2').value) && matchBlackFiels.test( document.getElementById('achieve3').value)){
+                resumeData.json[0].achievement = [{ "ach_details": (document.getElementById('achieve1').value).trim() }];
+            }else if(matchBlackFiels.test(document.getElementById('achieve1').value)){
+                resumeData.json[0].achievement = [{ "ach_details": (document.getElementById('achieve2').value).trim() }, { "ach_details": (document.getElementById('achieve3').value).trim() }];
+            }else if(matchBlackFiels.test(document.getElementById('achieve2').value)){
+                resumeData.json[0].achievement = [{ "ach_details": (document.getElementById('achieve1').value).trim() }, { "ach_details": (document.getElementById('achieve3').value).trim() }];
+            }else if(matchBlackFiels.test(document.getElementById('achieve3').value)){
+                resumeData.json[0].achievement = [{ "ach_details": (document.getElementById('achieve1').value).trim() }, { "ach_details": (document.getElementById('achieve2').value).trim() }];
+            }else{
+                resumeData.json[0].achievement = [{ "ach_details": (document.getElementById('achieve1').value).trim() }, { "ach_details": (document.getElementById('achieve2').value).trim() }, { "ach_details": (document.getElementById('achieve3').value).trim() }];
             }
             
             let k = 0;
             for(k = 0; k < experienceCount; k++){
                 if(experiences[k]["exp_company"].length !== 0 || (experiences[k]["exp_date"].length - 3) !== 0 || experiences[k]["exp_details1"].length !== 0 || experiences[k]["exp_details2"].length !== 0){
                     if(experiences[k]["exp_company"].length === 0){
-                        alert("Experience company name is required");
+                        alert(`Experience ${k+1} company name is required`);
                         return false;
                     }
                     if((experiences[k]["exp_date"].length - 3) === 0){
-                        alert("Experience time-period is required");
+                        alert(`Experience ${k+1} time-period is required`);
                         return false;
                     }
                     if(experiences[k]["exp_details1"].length === 0){
-                        alert("Experience designation is required");
+                        alert(`Experience ${k+1} role is required`);
                         return false;
                     }
                     if(experiences[k]["exp_details2"].length === 0){
-                        alert("Experience location is required");
+                        alert(`Experience ${k+1} location is required`);
                         return false;
                     }
                     if(document.getElementById('exp-' + (k+1) + '-time-period-from').value === "" || document.getElementById('exp-' + (k+1) + '-time-period-to').value === ""){
-                        alert("Experience time-period is required");
+                        alert(`Experience ${k+1} time-period is required`);
                         return false;
                     }
                 }
@@ -1288,23 +1720,23 @@
             for(k = 0; k < internshipCount; k++){
                 if(internships[k]["intern_company"] !== "" || internships[k]["intern_date"] !== " - " || internships[k]["intern_details1"] !== "" || internships[k]["intern_details2"] !== ""){
                     if(internships[k]["intern_company"] === ""){
-                        alert("Internship company name is required");
+                        alert(`Internship ${k+1} company name is required`);
                         return false;
                     }
                     if(internships[k]["intern_date"] === " - "){
-                        alert("Internship time-period is required");
+                        alert(`Internship ${k+1} time-period is required`);
                         return false;
                     }
                     if(internships[k]["intern_details1"] === ""){
-                        alert("Internship role is required");
+                        alert(`Internship ${k+1} role is required`);
                         return false;
                     }
                     if(internships[k]["intern_details2"] === ""){
-                        alert("Internship location is required");
+                        alert(`Internship ${k+1} location is required`);
                         return false;
                     }
                     if(document.getElementById('intern-' + (k+1) + '-time-period-from').value === "" || document.getElementById('intern-' + (k+1) + '-time-period-to').value === ""){
-                        alert("Internship time-period is required");
+                        alert(`Internship ${k+1} time-period is required`);
                         return false;
                     }
                 }
@@ -1316,11 +1748,11 @@
             for(k = 0; k < hackathonCount; k++){
                 if(hackathons[k]["hack_title"] !== "" || hackathons[k]["hack_date"] !== ""){
                     if(hackathons[k]["hack_title"] === ""){
-                        alert("Hackathon title is required");
+                        alert(`Hackathon ${k+1} title is required`);
                         return false;
                     }
                     if(hackathons[k]["hack_date"] === ""){
-                        alert("Hackathon time-period is required");
+                        alert(`Hackathon ${k+1} year is required`);
                         return false;
                     }
                 }
@@ -1332,11 +1764,11 @@
             for(k = 0; k < githubProjectCount; k++){
                 if(githubProjects[k]["gitproj_title"] !== ""){
                     if(githubProjects[k]["gitproj_title"] === ""){
-                        alert("Github project title is required");
+                        alert(`Github project ${k+1} title is required`);
                         return false;
                     }
                     if(githubProjects[k]["gitproj_details"][0]["gitproj_details1"] === ""){
-                        alert("Github project details is required");
+                        alert(`Github project ${k+1} details-1 is required`);
                         return false;
                     }
                 }
@@ -1345,27 +1777,21 @@
                 delete resumeData.json[0].Gitproj;
             }
  
+            document.getElementById('sub-btn').style.display = "none";
+            document.getElementById('sub-btn').nextElementSibling.classList.remove('d-none');
             console.log(resumeData);
 
             // Use AJAX to post the JSON data to your Django view
             var xhr = new XMLHttpRequest();
-            xhr.open("POST", "{% url 'json2pdf' %}", true);
+            xhr.open("POST", "{% url 'resume' %}", true);
             xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
             xhr.setRequestHeader("X-CSRFToken", csrfToken);  // Include CSRF token
             xhr.onreadystatechange = function () {
-                if (xhr.readyState == 4 && xhr.status == 201) {
+                if (xhr.readyState == 4 && xhr.status == 200) {
                     console.log(xhr.responseText);
-                    console.log(xhr.status);
-                    //document.getElementById('sub-btn').style.display = "none";            
-                    document.getElementById('sub-btn').nextElementSibling.classList.remove('d-none');
-                    //window.location.href = "{% url 'index' %}"
                     // Handle success if needed 
-                    
                 } else if (xhr.readyState == 4) {
-                    console.log(xhr.responseText);
-                    console.log(xhr.status);
-                    {% comment %} console.error(xhr.statusText); {% endcomment %}
-                    console.log(xhr.status);
+                    console.error(xhr.statusText);
                     // Handle error if needed
                 }
             };
@@ -1374,9 +1800,6 @@
 
             // Prevent the default form submission
             return false;
-        }
-        function HandleRedirection() {
-            window.location.href = "{% url 'landing_page' %}";
         }
     </script>
 </body>

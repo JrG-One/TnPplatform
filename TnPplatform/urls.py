@@ -3,6 +3,7 @@ from django.contrib import admin
 from django.urls import path, include
 # from student.admin import custom_admin_site
 from . import views
+from django.views.generic.base import RedirectView
 
 '''
 making initialization and testing easier 
@@ -38,9 +39,13 @@ urlpatterns = [
     path('', include('Announcement.urls')),
     path('', include('Job_Opening.urls')),
     path('', include('TrainingProgram.urls')),
-    path('', include('student.urls')),
+    #path('', include('student.urls')),
     # path('', include('student.urls')),
     # path('admin/', include('student.urls')),
     # path('admin/student/', custom_admin_site.urls),
     # path('student/', include('student.urls')),
+    # path('', include('student.urls')),
+    path('admin/', include('student.urls')),
+    # path('admin/student/', custom_admin_site.urls),
+    path('student/', include('student.urls')),
 ]
