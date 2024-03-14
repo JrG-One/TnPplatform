@@ -5,10 +5,17 @@ from rest_framework.permissions import BasePermission
 from student.models import Job_Student_Application, Student
 from .models import Job_Opening
 from .serializer import JobOpeningSerializer
-from django.contrib.auth.decorators import login_required
-from django.http import JsonResponse
+from django.contrib.auth.decorators import login_required, permission_required
+from rest_framework import permissions
 
-from .forms import TestForm, ChoiceForm, JobProfileForm
+class NoPermissions(BasePermission):
+    def has_permission(self, request, view):
+        return False
+
+class CanAddJobOpening(BasePermission):
+    def has_permission(self, request, view):
+        #print(f"User permissions: {request.user.get_all_permissions()}")
+        return request.user.has_perm('Job_Opening.add_job_opening')
 
 class CanChangeJobOpening(BasePermission):
     def has_permission(self, request, view):
