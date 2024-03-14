@@ -17,26 +17,24 @@ job_opening_data = {
             'Selection': 'Virtual',
             'location': 'Surat',
             'stipend': 10000,
-            "start": "2024-03-06",
+            "start":"2024-03-18",
             'join_date': '2024-03-01',
-            'end_of_registration': '2024-03-15'
+            'end_of_registration': '2025-02-10'
         }
 
 put_job_opening_data = {
-        "id": 1,
-        "NameofCompany": "kasperTech",
-        "profileOfCompany": "nice Company",
-        "JobProfile": "Good Job",
-        "BranchChoice": "CSE",
-        "ctc": "12.1 LPA",
-        "Eligibility": "The Who",
-        "Selection": "Virtual",
-        "location": "Surat",
-        "stipend": 100000,
-        "start": "2024-03-06",
-        "join_date": "2024-03-21",
-        "end_of_registration": "2024-03-21"
-    }
+            'NameofCompany':'KasperTech',
+            'profileOfCompany':'Software',
+            'JobProfile': 'Software Engineer',
+            'BranchChoice':'CSE',
+            'ctc': '13LPA',
+            'Eligibility': 'B.Tech',
+            'Selection': 'Offline',
+            'location': 'Surat',
+            'stipend': 10000,
+            'join_date': '2024-03-01',
+            'end_of_registration': '2024-02-15'
+        }
 
 updated_data = {
             'title': 'Senior Software Engineer',

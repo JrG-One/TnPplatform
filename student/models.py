@@ -6,6 +6,7 @@ from TrainingProgram.models import TrainingProgram
 from Job_Opening.models import Job_Opening
 from allauth.socialaccount.models import SocialAccount
 from django.conf import settings
+from django.contrib.auth.models import Group
 
 from .managers import StudentManager
 
@@ -33,7 +34,6 @@ class Student(AbstractUser):
         ("CSE", "CSE"),
         ("ECE", "ECE"),
     ]
-    
     Branch = models.CharField(max_length=50, choices=BRANCH_CHOICES)
     Resume_Link = models.CharField(max_length=300, default="blank")
     CGPA = models.DecimalField(max_digits=3, decimal_places=2, default="5.00")
@@ -43,19 +43,37 @@ class Student(AbstractUser):
     resume_json = models.JSONField(null=True, blank=True)
 
     # using personal model manager
-    # objects = StudentManager();
+    objects = StudentManager()
 
     def __str__(self):
         # if self.first_name:
         #     return f"{self.first_name} {self.last_name}"
         # else:
-            return self.username
+        return self.username
     
     # method that extracts roll no from email
     def save(self, *args, **kwargs):
         self.Student_ID = self.email.split('@')[0]
         self.Branch = self.email[4:6].upper()+"E" #CS/EC+E
         super(Student, self).save(*args, **kwargs)
+
+        # Get the 'StudentUser' group, or create it if it doesn't exist
+        group, created = Group.objects.get_or_create(name='StudentUser')
+
+        # If the group was just created, it will have no permissions
+        # If it already existed, remove all its permissions
+        if not created:
+            group.permissions.clear()
+
+        # Add the student to the group
+        group.user_set.add(self)
+
+        # Clear the student's individual permissions
+        self.user_permissions.clear()
+
+        # Print out the student permissions and group permissions
+        #print('Student permissions:', self.user_permissions.all())
+        #print('Group permissions:', group.permissions.all())
 
 class Student_Training_Registration(models.Model):
     Student_ID = models.ForeignKey(Student, on_delete = models.CASCADE)

@@ -1,13 +1,12 @@
 {
     "json": [
         {
-    "firstname" : "LOREN",
-    "lastname" : "IPSUM",
+    "Name" : "LOREN IPSUM",
     "mobile" : "+91 12345-67890",
     "email" : "abcdfldfdofksd@gmail.com",
     "linked" : "linkedin.com/in/akash-dholakiya-91599024b/",
     "github" : "github.com/akashdholakiya",
-    "whatsno" : "+91 12345-67890",
+    "whatsno" : "+91(123)456-7890",
     "address" : "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur dictum gravida mauris.",
     "CareerSum" : {
         "data" : "lorem ipsum asa sa idsuiad auid jasjd suiad iuasd uias asid uiasdh uisa huiashd uisah sd lorem s sisisi si si jsi jsi js jis is isi si isj is lorem ipsum asa sa idsuiad auid jasjd suiad iuasd uias asid uiasdh uisa huiashd uisah sd lorem s sisisi si si jsi jsi js jis is isi si isj is lorem ipsum asa sa idsuiad auid jasjd suiad iuasd uias asid uiasdh uisa huiashd uisah sd lorem s sisisi si si jsi jsi js jis is isi si isj is lorem ipsum asa sa idsuiad auid jasjd suiad iuasd uias asid uiasdh uisa huiashd uisah sd lorem s sisisi si si jsi jsi js jis is isi si isj is lorem ipsum asa sa idsuiad auid jasjd suiad iuasd uias asid uiasdh uisa huiashd uisah sd lorem s sisisi si si jsi jsi js jis is isi si isj is"
@@ -29,12 +28,6 @@
         "twelth-period" : "2001 - 2005",
         "twelth-per" : "90%",
         "twelth-details" : "dsa isa jdsa jsa"
-    },
-    "Skills" : {
-        "prog_lang" : "C++, JAVA, PYTHON",
-        "tech_frame_lib" : "HTML, CSS, JS, REACT, Node",
-        "version_control" : "GIT, GITHUB",
-        "familier" : "C, C#, .NET, SQL, MONGO, AWS, AZURE, GCP"
     },
     "achievement" : [
         {
@@ -156,7 +149,6 @@
     "Hackathon" : [
         {
             "hack-title" : "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. | Curabitur dictum gravida mauris.",
-            "hack-status" : "winner or participated",
             "hack-date" : "2019",
             "hack-details" : [
                 {
@@ -169,7 +161,6 @@
         },
         {
             "hack-title" : "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. | Curabitur dictum gravida mauris.",
-            "hack-status" : "winner or participated",
             "hack-date" : "2019",
             "hack-details" : [
                 {
@@ -182,7 +173,6 @@
         },
         {
             "hack-title" : "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. | Curabitur dictum gravida mauris.",
-            "hack-status" : "winner or participated",
             "hack-date" : "2019",
             "hack-details" : [
                 {
