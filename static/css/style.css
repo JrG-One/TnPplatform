@@ -48,7 +48,7 @@ a {
 }
 
 .navbar-btn button:hover {
-    backgroud-color: var(--indigo-25);
+    background-color: var(--indigo-25);
     color: var(--indigo-600);
     border: 1px solid var(--indigo-600);
     margin: 0 0.25rem;

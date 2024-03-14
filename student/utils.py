@@ -43,7 +43,7 @@ def generate_pdf(data):
 
     pdf.set_font("cmr", "", 24) 
     remain_space = 204 - pdf.get_x()
-    pdf.cell(0, 7, data["Name"] , ln=1, align="C")
+    pdf.cell(0, 7, data["firstname"] + " " + data["lastname"] , ln=1, align="C")
 
     pdf.set_font("cmr", "", 10)
     if data.get('mobile'):
@@ -104,41 +104,70 @@ def generate_pdf(data):
         pdf.set_font("cmbx", "", 14)
         pdf.cell(0, 7, 'Education', ln=1)
         pdf.line(10, pdf.get_y(), 204, pdf.get_y())
+        pdf.set_y(pdf.get_y() + 1)
         pdf.set_font("cmbx", "", 12)
         pdf.cell(0, 7, "Secondary Education :", ln=1)
-        pdf.set_font("cmbx", "", 11)
-        pdf.cell(0, 6, data['tenth'].get("tenth_name"))
-        pdf.cell(0, 6, data['tenth'].get("tenth_period"), ln=1, align="R")
-        pdf.cell(0, 6, "Grade : " + data['tenth'].get("tenth_per"), ln=1)
-        pdf.set_font("cmsl", "", 10)
-        lines = pdf.multi_cell(remain_space, 4, data['tenth'].get("tenth_details"))
-        
-        for line in lines:
-            pdf.cell(0, 5, line)
+        pdf.set_font("cmr", "", 11)
+        pdf.cell(0, 5, data['tenth'].get("tenth_name"))
+        pdf.cell(0, 5, data['tenth'].get("tenth_period"), ln=1, align="R")
+        pdf.cell(0, 5, "Grade : " + data['tenth'].get("tenth_per"), ln=1)
+        pdf.cell(0, 5, "Board : " + data['tenth'].get("tenth_details"), ln=1)
         
         pdf.set_font("cmbx", "", 12)
         pdf.cell(0, 7, "Higher Secondary Education :", ln=1)
-        pdf.set_font("cmbx", "", 11)
-        pdf.cell(0, 6, data['twelth'].get("twelth_name"))
-        pdf.cell(0, 6, data['twelth'].get("twelth_period"), ln=1, align="R")
-        pdf.cell(0, 6, "Grade : " + data['twelth'].get("twelth_per"), ln=1)
-        pdf.set_font("cmsl", "", 10)
-        lines = pdf.multi_cell(remain_space, 4, data['twelth'].get("twelth_details"))
-        
-        for line in lines:
-            pdf.cell(0, 5, line)
+        pdf.set_font("cmr", "", 11)
+        pdf.cell(0, 5, data['twelth'].get("twelth_name"))
+        pdf.cell(0, 5, data['twelth'].get("twelth_period"), ln=1, align="R")
+        pdf.cell(0, 5, "Grade : " + data['twelth'].get("twelth_per"), ln=1)
+        pdf.cell(0, 5, "Board : " + data['twelth'].get("twelth_details"), ln=1)
             
         pdf.set_font("cmbx", "", 12)
         pdf.cell(0, 7, "Institute Education :", ln=1)
-        pdf.set_font("cmbx", "", 11)
-        pdf.cell(0, 6, data['education'].get("Education_clg"))
-        pdf.cell(0, 6, data['education'].get("ed_date"), ln=1, align="R")
-        pdf.cell(0, 6, "CGPA : " + data['education'].get("ins_cgpa"), ln=1)
-        pdf.set_font("cmsl", "", 10)
-        lines = pdf.multi_cell(remain_space, 4, data['education'].get("edu_details"))
+        pdf.set_font("cmr", "", 11)
+        pdf.cell(0, 5, data['education'].get("Education_clg"))
+        pdf.cell(0, 5, data['education'].get("ed_date"), ln=1, align="R")
+        pdf.cell(0, 5, "Cgpa : " + data['education'].get("ins_cgpa"), ln=1)
+        pdf.cell(0, 5, "Branch : " + data['education'].get("ins_details"), ln=1)
+        pdf.set_y(pdf.get_y() + 2)
 
-        for line in lines:
-            pdf.cell(0, 5, line)
+    # Check if 'skills' key exists
+    if data.get('Skills'):
+        pdf.set_font("cmbx", "", 14)
+        pdf.cell(0, 7, "Skills", ln=1)
+        pdf.line(10, pdf.get_y(), 204, pdf.get_y())
+        pdf.set_y(pdf.get_y() + 1)
+        if data.get('Skills').get('prog_lang'):
+            pdf.set_font("cmbx", "", 12)
+            pdf.cell(0, 7, "Programming Languages :", ln=1)
+            pdf.set_font("cmr", "", 10)
+            lines = pdf.multi_cell(remain_space, 4, data['Skills'].get('prog_lang'))
+            for line in lines:
+                pdf.cell(0, 5, line)
+        
+        if data.get('Skills').get('tech_frame_lib'):
+            pdf.set_font("cmbx", "", 12)
+            pdf.cell(0, 7, "Technologies, Frameworks and Libraries : ", ln=1)
+            pdf.set_font("cmr", "", 10)
+            lines = pdf.multi_cell(remain_space, 4, data['Skills'].get('tech_frame_lib'))
+            for line in lines:
+                pdf.cell(0, 5, line)
+        
+        if data.get('Skills').get('version_control'):
+            pdf.set_font("cmbx", "", 12)
+            pdf.cell(0, 7, "Version Control :", ln=1)
+            pdf.set_font("cmr", "", 10)
+            lines = pdf.multi_cell(remain_space, 4, data['Skills'].get('version_control'))
+            for line in lines:
+                pdf.cell(0, 5, line)
+        
+        if data.get('Skills').get('familier'):
+            pdf.set_font("cmbx", "", 12)
+            pdf.cell(0, 7, "Familiar with :", ln=1)
+            pdf.set_font("cmr", "", 10)
+            lines = pdf.multi_cell(remain_space, 4, data['Skills'].get('familier'))
+            for line in lines:
+                pdf.cell(0, 5, line)
+        
         pdf.set_y(pdf.get_y() + 2)
 
     # Check if 'achievement' key exists
@@ -146,15 +175,16 @@ def generate_pdf(data):
         pdf.set_font("cmbx", "", 14)
         pdf.cell(0, 7, "Achievements", ln=1)
         pdf.line(10, pdf.get_y(), 204, pdf.get_y())
-        pdf.set_y(pdf.get_y() + 2)
+        pdf.set_y(pdf.get_y() + 1)
         pdf.set_font("cmr", "", 10)
         for i in range(len(data["achievement"])):
-            pdf.cell(3)
-            lines = pdf.multi_cell(remain_space, 4, data['achievement'][i].get("ach_details"))
-            
-            for line in lines:
-                pdf.cell(0, 5, line)
-            pdf.set_y(pdf.get_y() + 1)
+            if data['achievement'][i].get("ach_details"):
+                pdf.cell(3, 5, "- ")
+                lines = pdf.multi_cell(remain_space, 4, data['achievement'][i].get("ach_details"))
+                
+                for line in lines:
+                    pdf.cell(0, 5, line)
+                pdf.set_y(pdf.get_y() + 1)
         pdf.set_y(pdf.get_y() + 2)
 
     # Check if 'experience' key exists
@@ -162,19 +192,22 @@ def generate_pdf(data):
         pdf.set_font("cmbx", "", 14)
         pdf.cell(0, 7, "Experience", ln=1)
         pdf.line(10, pdf.get_y(), 204, pdf.get_y())
+        pdf.set_y(pdf.get_y() + 1)
         for i in range(len(data['experience'])):
-            pdf.set_font("cmbx", "", 11)
-            pdf.cell(0, 6, data['experience'][i].get("exp_company"))
-            pdf.cell(0, 6, data['experience'][i].get("exp_date"), ln=1, align="R")
-            pdf.set_font("cmr", "", 10)
-            pdf.cell(0, 5, data['experience'][i].get("exp_details1"))
-            pdf.cell(0, 5, data['experience'][i].get("exp_details2"), ln=1, align="R")
-            for j in range(len(data['experience'][i].get("exp_details3"))):
-                pdf.cell(3)
-                pdf.multi_cell(remain_space, 4, data['experience'][i].get("exp_details3")[j].get("exp_details"))
-                
-                for line in lines:
-                    pdf.cell(0, 5, line)
+            if data['experience'][i].get("exp_company"):
+                pdf.set_font("cmbx", "", 11)
+                pdf.cell(0, 6, data['experience'][i].get("exp_company"))
+                pdf.cell(0, 6, data['experience'][i].get("exp_date"), ln=1, align="R")
+                pdf.set_font("cmr", "", 10)
+                pdf.cell(0, 5, data['experience'][i].get("exp_details1"))
+                pdf.cell(0, 5, data['experience'][i].get("exp_details2"), ln=1, align="R")
+                for j in range(len(data['experience'][i].get("exp_details3"))):
+                    if data['experience'][i].get("exp_details3")[j].get("exp_details"):
+                        pdf.cell(3)
+                        pdf.multi_cell(remain_space, 4, data['experience'][i].get("exp_details3")[j].get("exp_details"))
+                        
+                        for line in lines:
+                            pdf.cell(0, 5, line)
         pdf.set_y(pdf.get_y() + 2)
 
     # Check if 'Internships' key exists
@@ -182,35 +215,41 @@ def generate_pdf(data):
         pdf.set_font("cmbx", "", 14)
         pdf.cell(0, 7, "Internships", ln=1)
         pdf.line(10, pdf.get_y(), 204, pdf.get_y())
+        pdf.set_y(pdf.get_y() + 1)
         for i in range(len(data['Internships'])):
-            pdf.set_font("cmbx", "", 11)
-            pdf.cell(0, 6, data['Internships'][i].get("intern_company"))
-            pdf.cell(0, 6, data['Internships'][i].get("intern_date"), ln=1, align="R")
-            pdf.set_font("cmr", "", 10)
-            pdf.cell(0, 5, data['Internships'][i].get("intern_details1"))
-            pdf.cell(0, 5, data['Internships'][i].get("intern_details2"), ln=1, align="R")
-            for j in range(len(data['Internships'][i].get("intern_details3"))):
-                pdf.cell(3)
-                pdf.multi_cell(remain_space, 4, data['Internships'][i].get("intern_details3")[j].get("intern_details"))
-                for line in lines:
-                    pdf.cell(0, 5, line)
+            if data['Internships'][i].get("intern_company"):
+                pdf.set_font("cmbx", "", 11)
+                pdf.cell(0, 6, data['Internships'][i].get("intern_company"))
+                pdf.cell(0, 6, data['Internships'][i].get("intern_date"), ln=1, align="R")
+                pdf.set_font("cmr", "", 10)
+                pdf.cell(0, 5, data['Internships'][i].get("intern_details1"))
+                pdf.cell(0, 5, data['Internships'][i].get("intern_details2"), ln=1, align="R")
+                for j in range(len(data['Internships'][i].get("intern_details3"))):
+                    if data['Internships'][i].get("intern_details3")[j].get("intern_details"):
+                        pdf.cell(3)
+                        pdf.multi_cell(remain_space, 4, data['Internships'][i].get("intern_details3")[j].get("intern_details"))
+                        for line in lines:
+                            pdf.cell(0, 5, line)
         pdf.set_y(pdf.get_y() + 2)
 
     # Check if 'Hackathon' key exists
     if data.get('Hackathon'):
         pdf.set_font("cmbx", "", 14)
-        pdf.cell(0, 7, "Hackathons Won", ln=1)
+        pdf.cell(0, 7, "Hackathons", ln=1)
         pdf.line(10, pdf.get_y(), 204, pdf.get_y())
+        pdf.set_y(pdf.get_y() + 1)
         for i in range(len(data['Hackathon'])):
-            pdf.set_font("cmbx", "", 11)
-            pdf.cell(0, 6, data['Hackathon'][i].get("hack_title"))
-            pdf.cell(0, 6, data['Hackathon'][i].get("hack_date"), ln=1, align="R")
-            pdf.set_font("cmr", "", 10) 
-            for j in range(len(data['Hackathon'][i].get("hack_details"))):
-                pdf.cell(3)
-                lines = pdf.multi_cell(remain_space, 4, data['Hackathon'][i].get("hack_details")[j].get("hack_details1"))
-                for line in lines:
-                    pdf.cell(0, 5, line)
+            if data['Hackathon'][i].get("hack_title"):
+                pdf.set_font("cmbx", "", 11)
+                pdf.cell(0, 6, data['Hackathon'][i].get("hack_title") + " - " + data["Hackathon"][i].get("hack_status"))
+                pdf.cell(0, 6, data['Hackathon'][i].get("hack_date"), ln=1, align="R")
+                pdf.set_font("cmr", "", 10) 
+                for j in range(len(data['Hackathon'][i].get("hack_details"))):
+                    if data['Hackathon'][i].get("hack_details")[j].get("hack_details1"):
+                        pdf.cell(3)
+                        lines = pdf.multi_cell(remain_space, 4, data['Hackathon'][i].get("hack_details")[j].get("hack_details1"))
+                        for line in lines:
+                            pdf.cell(0, 5, line)
         pdf.set_y(pdf.get_y() + 2)
 
     # Check if 'Gitproj' key exists
@@ -218,20 +257,23 @@ def generate_pdf(data):
         pdf.set_font("cmbx", "", 14)
         pdf.cell(0, 7, "Notable Github Projects", ln=1)
         pdf.line(10, pdf.get_y(), 204, pdf.get_y())
+        pdf.set_y(pdf.get_y() + 1)
         for i in range(len(data['Gitproj'])):
-            pdf.set_font("cmbx", "", 11)
-            lines = pdf.multi_cell(remain_space, 6, data['Gitproj'][i].get("gitproj_title"))
-
-            for line in lines:
-                pdf.cell(0, 5, line)
-
-            pdf.set_font("cmr", "", 10)
-            for j in range(len(data['Gitproj'][i].get("gitproj_details"))):
-                pdf.cell(3)
-                lines = pdf.multi_cell(remain_space, 4, data['Gitproj'][i].get("gitproj_details")[j].get("gitproj_details1"))
-
+            if data['Gitproj'][i].get("gitproj_title"):
+                pdf.set_font("cmbx", "", 11)
+                lines = pdf.multi_cell(remain_space, 6, data['Gitproj'][i].get("gitproj_title"))
+                
                 for line in lines:
                     pdf.cell(0, 5, line)
+
+                pdf.set_font("cmr", "", 10)
+                for j in range(len(data['Gitproj'][i].get("gitproj_details"))):
+                    if data['Gitproj'][i].get("gitproj_details")[j].get("gitproj_details1"):
+                        pdf.cell(3)
+                        lines = pdf.multi_cell(remain_space, 4, data['Gitproj'][i].get("gitproj_details")[j].get("gitproj_details1"))
+
+                        for line in lines:
+                            pdf.cell(0, 5, line)
     # print(f"Output file: {output_file}")
     # pdf.output(output_file, "F")
     # print("PDF generated")

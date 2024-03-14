@@ -3,7 +3,7 @@ from django.contrib import admin
 from django.urls import path, include
 # from student.admin import custom_admin_site
 from . import views
-
+from django.views.generic.base import RedirectView
 '''
 making initialization and testing easier 
 
@@ -26,9 +26,6 @@ if 'runserver' in sys.argv:
         SocialApp.objects.create(provider="google", name="Google", client_id=os.getenv("client"), secret=os.getenv("secret")).sites.set(Site.objects.filter(domain="127.0.0.1:8000"))
 
 
-
-
-
 urlpatterns = [
     path("admin/", admin.site.urls),
     path('accounts/', include('allauth.urls')),
@@ -38,9 +35,8 @@ urlpatterns = [
     path('', include('Announcement.urls')),
     path('', include('Job_Opening.urls')),
     path('', include('TrainingProgram.urls')),
-    path('', include('student.urls')),
     # path('', include('student.urls')),
-    # path('admin/', include('student.urls')),
+    path('admin/', include('student.urls')),
     # path('admin/student/', custom_admin_site.urls),
-    # path('student/', include('student.urls')),
+    path('student/', include('student.urls')),
 ]

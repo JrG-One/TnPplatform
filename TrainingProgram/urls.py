@@ -7,4 +7,5 @@ router.register(r'training_programs', TrainingProgramViewSet, basename='training
 
 urlpatterns = [
     path('training_programs/<int:pk>/', training_program_detail, name='training_program_detail')
+    
 ]+router.urls
